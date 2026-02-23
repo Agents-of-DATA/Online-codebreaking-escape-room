@@ -11,14 +11,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #111; /* dark background for contrast */
+    background-color: #999;
+    /* dark background for contrast */
     font-family: Arial, sans-serif;
 }
 
 /* Viking image styling */
 .viking {
     width: 300px;
-    border-radius: 25px; /* Rounded corners */
+    border-radius: 25px;
+    /* Rounded corners */
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
