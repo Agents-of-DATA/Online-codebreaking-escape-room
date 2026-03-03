@@ -1,0 +1,36 @@
+/* Reset default spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Full screen centre layout */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #999;
+    /* dark background for contrast */
+    font-family: Arial, sans-serif;
+}
+
+/* Viking image styling */
+.viking {
+    width: 300px;
+    border-radius: 25px;
+    /* Rounded corners */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Optional hover effect */
+.viking:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Class added when clicked */
+.viking.enlarged {
+    transform: scale(1.2);
+}
