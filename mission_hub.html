@@ -1,21 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Mission Hub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/mission_hub.css" />
+  <title>Mission Hub</title>
 </head>
 
-<body>
-    <main>
-        <h1 id="welcome-message"></h1>
-        <img src="./assets/images/viking.jpg" alt="A big angry viking" class="viking">
-    </main>
+<body class="mission-page">
+  <header class="site-header">
+    <img src="assets/images/Logo.png" alt="Data Education in Schools Logo" class="site-logo">
+  </header>
+      <nav class="main-nav">
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="mission_hub.html">Missions</a>
+        <a href="accessibility.html">Accessibility</a>
+    </div>
+    </nav>
 
+  <main class="hub-wrap">
+    <h1 id="welcome-message" class="hub-title"></h1>
 
-    <script src="js/app.js"></script>
+    <nav class="mission-steps" aria-label="Mission steps">
+      <button class="step active" type="button">1</button>
+      <button class="step" type="button">2</button>
+      <button class="step" type="button">3</button>
+      <button class="step" type="button">4</button>
+      <button class="step" type="button">5</button>
+      <button class="step" type="button">6</button>
+      <button class="step" type="button">7</button>
+    </nav>
+
+    <section class="mission-grid" aria-label="Mission selection">
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 1 image">
+        <div class="mission-overlay">
+          <h2>Mission 1</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 2 image">
+        <div class="mission-overlay">
+          <h2>Mission 2</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 3 image">
+        <div class="mission-overlay">
+          <h2>Mission 3</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 4 image">
+        <div class="mission-overlay">
+          <h2>Mission 4</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 5 image">
+        <div class="mission-overlay">
+          <h2>Mission 5</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 6 image">
+        <div class="mission-overlay">
+          <h2>Mission 6</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+
+      <article class="mission-card-tile">
+        <img src="assets/images/placeholder.png" alt="Mission 7 image">
+        <div class="mission-overlay">
+          <h2>Mission 7</h2>
+          <a class="read-more" href="#" role="button">Read More</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
 </body>
-
 </html>

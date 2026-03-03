@@ -18,7 +18,7 @@ nameForm?.addEventListener("submit", (event) => {
 
   // Persist name for use on the next page in the same browser session.
   sessionStorage.setItem("agentName", name);
-  window.location.href = "mission_hub.html";
+  window.location.href = "avatar.html";
 });
 
 // On the mission hub page: greet the user with their stored agent name.
@@ -33,3 +33,52 @@ if (welcomeMessage) {
 viking?.addEventListener("click", () => {
   viking.classList.toggle("enlarged");
 });
+
+// --- Avatar selection page logic ---
+const avatarButtons = document.querySelectorAll(".avatar-option");
+const continueBtn = document.querySelector("#continue-btn");
+
+// If we're on avatar.html, allow selection and store in sessionStorage
+if (avatarButtons.length && continueBtn) {
+  // Optional: if user lands here without a name, send them back
+  const storedName = sessionStorage.getItem("agentName");
+  if (!storedName) {
+    window.location.href = "index.html";
+  }
+
+  let selectedAvatar = sessionStorage.getItem("agentAvatar"); // e.g. "agent3.png"
+
+  // Restore selection if they already picked one
+  if (selectedAvatar) {
+    avatarButtons.forEach(btn => {
+      if (btn.dataset.avatar === selectedAvatar) btn.classList.add("selected");
+    });
+    continueBtn.disabled = false;
+  }
+
+  avatarButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      avatarButtons.forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+
+      selectedAvatar = btn.dataset.avatar;
+      sessionStorage.setItem("agentAvatar", selectedAvatar);
+      continueBtn.disabled = false;
+    });
+  });
+
+  continueBtn.addEventListener("click", () => {
+    window.location.href = "mission_hub.html";
+  });
+
+
+  const steps = document.querySelectorAll(".step");
+  if (steps.length) {
+    steps.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        steps.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  }
+}
