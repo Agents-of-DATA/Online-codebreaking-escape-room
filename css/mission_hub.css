@@ -25,7 +25,7 @@ body.mission-page::before {
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  .hub-wrap {padding: 80px 30px 40px;}
+  padding: 80px 30px 40px;
 }
 
 .hub-title {
@@ -92,6 +92,7 @@ body.mission-page::before {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
   padding: 18px;
   display: grid;
   gap: 12px;
@@ -114,6 +115,56 @@ body.mission-page::before {
   text-decoration: none;
   border: 2px solid rgba(255,255,255,0.75);
   font-weight: 700;
+}
+
+.mission-details {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 90px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.86);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 0 16px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease, padding 0.25s ease;
+}
+
+.mission-card-tile.expanded .mission-details {
+  opacity: 1;
+  max-height: 260px;
+  padding: 16px;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mission-details h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.mission-details p {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.launch-mission {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(63, 127, 63, 0.9);
 }
 
 @media (max-width: 1100px) {

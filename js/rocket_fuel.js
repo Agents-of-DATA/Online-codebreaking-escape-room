@@ -25,9 +25,10 @@ const valueDisplays = {
     C: document.getElementById("valueC")
 };
 
-// Progress bar fill and launch button elements.
+// Progress bar fill, back and launch button elements.
 const progressFill = document.getElementById("progressFill");
 const launchBtn = document.getElementById("launchBtn");
+const backBtn = document.getElementById("backBtn");
 const report1Text = document.getElementById("report1Text");
 const report2Text = document.getElementById("report2Text");
 const report3Text = document.getElementById("report3Text");
@@ -98,6 +99,11 @@ updateProgress();
 // Launch button
 launchBtn.addEventListener("click", () => {
     alert("Satellite Successfully Launched!");
+});
+
+// Return to mission hub.
+backBtn?.addEventListener("click", () => {
+    window.location.href = "mission_hub.html";
 });
 
 // Toggle visibility of each data report panel.

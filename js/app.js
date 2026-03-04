@@ -34,6 +34,21 @@ viking?.addEventListener("click", () => {
   viking.classList.toggle("enlarged");
 });
 
+// Mission 1 details toggle on mission hub.
+const missionOneReadMore = document.querySelector(".mission-card-tile .read-more");
+const missionOneTile = missionOneReadMore?.closest(".mission-card-tile");
+const missionOneDetails = document.querySelector("#mission-1-details");
+
+missionOneReadMore?.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const isExpanded = missionOneTile?.classList.toggle("expanded");
+
+  missionOneReadMore.textContent = isExpanded ? "Read Less" : "Read More";
+  missionOneReadMore.setAttribute("aria-expanded", String(Boolean(isExpanded)));
+  missionOneDetails?.setAttribute("aria-hidden", String(!isExpanded));
+});
+
 // --- Avatar selection page logic ---
 const avatarButtons = document.querySelectorAll(".avatar-option");
 const continueBtn = document.querySelector("#continue-btn");

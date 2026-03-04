@@ -35,10 +35,21 @@
     <section class="mission-grid" aria-label="Mission selection">
 
       <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 1 image">
+        <img src="assets/images/rocket_launch.jpg" alt="A rocket launching into the sky across the night sky">
         <div class="mission-overlay">
           <h2>Mission 1</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
+          <a class="read-more" href="#" role="button" aria-expanded="false" aria-controls="mission-1-details">Read More</a>
+        </div>
+        <div class="mission-details" id="mission-1-details" aria-hidden="true">
+          <h3>Launch the Spy Satellite</h3>
+          <p>
+            We need to launch the spy satellite!
+          </p>
+          <p> 
+            Analyse the rocket fuel data reports, calculate the correct sequence,
+            and fill the barrels so the launch system can be safely unlocked.
+          </p>
+          <a class="launch-mission" href="puzzle_rocket_fuel.html">Launch Mission</a>
         </div>
       </article>
 

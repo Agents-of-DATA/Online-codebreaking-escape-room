@@ -3,6 +3,31 @@ body {
     text-align: center;
     background: #0f172a;
     color: white;
+    position: relative;
+    min-height: 100vh;
+    padding-top: 56px;
+}
+
+#backBtn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 999px;
+    background: #f97316;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#backBtn:hover {
+    background: #ea580c;
+}
+
+#backBtn:focus-visible {
+    outline: 3px solid #fdba74;
+    outline-offset: 2px;
 }
 
 .barrel-container {
