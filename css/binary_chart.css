@@ -1,0 +1,125 @@
+/* Reset spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body full screen, flex center */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: #000000;
+    overflow: hidden;
+}
+
+/* Animated background wrapper */
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* adjust column count if you want wider bars */
+    gap: 2px;
+
+    pointer-events: none; /* clicks pass through */
+    z-index: 0;           /* behind content */
+    overflow: hidden;
+}
+
+/* Columns and boxes */
+.column {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+}
+
+.box {
+    width: 100%;
+    height: 80px;
+    border-radius: 6px;
+    transition: background-color 0.8s ease;
+}
+
+/* Content box centered on page */
+.content {
+    position: relative;
+    z-index: 10; /* ABOVE the background */
+    background-color: #111111; /* fully opaque, prevents background showing through */
+    color: white;
+
+    padding: 40px;
+    border-radius: 12px;
+    border: 3px solid #00aaff;
+
+    max-width: 700px;
+    width: 90%;
+    text-align: center;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* Binary chart styling */
+.binary {
+    width: 200px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.binary:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.binary.enlarged {
+    transform: scale(1.2);
+}
+
+/* Binary message box */
+#binary_message {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    border-radius: 8px;
+    max-width: 600px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+
+#binary_message h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#binary_message p {
+    margin: 10px 0;
+    word-break: break-all;
+}
+
+#generate_btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#generate_btn:hover {
+    background-color: #0056b3;
+}
+
+/* Input / buttons */
+.display-box { margin: 10px 0; }
+input { width: 200px; padding: 5px; margin: 5px 0; }
+button { padding: 5px 10px; margin: 5px; }
