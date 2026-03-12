@@ -34,20 +34,22 @@ viking?.addEventListener("click", () => {
   viking.classList.toggle("enlarged");
 });
 
-// Mission 1 details toggle on mission hub.
-const missionOneReadMore = document.querySelector(".mission-card-tile .read-more");
-const missionOneTile = missionOneReadMore?.closest(".mission-card-tile");
-const missionOneDetails = document.querySelector("#mission-1-details");
-
-missionOneReadMore?.addEventListener("click", (event) => {
-  event.preventDefault();
-
-  const isExpanded = missionOneTile?.classList.toggle("expanded");
-
-  missionOneReadMore.textContent = isExpanded ? "Read Less" : "Read More";
-  missionOneReadMore.setAttribute("aria-expanded", String(Boolean(isExpanded)));
-  missionOneDetails?.setAttribute("aria-hidden", String(!isExpanded));
-});
+// Mission card details toggle — works for every card on the mission hub.
+document
+  .querySelectorAll(".mission-card-tile .read-more")
+  .forEach((readMore) => {
+    readMore.addEventListener("click", (event) => {
+      event.preventDefault();
+      const tile = readMore.closest(".mission-card-tile");
+      const details = document.getElementById(
+        readMore.getAttribute("aria-controls"),
+      );
+      const isExpanded = tile?.classList.toggle("expanded");
+      readMore.textContent = isExpanded ? "Read Less" : "Read More";
+      readMore.setAttribute("aria-expanded", String(Boolean(isExpanded)));
+      details?.setAttribute("aria-hidden", String(!isExpanded));
+    });
+  });
 
 // --- Avatar selection page logic ---
 const avatarButtons = document.querySelectorAll(".avatar-option");
@@ -65,7 +67,7 @@ if (avatarButtons.length && continueBtn) {
 
   // Restore selection if they already picked one
   if (selectedAvatar) {
-    avatarButtons.forEach(btn => {
+    avatarButtons.forEach((btn) => {
       if (btn.dataset.avatar === selectedAvatar) btn.classList.add("selected");
     });
     continueBtn.disabled = false;
@@ -73,7 +75,7 @@ if (avatarButtons.length && continueBtn) {
 
   avatarButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      avatarButtons.forEach(b => b.classList.remove("selected"));
+      avatarButtons.forEach((b) => b.classList.remove("selected"));
       btn.classList.add("selected");
 
       selectedAvatar = btn.dataset.avatar;
@@ -86,12 +88,11 @@ if (avatarButtons.length && continueBtn) {
     window.location.href = "mission_hub.html";
   });
 
-
   const steps = document.querySelectorAll(".step");
   if (steps.length) {
     steps.forEach((btn) => {
       btn.addEventListener("click", () => {
-        steps.forEach(b => b.classList.remove("active"));
+        steps.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
       });
     });

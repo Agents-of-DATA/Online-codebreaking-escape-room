@@ -1,0 +1,652 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+  min-height: 100vh;
+  padding: 56px 16px 40px;
+}
+
+/* ── Back Button ──────────────────────────────────────── */
+#backBtn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #f97316;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 100;
+}
+
+#backBtn:hover {
+  background: #ea580c;
+}
+
+#backBtn:focus-visible {
+  outline: 3px solid #fdba74;
+  outline-offset: 2px;
+}
+
+/* ── Page Title ───────────────────────────────────────── */
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: #fbbf24;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+/* ── Two-Column Puzzle Layout ──────────────────────────── */
+/*
+ * Phone  (< 640px)  : single column, scene zoomed to 55%
+ * Tablet (640–1099px): single column, scene zoomed to 72%
+ * Desktop (≥ 1100px): side-by-side — diagram sticky on the left,
+ *                      reports + controls scrollable on the right.
+ */
+.puzzle-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-col,
+.right-col {
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .puzzle-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .left-col {
+    flex: 0 0 auto; /* sized by the space scene — no stretching */
+    position: sticky;
+    top: 16px;
+  }
+  .right-col {
+    flex: 1 1 0;
+  }
+}
+
+/* ── Space Diagram ────────────────────────────────────── */
+.diagram-wrap {
+  overflow-x: auto;
+  padding: 4px 0 8px;
+}
+
+/*
+ * Fixed 560 × 320 px scene.
+ * Earth centre is at (280, 270) — this MUST match EARTH_X / EARTH_Y in align_radar.js.
+ * Orbit radius is 200 px     — this MUST match ORBIT_R in align_radar.js.
+ */
+.space-scene {
+  position: relative;
+  width: 560px;
+  height: 320px;
+  margin: 0 auto;
+  background: radial-gradient(ellipse at 50% 115%, #0e2a4a 0%, #040812 65%);
+  border-radius: 16px;
+  border: 2px solid #1e3a6e;
+  overflow: hidden;
+}
+
+/* Scale the scene down on smaller screens so it never requires horizontal scrolling.
+ * zoom shrinks the rendered size so the surrounding layout adjusts automatically.
+ * JS still uses fixed pixel coordinates internally — zoom is purely visual. */
+@media (max-width: 639px) {
+  .space-scene {
+    zoom: 0.55;
+  } /* 560px → ~308px — fits all phones */
+}
+@media (min-width: 640px) and (max-width: 1099px) {
+  .space-scene {
+    zoom: 0.72;
+  } /* 560px → ~403px — fits tablets in portrait */
+}
+
+/* Starfield using stacked radial-gradients */
+.space-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      1px 1px at 7% 10%,
+      rgba(255, 255, 255, 0.9) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 18% 5%,
+      rgba(255, 255, 255, 0.7) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1.5px 1.5px at 33% 16%,
+      rgba(255, 255, 255, 0.8) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 48% 8%,
+      rgba(255, 255, 255, 0.6) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 62% 20%,
+      rgba(255, 255, 255, 0.7) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1.5px 1.5px at 76% 6%,
+      rgba(255, 255, 255, 0.9) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 91% 15%,
+      rgba(255, 255, 255, 0.6) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 96% 32%,
+      rgba(255, 255, 255, 0.8) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 11% 38%,
+      rgba(255, 255, 255, 0.5) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1.5px 1.5px at 40% 42%,
+      rgba(255, 255, 255, 0.7) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 70% 40%,
+      rgba(255, 255, 255, 0.6) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 2% 52%,
+      rgba(255, 255, 255, 0.8) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 54% 55%,
+      rgba(255, 255, 255, 0.5) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 87% 48%,
+      rgba(255, 255, 255, 0.7) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 25% 65%,
+      rgba(255, 255, 255, 0.4) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1.5px 1.5px at 80% 62%,
+      rgba(255, 255, 255, 0.6) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 45% 72%,
+      rgba(255, 255, 255, 0.3) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 15% 78%,
+      rgba(255, 255, 255, 0.5) 100%,
+      transparent
+    ),
+    radial-gradient(
+      1px 1px at 60% 80%,
+      rgba(255, 255, 255, 0.4) 100%,
+      transparent
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Atmospheric glow along the bottom (Earth's upper atmosphere) */
+.space-scene::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(59, 130, 246, 0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Dashed orbit ring — centred on Earth at (280,270) with r=200 */
+.orbit-path {
+  position: absolute;
+  width: 400px; /* 2 × ORBIT_R */
+  height: 400px; /* 2 × ORBIT_R */
+  border: 1.5px dashed rgba(96, 165, 250, 0.35);
+  border-radius: 50%;
+  left: 80px; /* EARTH_X − ORBIT_R = 280 − 200 */
+  top: 70px; /* EARTH_Y − ORBIT_R = 270 − 200 */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Yellow signal beam from Earth out to the orbit edge */
+.beam {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(251, 191, 36, 0.9),
+    rgba(251, 191, 36, 0.2),
+    transparent
+  );
+  transform-origin: 0 50%;
+  z-index: 4;
+  pointer-events: none;
+  transition:
+    transform 0.15s ease,
+    background 0.3s;
+}
+
+/* Green locked-on beam when angle is correct */
+.beam.locked {
+  background: linear-gradient(
+    to right,
+    rgba(74, 222, 128, 1),
+    rgba(74, 222, 128, 0.3),
+    transparent
+  );
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+}
+
+/* Orange radar arm with dish emoji at the tip */
+.radar-arm {
+  position: absolute;
+  height: 3px;
+  background: #f97316;
+  border-radius: 0 2px 2px 0;
+  transform-origin: 0 50%;
+  z-index: 6;
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.radar-arm::after {
+  content: "📡";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  line-height: 1;
+}
+
+/*
+ * Earth emoji — centred at (280, 270).
+ * translate(-50%, -50%) offsets the emoji so its visual centre sits at this point.
+ * These pixel values MUST match EARTH_X and EARTH_Y in align_radar.js.
+ */
+.earth {
+  position: absolute;
+  left: 280px;
+  top: 270px;
+  font-size: 52px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.7));
+}
+
+/* Satellite emoji — position is calculated by JS based on satelliteAngle */
+.satellite {
+  position: absolute;
+  font-size: 26px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.8));
+  transition: filter 0.4s;
+}
+
+/* Pulsing green glow when satellite is locked on */
+.satellite.locked {
+  filter: drop-shadow(0 0 14px #4ade80)
+    drop-shadow(0 0 24px rgba(74, 222, 128, 0.5));
+  animation: sat-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes sat-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 14px #4ade80)
+      drop-shadow(0 0 24px rgba(74, 222, 128, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(74, 222, 128, 0.5));
+  }
+}
+
+/* ── Data Reports ─────────────────────────────────────── */
+.hints {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+
+.accordion {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 4px 0;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.accordion:hover {
+  background: #293548;
+}
+.accordion.open {
+  background: #1e3a5f;
+}
+
+.panel {
+  display: none;
+  background: #0f1f35;
+  padding: 14px 16px;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 4px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  text-align: left;
+}
+
+.panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.panel th,
+.panel td {
+  border: 1px solid #334155;
+  padding: 9px 14px;
+  text-align: center;
+}
+
+.panel th {
+  background: #1e3a5f;
+  color: #93c5fd;
+  font-size: 0.9rem;
+}
+.panel td:first-child {
+  color: #fbbf24;
+  font-weight: 600;
+}
+.panel td:nth-child(2) {
+  color: #a78bfa;
+}
+.panel td:last-child {
+  color: #4ade80;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.formula-box {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #0f172a;
+  border-radius: 8px;
+  border-left: 3px solid #fbbf24;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.formula-box strong {
+  color: #fbbf24;
+}
+
+/* ── Controls ─────────────────────────────────────────── */
+.controls {
+  width: 100%;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.control-group {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.control-group label span {
+  color: #fbbf24;
+  font-size: 1.15rem;
+}
+
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #f97316;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 4px;
+  padding: 0 2px;
+}
+
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+select:focus {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* ── Signal Strength / Progress ───────────────────────── */
+.status-section {
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 16px 20px;
+  background: #1e293b;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.status-section > p:first-child {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 18px;
+  background: #334155;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #ef4444;
+  border-radius: 10px;
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+.status-msg {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  min-height: 22px;
+}
+
+/* ── Contact Button ───────────────────────────────────── */
+#contactBtn {
+  display: block;
+  margin: 16px auto 0;
+  padding: 14px 44px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+#contactBtn:not(:disabled):hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+#contactBtn:disabled {
+  background: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+#contactBtn:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+/* ── Success Screen ───────────────────────────────────── */
+.success-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 24px;
+  text-align: center;
+  animation: fade-in 0.6s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-screen .sat-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: orbit-spin 4s linear infinite;
+}
+
+@keyframes orbit-spin {
+  0% {
+    transform: rotate(0deg) translateX(24px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(24px) rotate(-360deg);
+  }
+}
+
+.success-screen h1 {
+  font-size: 2.4rem;
+  color: #4ade80;
+  margin-bottom: 8px;
+}
+
+.success-screen p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.success-screen .highlight {
+  color: #fbbf24;
+  font-weight: bold;
+}
+
+.success-screen button {
+  margin-top: 20px;
+  padding: 14px 36px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  background: #4ade80;
+  color: #0f172a;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.success-screen button:hover {
+  background: #22c55e;
+  transform: scale(1.04);
+}

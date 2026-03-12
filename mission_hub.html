@@ -1,108 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/mission_hub.css" />
-  <title>Mission Hub</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/mission_hub.css" />
+    <title>Mission Hub</title>
+  </head>
 
-<body class="mission-page">
-  <header class="site-header">
-    <img src="assets/images/Logo.png" alt="Data Education in Schools Logo" class="site-logo">
-  </header>
-      <nav class="main-nav">
-    <div class="nav-links">
+  <body class="mission-page">
+    <header class="site-header">
+      <img
+        src="assets/images/Logo.png"
+        alt="Data Education in Schools Logo"
+        class="site-logo"
+      />
+    </header>
+    <nav class="main-nav">
+      <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="mission_hub.html">Missions</a>
         <a href="accessibility.html">Accessibility</a>
-    </div>
+      </div>
     </nav>
 
-  <main class="hub-wrap">
-    <h1 id="welcome-message" class="hub-title"></h1>
+    <main class="hub-wrap">
+      <h1 id="welcome-message" class="hub-title"></h1>
 
-    <nav class="mission-steps" aria-label="Mission steps">
-      <button class="step active" type="button">1</button>
-      <button class="step" type="button">2</button>
-      <button class="step" type="button">3</button>
-      <button class="step" type="button">4</button>
-      <button class="step" type="button">5</button>
-      <button class="step" type="button">6</button>
-      <button class="step" type="button">7</button>
-    </nav>
+      <nav class="mission-steps" aria-label="Mission steps">
+        <button class="step active" type="button">1</button>
+        <button class="step" type="button">2</button>
+        <button class="step" type="button">3</button>
+        <button class="step" type="button">4</button>
+        <button class="step" type="button">5</button>
+        <button class="step" type="button">6</button>
+        <button class="step" type="button">7</button>
+      </nav>
 
-    <section class="mission-grid" aria-label="Mission selection">
+      <section class="mission-grid" aria-label="Mission selection">
+        <article class="mission-card-tile">
+          <img
+            src="assets/images/rocket_launch.jpg"
+            alt="A rocket launching into the sky across the night sky"
+          />
+          <div class="mission-overlay">
+            <h2>Mission 1</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-1-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-1-details"
+            aria-hidden="true"
+          >
+            <h3>Launch the Spy Satellite</h3>
+            <p>We need to launch the spy satellite!</p>
+            <p>
+              Analyse the rocket fuel data reports, calculate the correct
+              sequence, and fill the barrels so the launch system can be safely
+              unlocked.
+            </p>
+            <a class="launch-mission" href="puzzle_rocket_fuel.html"
+              >Launch Mission</a
+            >
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/rocket_launch.jpg" alt="A rocket launching into the sky across the night sky">
-        <div class="mission-overlay">
-          <h2>Mission 1</h2>
-          <a class="read-more" href="#" role="button" aria-expanded="false" aria-controls="mission-1-details">Read More</a>
-        </div>
-        <div class="mission-details" id="mission-1-details" aria-hidden="true">
-          <h3>Launch the Spy Satellite</h3>
-          <p>
-            We need to launch the spy satellite!
-          </p>
-          <p> 
-            Analyse the rocket fuel data reports, calculate the correct sequence,
-            and fill the barrels so the launch system can be safely unlocked.
-          </p>
-          <a class="launch-mission" href="puzzle_rocket_fuel.html">Launch Mission</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img
+            src="assets/images/satellite.jpg"
+            alt="A satellite orbiting the Earth"
+          />
+          <div class="mission-overlay">
+            <h2>Mission 2</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-2-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-2-details"
+            aria-hidden="true"
+          >
+            <h3>Align the Radar Dish</h3>
+            <p>The spy satellite is in orbit — now we need to contact it!</p>
+            <p>
+              Analyse the orbital data, calculate the correct radar angle and
+              frequency code, then establish communication with the satellite.
+            </p>
+            <a class="launch-mission" href="puzzle_align_radar.html"
+              >Launch Mission</a
+            >
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 2 image">
-        <div class="mission-overlay">
-          <h2>Mission 2</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img src="assets/images/placeholder.png" alt="Mission 3 image" />
+          <div class="mission-overlay">
+            <h2>Mission 3</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-3-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-3-details"
+            aria-hidden="true"
+          >
+            <h3>Mission 3 Details</h3>
+            <p>Details about Mission 3...</p>
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 3 image">
-        <div class="mission-overlay">
-          <h2>Mission 3</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img src="assets/images/placeholder.png" alt="Mission 4 image" />
+          <div class="mission-overlay">
+            <h2>Mission 4</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-4-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-4-details"
+            aria-hidden="true"
+          >
+            <h3>Mission 4 Details</h3>
+            <p>Details about Mission 4...</p>
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 4 image">
-        <div class="mission-overlay">
-          <h2>Mission 4</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img src="assets/images/placeholder.png" alt="Mission 5 image" />
+          <div class="mission-overlay">
+            <h2>Mission 5</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-5-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-5-details"
+            aria-hidden="true"
+          >
+            <h3>Mission 5 Details</h3>
+            <p>Details about Mission 5...</p>
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 5 image">
-        <div class="mission-overlay">
-          <h2>Mission 5</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img src="assets/images/placeholder.png" alt="Mission 6 image" />
+          <div class="mission-overlay">
+            <h2>Mission 6</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-6-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-6-details"
+            aria-hidden="true"
+          >
+            <h3>Mission 6 Details</h3>
+            <p>Details about Mission 6...</p>
+          </div>
+        </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 6 image">
-        <div class="mission-overlay">
-          <h2>Mission 6</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
+        <article class="mission-card-tile">
+          <img src="assets/images/placeholder.png" alt="Mission 7 image" />
+          <div class="mission-overlay">
+            <h2>Mission 7</h2>
+            <a
+              class="read-more"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              aria-controls="mission-7-details"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="mission-details"
+            id="mission-7-details"
+            aria-hidden="true"
+          >
+            <h3>Mission 7 Details</h3>
+            <p>Details about Mission 7...</p>
+          </div>
+        </article>
+      </section>
+    </main>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 7 image">
-        <div class="mission-overlay">
-          <h2>Mission 7</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <script src="js/app.js"></script>
-</body>
+    <script src="js/app.js"></script>
+  </body>
 </html>

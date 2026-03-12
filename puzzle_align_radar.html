@@ -1,13 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/align_radar.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/align_radar.css" />
     <title>Align the Radar Dish</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <button id="backBtn">Back to Mission Hub</button>
+
+    <h1>📡 Align the Radar Dish!</h1>
+    <p class="subtitle">
+      Use the mission data to point the radar at the satellite and establish
+      contact!
+    </p>
+
+    <div class="puzzle-layout">
+      <!-- LEFT: diagram + status stays visible while scrolling -->
+      <div class="left-col">
+        <!-- ── Space Diagram ──────────────────────────────── -->
+        <div class="diagram-wrap">
+          <div
+            class="space-scene"
+            role="region"
+            aria-label="Space diagram showing Earth and satellite orbit"
+          >
+            <div class="orbit-path"></div>
+            <div class="beam" id="beam"></div>
+            <div class="radar-arm" id="radarArm"></div>
+            <div class="satellite" id="satellite">🛰️</div>
+            <div class="earth">🌍</div>
+          </div>
+        </div>
+
+        <!-- ── Signal Strength ────────────────────────────── -->
+        <div class="status-section">
+          <p>Signal Strength</p>
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p id="statusMsg" class="status-msg" aria-live="polite">
+            Set the radar angle and frequency code to establish contact!
+          </p>
+        </div>
+
+        <button id="contactBtn" disabled>Establish Contact 📡</button>
+      </div>
+
+      <!-- RIGHT: scrollable data reports and controls -->
+      <div class="right-col">
+        <!-- ── Data Reports ────────────────────────────────── -->
+        <div class="hints">
+          <button
+            class="accordion"
+            aria-expanded="false"
+            aria-controls="panel1"
+          >
+            Data Report 1 — Satellite Position
+          </button>
+          <div class="panel" id="panel1" role="region">
+            <p id="report1Text"></p>
+          </div>
+
+          <button
+            class="accordion"
+            aria-expanded="false"
+            aria-controls="panel2"
+          >
+            Data Report 2 — Orbital Speed
+          </button>
+          <div class="panel" id="panel2" role="region">
+            <p id="report2Text"></p>
+          </div>
+
+          <button
+            class="accordion"
+            aria-expanded="false"
+            aria-controls="panel3"
+          >
+            Data Report 3 — Speed Reference Table
+          </button>
+          <div class="panel" id="report3Panel" role="region"></div>
+        </div>
+
+        <!-- ── Controls ───────────────────────────────────── -->
+        <div class="controls">
+          <div class="control-group">
+            <label for="angleInput"
+              >Radar Angle: <span id="angleDisplay">0°</span></label
+            >
+            <input
+              type="range"
+              id="angleInput"
+              min="0"
+              max="180"
+              value="0"
+              step="1"
+              aria-label="Radar angle in degrees"
+            />
+            <div class="range-labels">
+              <span>0° (East)</span>
+              <span>90° (Overhead)</span>
+              <span>180° (West)</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="freqSelect">Frequency Code</label>
+            <select id="freqSelect">
+              <option value="">— Select a code —</option>
+              <option value="A">Code A</option>
+              <option value="B">Code B</option>
+              <option value="C">Code C</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="js/align_radar.js"></script>
-</body>
+  </body>
 </html>

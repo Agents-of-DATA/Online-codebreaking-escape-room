@@ -1,69 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/rocket_fuel.css">
+    <link rel="stylesheet" href="css/rocket_fuel.css" />
 
     <title>Launch the Spy Satellite</title>
-</head>
-<body>
+  </head>
+  <body>
     <button id="backBtn">Back to Mission Hub</button>
     <h1>Spy Satellite Launch Control</h1>
     <p>Review the Data Reports to discover the required chemical levels.</p>
-    
+
     <!-- DATA HINTS -->
     <div class="hints">
-        <button class="accordion">Data Report 1</button>
-        <div class="panel">
-            <p id="report1Text"></p>
-        </div>
-        
-        <button class="accordion">Data Report 2</button>
-        <div class="panel">
-            <p id="report2Text"></p>
-        </div>
-        
-        <button class="accordion">Data Report 3</button>
-        <div class="panel">
-            <p id="report3Text"></p>
-        </div>
+      <button class="accordion">Data Report 1</button>
+      <div class="panel">
+        <p id="report1Text"></p>
+      </div>
+
+      <button class="accordion">Data Report 2</button>
+      <div class="panel">
+        <p id="report2Text"></p>
+      </div>
+
+      <button class="accordion">Data Report 3</button>
+      <div class="panel">
+        <p id="report3Text"></p>
+      </div>
     </div>
-    
+
     <p>Adjust the rocket fuel chemical levels to achieve launch readiness!</p>
     <!-- BARRELS -->
     <div class="barrel-container">
-        <div class="barrel">
-            <div class="fill" id="fillA"></div>
-            <p>Chemical A</p>
-            <input type="range" min="0" max="100" value="0" id="inputA">
-            <p id="valueA">0%</p>
-        </div>
-        <div class="barrel">
-            <div class="fill" id="fillB"></div>
-            <p>Chemical B</p>
-            <input type="range" min="0" max="100" value="0" id="inputB">
-            <p id="valueB">0%</p>
-        </div>
-        <div class="barrel">
-            <div class="fill" id="fillC"></div>
-            <p>Chemical C</p>
-            <input type="range" min="0" max="100" value="0" id="inputC">
-            <p id="valueC">0%</p>
-        </div>
+      <div class="barrel">
+        <div class="fill" id="fillA"></div>
+        <p>Chemical A</p>
+        <input type="range" min="0" max="100" value="0" id="inputA" />
+        <p id="valueA">0%</p>
+      </div>
+      <div class="barrel">
+        <div class="fill" id="fillB"></div>
+        <p>Chemical B</p>
+        <input type="range" min="0" max="100" value="0" id="inputB" />
+        <p id="valueB">0%</p>
+      </div>
+      <div class="barrel">
+        <div class="fill" id="fillC"></div>
+        <p>Chemical C</p>
+        <input type="range" min="0" max="100" value="0" id="inputC" />
+        <p id="valueC">0%</p>
+      </div>
     </div>
 
     <!-- PROGRESS-->
-     <div class="progress-section">
-        <p>Launch Readiness</p>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-     </div>
-     
-     <button id="launchBtn" disabled>Launch Satellite</button>
+    <div class="progress-section">
+      <p>Launch Readiness</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
 
-     <script src="js/rocket_fuel.js"></script>
-</body>
+    <button id="launchBtn" disabled>Launch Satellite</button>
+
+    <script src="js/rocket_fuel.js"></script>
+  </body>
 </html>
