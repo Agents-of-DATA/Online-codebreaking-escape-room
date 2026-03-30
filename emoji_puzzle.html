@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Emoji Challenge</title>
+<link rel="stylesheet" href="css/emoji_puzzle.css">
+</head>
+
+<body>
+  <header class="mission-header">
+    <h1>Agents of DATA</h1>
+    <h2>System 1: </h2>
+    <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
+  </header>
+  
+  <!-- ===== MAIN PANEL ===== -->
+   <section class="mission-panel">
+  
+    <!-- BRIEFING -->
+    <div class="briefing">
+      <h3>Agent K's BriefinG</h3>
+      <p></p>
+    </div>
+    
+    <div class="container">
+
+        <h2 id="levelTitle">Level 1</h2>
+
+        <div id="puzzle" class="puzzle"></div>
+        <div id="clues" class="clues"></div>
+      
+        <input id="answerInput" type="text" placeholder="Type your answer here">
+        <br>
+        <button onclick="checkAnswer()">Check Answer</button>
+
+        <div id="result"></div>
+      
+    </div>
+
+  <script src="js/emoji_puzzle.js"></script>
+</body>
+</html>
