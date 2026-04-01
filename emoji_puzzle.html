@@ -1,42 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Emoji Challenge</title>
-<link rel="stylesheet" href="css/emoji_puzzle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/emoji_puzzle.css">
+  <title>Emoji Challenge</title>
 </head>
 
 <body>
+
   <header class="mission-header">
     <h1>Agents of DATA</h1>
-    <h2>System 1: </h2>
+    <h2>System 1</h2>
     <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
   </header>
-  
-  <!-- ===== MAIN PANEL ===== -->
-   <section class="mission-panel">
-  
-    <!-- BRIEFING -->
-    <div class="briefing">
-      <h3>Agent K's BriefinG</h3>
-      <p></p>
-    </div>
-    
+
+  <section class="mission-panel">
+
     <div class="container">
 
+      <!-- Briefing -->
+      <div class="puzzle-container briefing">
+        <h3>Agent K's Briefing</h3>
+        <p>
+          The VIKINGS have encrypted their message using emojis. Decode the pattern and find the correct meaning.
+        </p>
+      </div>
+
+      <!-- Puzzle -->
+      <div class="puzzle-container">
+
+        <!-- Emoji Cipher Table -->
+        <table id="emojiTable">
+            <thead id="tableHead"></thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Level Title -->
         <h2 id="levelTitle">Level 1</h2>
 
-        <div id="puzzle" class="puzzle"></div>
-        <div id="clues" class="clues"></div>
-      
-        <input id="answerInput" type="text" placeholder="Type your answer here">
-        <br>
+        <!-- Emoji Display -->
+        <div id="emojiDisplay" style="font-size: 2rem; margin: 15px 0;"></div>
+
+        <!-- Optional Clues -->
+        <div id="clues"></div>
+
+        <!-- Input -->
+        <input id="answerInput" type="text" placeholder="Type your answer here" />
+
+        <!-- Button -->
         <button onclick="checkAnswer()">Check Answer</button>
 
+        <!-- Feedback -->
         <div id="result"></div>
-      
-    </div>
 
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Load JS at end of body -->
   <script src="js/emoji_puzzle.js"></script>
+
 </body>
 </html>

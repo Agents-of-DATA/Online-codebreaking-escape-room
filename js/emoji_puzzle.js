@@ -1,57 +1,115 @@
-const levels = [
-    {
-      // EASY (lots of clues)
-      puzzle: "🐵🍎🍎🌳   🐵🍎",
-      clues: ["🐵 = M", "🍎 = E", "🌳 = T"],
-      answer: "MEET ME"
-    },
-    {
-      // MEDIUM (fewer clues)
-      puzzle: "🐸🍦⚡⚡🐶   🎉🐶🌟🌟",
-      clues: ["🐸 = P", "⚡ = Z"],
-      answer: "PIZZA PARTY"
-    },
-    {
-      // HARD (minimal clues)
-      puzzle: "🦊🌙🔥   🌙🍎🔥🔥",
-      clues: ["🌙 = N"],
-      answer: "FUN NIGHT"
-    }
-  ];
-
-let currentLevel = 0;
-
-function loadLevel() {
-  const level = levels[currentLevel];
-
-  document.getElementById("levelTitle").textContent = "Level " + (currentLevel + 1);
-  document.getElementById("puzzle").textContent = level.puzzle;
-  document.getElementById("clues").innerHTML =
-    level.clues.map(c => `<p>${c}</p>`).join("");
-
-  document.getElementById("answerInput").value = "";
-  document.getElementById("result").textContent = "";
+const emojiKey = {
+    A: "⚔️", B: "🛡️", C: "🚢", D: "🪓", E: "🐺",
+    F: "❄️", G: "🔥", H: "🍖", I: "🍺",
+    J: "🗡️", K: "🧭", L: "🌊", M: "⛰️",
+    N: "🌙", O: "👁️", P: "🐉", Q: "👑",
+    R: "🏹", S: "🪶", T: "⚡️", U: "🪵",
+    V: "🧔", W: "🌲", X: "❌", Y: "🦅", Z: "🪙"
+};
+  
+const table = document.getElementById("emojiTable");
+const letters = Object.keys(emojiKey);
+  
+const groupSize = Math.ceil(letters.length / 3);
+  
+for (let i = 0; i < 3; i++) {
+    const group = letters.slice(i * groupSize, (i + 1) * groupSize);
+  
+    const letterRow = document.createElement("tr");
+    const emojiRow = document.createElement("tr");
+  
+    group.forEach(letter => {
+      const th = document.createElement("th");
+      th.textContent = letter;
+      letterRow.appendChild(th);
+  
+      const td = document.createElement("td");
+      td.textContent = emojiKey[letter];
+      emojiRow.appendChild(td);
+    });
+  
+    table.appendChild(letterRow);
+    table.appendChild(emojiRow);
 }
-
+  
+// puzzles
+const emojiPuzzles = {
+    easy: [
+      { emojis: "⛰️🐺🐺⚡️ ⚔️⚡️", answer: ["meet at"] },
+      { emojis: "🔥👁️ ⚡️👁️", answer: ["go to"] },
+      { emojis: "🌊👁️🚢⚔️⚡️🍺👁️🌙", answer: ["location"] }
+    ],
+    medium: [
+      { emojis: "⚡️🍖🐺🪶 🍖🍺🐉", answer: ["the ship"] },
+      { emojis: "⚡️🍖🐺🪶 🍖👁️🏹🐺", answer: ["the shore"] },
+      { emojis: "⚡️🍖🐺🪓 👁️🚢🧭", answer: ["the dock"] }
+    ],
+    hard: [
+      { emojis: "❄️👁️🏹 ⛰️🍺🪶🪶🍺👁️🌙 ⚡️⚔️🧭🐺 👁️❄️❄️", answer: ["for mission take off"] },
+      { emojis: "❄️👁️🏹 🏹⚔️🪓⚔️🏹 🌊⚔️🪵🌙🚢🍖 👁️❄️❄️", answer: ["for radar launch off"] },
+      { emojis: "❄️👁️🏹 🪶⚔️⚡️🐺🌊🌊🍺⚡️🐺 🌊⚔️🪵🌙🚢🍖", answer: ["for satellite launch"] }
+    ]
+  };
+  
+const levels = ["easy", "medium", "hard"];
+let currentLevelIndex = 0;
+let currentPuzzle = null;
+  
+function renderEmojiPuzzle() {
+    const levelName = levels[currentLevelIndex];
+    const puzzles = emojiPuzzles[levelName];
+  
+    currentPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+  
+    document.getElementById("levelTitle").textContent =
+      "Level " + (currentLevelIndex + 1);
+  
+    document.getElementById("emojiDisplay").textContent =
+      currentPuzzle.emojis;
+  
+    document.getElementById("answerInput").value = "";
+    document.getElementById("result").textContent = "";
+}
+  
 function checkAnswer() {
-  const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();
-  const correctAnswer = levels[currentLevel].answer;
-
-  if (userAnswer === correctAnswer) {
-    if (currentLevel < levels.length - 1) {
-      document.getElementById("result").textContent = "Correct! Next level...";
-      document.getElementById("result").style.color = "green";
-      currentLevel++;
-      setTimeout(loadLevel, 1000);
+    const userInput = document
+      .getElementById("answerInput").value.toLowerCase();
+  
+    const result = document.getElementById("result");
+  
+    if (currentPuzzle.answer.includes(userInput)) {
+      result.textContent = "Correct!";
+      result.style.color = "lightgreen";
+  
+      setTimeout(goToNextLevel, 1000);
     } else {
-      document.getElementById("result").textContent = "You completed all levels!";
-      document.getElementById("result").style.color = "blue";
+      result.textContent = "Incorrect. Try again.";
+      result.style.color = "red";
     }
-  } else {
-    document.getElementById("result").textContent = "Try again!";
-    document.getElementById("result").style.color = "red";
-  }
 }
-
-// Start game
-loadLevel();
+  
+function goToNextLevel() {
+    const result = document.getElementById("result");
+  
+    if (currentLevelIndex < levels.length - 1) {
+      result.textContent = "Level Complete! Advancing...";
+      result.style.color = "lightgreen";
+  
+      setTimeout(() => {
+        currentLevelIndex++;
+        renderEmojiPuzzle();
+      }, 1200);
+    } else {
+      finishEmojiMission();
+    }
+}
+  
+function finishEmojiMission() {
+    const result = document.getElementById("result");
+    result.textContent = "Mission Complete! All messages decrypted.";
+    result.style.color = "lightgreen";
+}
+  
+window.onload = function () {
+    renderEmojiPuzzle();
+};
