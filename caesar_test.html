@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="css/binary_chart.css">
 </head>
 <body>
-    <div class="wrapper" id="wrapper"></div>
     <div class="content">
-    <h1>Caesar Cipher Challenge</h1>
+        <h1>Caesar Cipher Challenge</h1>
 
         <!-- Forward/Back navigation -->
         <button id="back_btn">Back</button>
@@ -18,13 +17,13 @@
         <!-- Main content area -->
         <div id="page_content"></div>
 
-        <!-- Caesar challenge elements (will only show on Question page) -->
+        <!-- Caesar challenge elements (shown only on question page) -->
         <div id="caesar_controls" style="display:none;">
+            <h3>Decode the Caesar Cipher:</h3>
             <input type="text" id="caesar_input" placeholder="Type your guess here">
             <button id="submit_btn">Submit Answer</button>
             <div id="word_feedback"></div>
-        <img src="./assets/images/alphabet.png" alt="binary_chart" class="binary" >
-    
+            <img src="./assets/images/alphabet.png" alt="alphabet chart" class="binary">
 
             <h2>Reference (for demo purposes)</h2>
             <div class="display-box">
@@ -34,7 +33,7 @@
 
             <div class="display-box">
                 <label>Original Word:</label>
-                <input type="text" id="original_input"  readonly>
+                <input type="text" id="original_input" readonly>
             </div>
 
             <div class="display-box">
@@ -45,6 +44,5 @@
     </div>
 
     <script src="js/caesar_shifter.js"></script>
-    <script src="js/background.js"></script>
 </body>
 </html>

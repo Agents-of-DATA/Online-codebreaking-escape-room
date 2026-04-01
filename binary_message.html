@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/binary_chart.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Message</title>
+  <link rel="stylesheet" href="css/binary_chart.css">
 
 
 
-<title>Binary Message</title>
+
 </head>
 
 <body>
-  <!-- Animated background behind everything -->
-  <div class="wrapper" id="wrapper"></div>
-
-  <!-- Centered content box -->
   <div class="content">
-    <h1>Binary Decoder Challenge</h1>
-    <button id="back_btn">Back</button>
-    <button id="forward_btn">Forward</button>
-    <div id="page_content"></div>
-    <div id="binary_controls" style="display:none;">
-      <img src="./assets/images/binary_Chart.png" class="binary">
-      <div id="binary_message"></div>
-      <input type="text" id="binary_input" placeholder="Enter decoded word">
-      <button id="answer_btn">Submit Answer</button>
-      <div id="word_feedback"></div>
+    <div class="page-center">
+    
+      <h1>Binary Decoder Challenge</h1>
+
+      <button id="back_btn">Back</button>
+      <button id="forward_btn">Forward</button>
+
+      <div id="page_content"></div>
+
+      <div id="binary_controls" style="display:none;">
+        <img src="./assets/images/binary_Chart.png" class="binary">
+
+        <div id="binary_message"></div>
+
+        <input type="text" id="binary_input" placeholder="Enter decoded word">
+        <button id="answer_btn">Submit Answer</button>
+
+        <div id="word_feedback"></div>
+      </div>
     </div>
   </div>
 
   <script src="js/binary.js"></script>
-  <script src="js/background.js"></script>
+
+
 </body>
 </html>
