@@ -16,7 +16,8 @@ const binaryValues = [
 
 let currentBinaryChallenge = null;
 let currentIndex = 0;
-
+let questionsAnswered = 0;
+const maxQuestions = 2; 
 /* ---------- Page system ---------- */
 
 const pages = [
@@ -63,66 +64,43 @@ return Math.floor(Math.random()*(max-min+1))+min;
 }
 
 /* ---------- Binary Challenge ---------- */
+function displayBinary() {
+    if (questionsAnswered >= maxQuestions) {
+        document.getElementById("binary_message").innerHTML = `<h3>Challenge Completed! Great job!</h3>`;
+        document.getElementById("binary_input").disabled = true;
+        document.getElementById("answer_btn").disabled = true;
+        // Add hyperlink to homepage
+        document.getElementById("word_feedback").innerHTML = `<a href="index.html" style="color:blue; text-decoration:underline;">Return to Homepage</a>`;
+        return;
+    }
 
-function displayBinary(){
+    // Pick a random word
+    const index = randomInt(0, words.length - 1);
+    currentBinaryChallenge = {
+        word: words[index],
+        binary: binaryValues[index]
+    };
 
-if(!currentBinaryChallenge){
-
-const index = randomInt(0,words.length-1);
-
-currentBinaryChallenge = {
-word: words[index],
-binary: binaryValues[index]
-};
-
-}
-
-document.getElementById("binary_message").innerHTML = `
-<h3>Decode the Binary</h3>
-<p><strong>Binary:</strong> ${currentBinaryChallenge.binary}</p>
-`;
-
+    document.getElementById("binary_message").innerHTML = `
+        <h3>Decode the Binary</h3>
+        <p><strong>Binary:</strong> ${currentBinaryChallenge.binary}</p>
+    `;
 }
 
 /* ---------- Answer Checking ---------- */
+function compareBinaryInput() {
+    const userInput = document.getElementById("binary_input").value.trim().toUpperCase();
+    const feedback = document.getElementById("word_feedback");
 
-function compareBinaryInput(){
+    if (userInput === currentBinaryChallenge.word) {
+        feedback.innerHTML = `<p style="color:green;">Correct! The word is ${currentBinaryChallenge.word}</p>`;
+        questionsAnswered++; // Increment number of questions answered
+        document.getElementById("binary_input").value = "";
 
-const userInput =
-document.getElementById("binary_input")
-.value
-.trim()
-.toUpperCase();
-
-const feedback = document.getElementById("word_feedback");
-
-if(userInput === currentBinaryChallenge.word){
-
-feedback.innerHTML =
-`<p style="color:green;">Correct! The word is ${currentBinaryChallenge.word}</p>`;
-
-setTimeout(()=>{
-
-const index = randomInt(0,words.length-1);
-
-currentBinaryChallenge = {
-word: words[index],
-binary: binaryValues[index]
-};
-
-document.getElementById("binary_input").value="";
-displayBinary();
-
-},1000);
-
-}
-else{
-
-feedback.innerHTML =
-`<p style="color:red;">Try again!</p>`;
-
-}
-
+        setTimeout(displayBinary, 1000);
+    } else {
+        feedback.innerHTML = `<p style="color:red;">Try again!</p>`;
+    }
 }
 
 /* ---------- Navigation ---------- */
