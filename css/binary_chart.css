@@ -1,0 +1,94 @@
+/* Reset spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body full screen, flex center */
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #111;
+
+  display: flex;
+  justify-content: center;   /* horizontal center */
+  align-items: center;       /* vertical center */
+
+  background-image: url("../assets/images/hackingtheship.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.content {
+  width: 90%;
+  max-width: 700px;
+  transform: translateY(-40px);
+}
+
+/* Binary chart styling */
+.binary {
+    width: 190px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.binary:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.binary.enlarged {
+    transform: scale(1.2);
+}
+
+/* Binary message box */
+#binary_message {
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    border-radius: 8px;
+    max-width: 600px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+
+#binary_message h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#binary_message p {
+    margin: 10px 0;
+    word-break: break-all;
+}
+
+#generate_btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#generate_btn:hover {
+    background-color: #0056b3;
+}
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Input / buttons */
+.display-box { margin: 10px 0; }
+input { width: 200px; padding: 5px; margin: 5px 0; }
+button { padding: 5px 10px; margin: 5px; }
