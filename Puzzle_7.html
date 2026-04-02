@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mission 7 </title>
+    <script src="./js/chart.js"></script>
+    <link rel="stylesheet" href="css/chart.css">
+</head>
+<body>
+
+<div id="chartPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeChart()">&times;</span>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </div>
+</div>
+
+
+<h1>Analysis Question</h1>
+Which region is leaking encrypted data?<br>
+<p>Hint: Click the "Show Chart" button to view the data distribution across regions.</p>
+<div class="button-row">
+    <button> Glasgow</button>
+    <button> Edinburgh</button>
+    <button> Dundee</button>    
+    <button> Inverness</button> 
+</div>
+<br><br>
+<div class="button-row">
+    <button onclick="openChart()">Show Chart</button>
+    <button onclick="openChart()">Show Chart</button>
+</div>
+<script>
+const ctx = document.getElementById("canvas");
+
+const myChart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
+    datasets: [{
+      label: "Data Received",
+      data: [45, 60, 80, 20],
+      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+    }]
+  },
+  options: {
+    events: ['click'], 
+  }
+});
+</script>
+
+</body>
+</html>
