@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Challenge</title>
+    <link rel="stylesheet" href="css/binary_chart.css">
+</head>
+<body>
+    <div class="content">
+        <h1>Caesar Cipher Challenge</h1>
+
+        <!-- Forward/Back navigation -->
+        <button id="back_btn">Back</button>
+        <button id="forward_btn">Forward</button>
+
+        <!-- Main content area -->
+        <div id="page_content"></div>
+
+        <!-- Caesar challenge elements (shown only on question page) -->
+        <div id="caesar_controls" style="display:none;">
+            <h3>Decode the Caesar Cipher:</h3>
+            <input type="text" id="caesar_input" placeholder="Type your guess here">
+            <button id="submit_btn">Submit Answer</button>
+            <div id="word_feedback"></div>
+            <img src="./assets/images/alphabet.png" alt="alphabet chart" class="binary">
+
+            <h2>Reference (for demo purposes)</h2>
+            <div class="display-box">
+                <label>Encoded Word:</label>
+                <input type="text" id="encoded_input" readonly>
+            </div>
+
+            <div class="display-box">
+                <label>Original Word:</label>
+                <input type="text" id="original_input" readonly>
+            </div>
+
+            <div class="display-box">
+                <label>Shift:</label>
+                <input type="text" id="shift" readonly>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/caesar_shifter.js"></script>
+</body>
+</html>
