@@ -1,19 +1,54 @@
-
 body {
   font-family: Arial, sans-serif;
   background: #0f172a; /* solid dark */
   color: #e2e8f0;
   margin: 0;
-  padding: 20px;
+  padding: 0px;
 
   /* Flexbox centering */
   display: flex;            /* enable flexbox */
   flex-direction: column;   /* stack content vertically */
   align-items: center;      /* horizontal center */
-  justify-content: center;  /* vertical center */
+  justify-content: flex-start;  /* vertical center */
   min-height: 100vh;        /* make body fill the viewport */
   text-align: center;       /* optional: center text */
 }
+
+h3 {
+  color: #38bdf8;               
+}
+
+.mission-header {
+  background: #020617;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #334155;
+  align-self: stretch;
+}
+.mission-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+.mission-header h2 {
+  margin: 5px 0 10px;
+  font-weight: normal;
+  color: #94a3b8;
+}
+.back-link {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.briefing {
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left; /* ensures everything aligns left */
+}
+
 .popup {
   display: none;
   position: fixed;
@@ -82,4 +117,30 @@ button:hover {
 button:active {
   transform: translateY(1px); /* Push down effect */
   box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.tips {
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left; /* ensures everything aligns left */
+}
+
+.tips ul {
+  padding-left: 20px; /* keeps bullet indentation clean */
+}
+
+.map-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.map-image {
+  width: 50%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
