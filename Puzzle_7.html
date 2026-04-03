@@ -27,11 +27,12 @@
 Which region is leaking encrypted data?<br>
 <p>Hint: Click the "Show Chart" button to view the data distribution across regions.</p>
 <div class="button-row">
-    <button> Glasgow</button>
-    <button> Edinburgh</button>
-    <button> Dundee</button>    
-    <button> Inverness</button> 
+    <button class="answer" disabled onclick="checkAnswer('glasgow')"> Glasgow</button>
+    <button class="answer" disabled onclick="checkAnswer('edinburgh')"> Edinburgh</button>
+    <button class="answer" disabled onclick="checkAnswer('dundee')"> Dundee</button>    
+    <button class="answer" disabled onclick="checkAnswer('inverness')"> Inverness</button> 
 </div>
+<p id="feedback"></p>
 <br><br>
 <div class="button-row">
   <button onclick="showBarChart()">Show Bar Chart</button>
@@ -39,7 +40,8 @@ Which region is leaking encrypted data?<br>
 </div>
 <script>
 const ctx = document.getElementById("canvas");
-
+let barChartViewed = false;
+let networkViewed = false;
 const myChart = new Chart(ctx, {
   type: "bar",
   data: {
@@ -59,6 +61,8 @@ function showBarChart() {
 
   document.getElementById("canvas").style.display = "block";
   document.querySelector(".map-container").style.display = "none";
+  barChartViewed = true;
+  checkIfUnlocked();
 }
 
 function showNetwork() {
@@ -70,10 +74,30 @@ function showNetwork() {
   requestAnimationFrame(() => {
     window.drawNetwork();
   });
+  networkViewed = true;
+  checkIfUnlocked();
 }
 
 function closeChart() {
   document.getElementById("chartPopup").style.display = "none";
+}
+function checkIfUnlocked() {
+  if (barChartViewed && networkViewed) {
+    document.querySelectorAll(".answer").forEach(btn => {
+      btn.disabled = false;
+    });
+  }
+}
+function checkAnswer(selected) {
+  const feedback = document.getElementById("feedback");
+
+  if (selected === window.correctCity) {
+    feedback.textContent = "✅ Correct! Dundee is leaking encrypted data.";
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent = "Try again.";
+    feedback.style.color = "red";
+  }
 }
 </script>
 
