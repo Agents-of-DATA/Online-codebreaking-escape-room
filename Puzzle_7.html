@@ -3,17 +3,25 @@
 <head>
     <title>Mission 7 </title>
     <script src="./js/chart.js"></script>
+    <script src="./js/traffic.js"></script>
     <link rel="stylesheet" href="css/chart.css">
+    <link rel="stylesheet" href="css/traffic.css">
 </head>
 <body>
 
 <div id="chartPopup" class="popup">
   <div class="popup-content">
     <span class="close" onclick="closeChart()">&times;</span>
+
     <canvas id="canvas" width="600" height="300"></canvas>
+
+    <div class="map-container">
+      <img src="assets/images/scotland-map.png" class="map-bg">
+    
+      <canvas id="network" width="600" height="400"></canvas>
+    </div>
   </div>
 </div>
-
 
 <h1>Analysis Question</h1>
 Which region is leaking encrypted data?<br>
@@ -26,8 +34,8 @@ Which region is leaking encrypted data?<br>
 </div>
 <br><br>
 <div class="button-row">
-    <button onclick="openChart()">Show Chart</button>
-    <button onclick="openChart()">Show Chart</button>
+  <button onclick="showBarChart()">Show Bar Chart</button>
+  <button onclick="showNetwork()">Show Network Graph</button>
 </div>
 <script>
 const ctx = document.getElementById("canvas");
@@ -46,6 +54,27 @@ const myChart = new Chart(ctx, {
     events: ['click'], 
   }
 });
+function showBarChart() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas").style.display = "block";
+  document.querySelector(".map-container").style.display = "none";
+}
+
+function showNetwork() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas").style.display = "none";
+  document.querySelector(".map-container").style.display = "block";
+
+  requestAnimationFrame(() => {
+    window.drawNetwork();
+  });
+}
+
+function closeChart() {
+  document.getElementById("chartPopup").style.display = "none";
+}
 </script>
 
 </body>
