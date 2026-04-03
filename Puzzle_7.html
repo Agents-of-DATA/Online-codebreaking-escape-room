@@ -88,12 +88,31 @@ function checkIfUnlocked() {
     });
   }
 }
+
+function finishMission2() {
+  const feedback = document.getElementById("feedback");
+
+  feedback.innerHTML = "🎉 Mission Complete! Returning to HQ...";
+  feedback.style.color = "green";
+
+  // Disable answer buttons
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.disabled = true;
+  });
+
+  localStorage.setItem("mission7Complete", "true");
+
+  setTimeout(() => {
+    window.location.href = "mission_hub.html";
+  }, 1500);
+}
 function checkAnswer(selected) {
   const feedback = document.getElementById("feedback");
 
   if (selected === window.correctCity) {
     feedback.textContent = "✅ Correct! Dundee is leaking encrypted data.";
     feedback.style.color = "green";
+    finishMission2();
   } else {
     feedback.textContent = "Try again.";
     feedback.style.color = "red";
