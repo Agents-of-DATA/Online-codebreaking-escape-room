@@ -1,27 +1,28 @@
-// Grab key elements used across the entry and mission hub pages.
 const nameForm = document.querySelector("#name-form");
 const nameInput = document.querySelector("#agent-name");
 const viking = document.querySelector(".viking");
 const welcomeMessage = document.querySelector("#welcome-message");
-
-// On the landing page: validate name, store it, then continue to mission hub.
+const missionLinks = document.querySelectorAll(".mission-link");
+// =========================
+// NAME ENTRY
+// =========================
 nameForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const name = nameInput?.value.trim();
 
-  // Keep the user on the page until a non-empty name is entered.
   if (!name) {
     nameInput?.focus();
     return;
   }
 
-  // Persist name for use on the next page in the same browser session.
   sessionStorage.setItem("agentName", name);
   window.location.href = "avatar.html";
 });
 
-// On the mission hub page: greet the user with their stored agent name.
+// =========================
+// WELCOME MESSAGE
+// =========================
 if (welcomeMessage) {
   const storedName = sessionStorage.getItem("agentName");
   welcomeMessage.textContent = storedName
@@ -29,46 +30,32 @@ if (welcomeMessage) {
     : "Welcome, Agent";
 }
 
-// Optional visual interaction for the viking image (where present).
+// =========================
+// VIKING CLICK EFFECT
+// =========================
 viking?.addEventListener("click", () => {
   viking.classList.toggle("enlarged");
 });
 
-// Mission card details toggle — works for every card on the mission hub.
-document
-  .querySelectorAll(".mission-card-tile .read-more")
-  .forEach((readMore) => {
-    readMore.addEventListener("click", (event) => {
-      event.preventDefault();
-      const tile = readMore.closest(".mission-card-tile");
-      const details = document.getElementById(
-        readMore.getAttribute("aria-controls"),
-      );
-      const isExpanded = tile?.classList.toggle("expanded");
-      readMore.textContent = isExpanded ? "Read Less" : "Read More";
-      readMore.setAttribute("aria-expanded", String(Boolean(isExpanded)));
-      details?.setAttribute("aria-hidden", String(!isExpanded));
-    });
-  });
-
-// --- Avatar selection page logic ---
+// =========================
+// AVATAR SELECTION
+// =========================
 const avatarButtons = document.querySelectorAll(".avatar-option");
 const continueBtn = document.querySelector("#continue-btn");
 
-// If we're on avatar.html, allow selection and store in sessionStorage
 if (avatarButtons.length && continueBtn) {
-  // Optional: if user lands here without a name, send them back
   const storedName = sessionStorage.getItem("agentName");
   if (!storedName) {
     window.location.href = "index.html";
   }
 
-  let selectedAvatar = sessionStorage.getItem("agentAvatar"); // e.g. "agent3.png"
+  let selectedAvatar = sessionStorage.getItem("agentAvatar");
 
-  // Restore selection if they already picked one
   if (selectedAvatar) {
     avatarButtons.forEach((btn) => {
-      if (btn.dataset.avatar === selectedAvatar) btn.classList.add("selected");
+      if (btn.dataset.avatar === selectedAvatar) {
+        btn.classList.add("selected");
+      }
     });
     continueBtn.disabled = false;
   }
@@ -87,14 +74,132 @@ if (avatarButtons.length && continueBtn) {
   continueBtn.addEventListener("click", () => {
     window.location.href = "mission_hub.html";
   });
+}
 
-  const steps = document.querySelectorAll(".step");
-  if (steps.length) {
-    steps.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        steps.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-      });
-    });
+// =========================
+// MISSION STEP BUTTONS
+// =========================
+const steps = document.querySelectorAll(".step");
+function updateMissionSteps() {
+  if (!steps.length) return;
+
+  const missionFlags = [
+    localStorage.getItem("mission1Complete") === "true",
+    localStorage.getItem("mission2Complete") === "true",
+    localStorage.getItem("mission3Complete") === "true",
+    localStorage.getItem("mission4Complete") === "true",
+    localStorage.getItem("mission5Complete") === "true",
+    localStorage.getItem("mission6Complete") === "true",
+    localStorage.getItem("mission7Complete") === "true"
+  ];
+
+  steps.forEach((step, index) => {
+    if (missionFlags[index]) {
+      step.classList.add("active"); // completed
+    } else {
+      step.classList.remove("active");
+    }
+  });
+
+  // 🔥 NEW: unlock logic
+  missionLinks.forEach((link, index) => {
+    if (index === 0 || missionFlags[index - 1]) {
+      // Unlock if first mission OR previous mission complete
+      link.classList.remove("locked");
+      link.style.pointerEvents = "auto";
+      link.style.opacity = "1";
+    } else {
+      // Lock
+      link.classList.add("locked");
+      link.style.pointerEvents = "none";
+      link.style.opacity = "0.5";
+    }
+  });
+}
+
+updateMissionSteps();
+
+// =========================
+// MAJOR X DIALOGUE SYSTEM
+// =========================
+const majorXModal = document.querySelector("#majorx-modal");
+const dialogueText = document.querySelector("#dialogue-text");
+const dialogueNextBtn = document.querySelector("#dialogue-next-btn");
+
+const mission1Complete = localStorage.getItem("mission1Complete");
+const mission1DialogueShown = localStorage.getItem("mission1DialogueShown");
+
+const mission2Complete = localStorage.getItem("mission2Complete");
+const mission2DialogueShown = localStorage.getItem("mission2DialogueShown");
+
+const mission3Complete = localStorage.getItem("mission3Complete");
+const mission3DialogueShown = localStorage.getItem("mission3DialogueShown");
+
+const mission6Complete = localStorage.getItem("mission6Complete");
+const mission6DialogueShown = localStorage.getItem("mission6DialogueShown");
+
+if (majorXModal && dialogueText && dialogueNextBtn) {
+  let dialogueLines = null;
+  let completionKey = null;
+
+  if (mission6Complete === "true" && mission6DialogueShown !== "true") {
+    dialogueLines = [
+      "Excellent work, Agent. You've secured the firewall with a strong password.",
+      "The V.I.K.I.N.G.S will have a far harder time breaking through our defenses now.",
+      "Security is never just about code. It's about smart choices, strong habits, and constant vigilance.",
+      "Stay ready. The final stages of this operation are approaching."
+    ];
+    btn.disabled = true;
+    completionKey = "mission6DialogueShown";
+  } else if (mission3Complete === "true" && mission3DialogueShown !== "true") {
+    dialogueLines = [
+      "Exceptional work, Agent. You've broken through the Caesar encryption.",
+      "The V.I.K.I.N.G.S are adapting quickly, but so are we.",
+      "Every decoded message brings us closer to exposing their full operation.",
+      "Stay focused. Mission 4 will push your skills even further."
+    ];
+    btn.disabled = true;
+    completionKey = "mission3DialogueShown";
+  } else if (mission2Complete === "true" && mission2DialogueShown !== "true") {
+    dialogueLines = [
+      "Outstanding work, Agent. You've successfully decoded the binary transmission.",
+      "We've intercepted critical intelligence from the V.I.K.I.N.G.S network.",
+      "They are escalating their encryption methods, which means our next move must be precise.",
+      "Stand by. Mission 3 is now unlocked."
+    ];
+    btn.disabled = true;
+    completionKey = "mission2DialogueShown";
+  } else if (mission1Complete === "true" && mission1DialogueShown !== "true") {
+    dialogueLines = [
+      "Excellent work, Agent. You've cracked the code to the first mission.",
+      "The V.I.K.I.N.G.S now know we are onto them. Time is no longer on our side.",
+      "Their next encryption will be harder to break. You must be sharper, faster, and more precise.",
+      "Prepare yourself. Mission 2 begins now."
+    ];
+    btn.disabled = true;
+    completionKey = "mission1DialogueShown";
+  }
+
+  if (dialogueLines) {
+    let currentLine = 0;
+
+    majorXModal.classList.remove("hidden");
+    dialogueText.textContent = dialogueLines[currentLine];
+    dialogueNextBtn.textContent = "Next";
+
+    dialogueNextBtn.onclick = () => {
+      currentLine++;
+
+      if (currentLine < dialogueLines.length) {
+        dialogueText.textContent = dialogueLines[currentLine];
+
+        if (currentLine === dialogueLines.length - 1) {
+          dialogueNextBtn.textContent = "Continue";
+        }
+      } else {
+        majorXModal.classList.add("hidden");
+        localStorage.setItem(completionKey, "true");
+      }
+    };
   }
 }
