@@ -83,6 +83,12 @@ body.mission-page::before {
   display: block;
 }
 
+.lock-overlay .lock-icon {
+  width: 120 !important;
+  height: 120px !important;
+  object-fit: contain !important;
+  display: block;
+}
 .mission-card-tile:last-child {
   grid-column: 2;
 }
@@ -263,4 +269,39 @@ body.mission-page::before {
     font-size: 1.1rem;
     min-height: 120px;
   }
+}
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lock-overlay.hidden {
+  display: none;
+}
+
+.lock-icon {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.lock-overlay p {
+  display: none;
+}
+
+.mission-card-tile.locked .read-more {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.mission-card-tile.locked img:not(.lock-icon) {
+  filter: brightness(0.45);
 }

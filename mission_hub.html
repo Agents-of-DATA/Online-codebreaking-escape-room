@@ -32,64 +32,93 @@
       <button class="step" type="button">7</button>
     </nav>
 
-    <section class="mission-grid" aria-label="Mission selection">
+  <section class="mission-grid" aria-label="Mission selection">
 
-      <article class="mission-card-tile">
-        <img src="assets/images/emoji_challenge.png" alt="Mission 1 image">
-        <div class="mission-overlay">
-          <h2>Mission 1</h2>
-          <a class="read-more" href="emoji_puzzle.html" role="button">Begin mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="1">
+      <img src="assets/images/emoji_challenge.png" alt="Mission 1 image">
+      <div class="mission-overlay">
+        <h2>Mission 1</h2>
+        <a class="read-more" href="emoji_puzzle.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/binary_decryption.png" alt="Mission 2 image">
-        <div class="mission-overlay">
-          <h2>Mission 2</h2>
-          <a class="read-more" href="binary_message.html" role="button">Begin Mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="2">
+      <img src="assets/images/binary_decryption.png" alt="Mission 2 image">
+      <div class="mission-overlay">
+        <h2>Mission 2</h2>
+        <a class="read-more" href="binary_message.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/mission3.png" alt="Mission 3 image">
-        <div class="mission-overlay">
-          <h2>Mission 3</h2>
-          <a class="read-more" href="caesar_test.html" role="button">Begin Mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="3">
+      <img src="assets/images/mission3.png" alt="Mission 3 image">
+      <div class="mission-overlay">
+        <h2>Mission 3</h2>
+        <a class="read-more" href="caesar_test.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/rocket_launch.jpg" alt="Mission 4 image">
-        <div class="mission-overlay">
-          <h2>Mission 4</h2>
-          <a class="read-more" href="puzzle_rocket_fuel.html" role="button">Begin Mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="4">
+      <img src="assets/images/rocket_launch.jpg" alt="Mission 4 image">
+      <div class="mission-overlay">
+        <h2>Mission 4</h2>
+        <a class="read-more" href="puzzle_rocket_fuel.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/satellite.jpg" alt="Mission 5 image">
-        <div class="mission-overlay">
-          <h2>Mission 5</h2>
-          <a class="read-more" href="puzzle_align_radar.html" role="button">Begin Mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="5">
+      <img src="assets/images/satellite.jpg" alt="Mission 5 image">
+      <div class="mission-overlay">
+        <h2>Mission 5</h2>
+        <a class="read-more" href="mission5.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/firewall.png" alt="Mission 6 image">
-        <div class="mission-overlay">
-          <h2>Mission 6</h2>
-          <a class="read-more" href="password_puzzle.html" role="button">Begin Mission</a>
-        </div>
-      </article>
+    <article class="mission-card-tile" data-mission="6">
+      <img src="assets/images/firewall.png" alt="Mission 6 image">
+      <div class="mission-overlay">
+        <h2>Mission 6</h2>
+        <a class="read-more" href="password_puzzle.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
 
-      <article class="mission-card-tile">
-        <img src="assets/images/placeholder.png" alt="Mission 7 image">
-        <div class="mission-overlay">
-          <h2>Mission 7</h2>
-          <a class="read-more" href="#" role="button">Read More</a>
-        </div>
-      </article>
-    </section>
+    <article class="mission-card-tile" data-mission="7">
+      <img src="assets/images/placeholder.png" alt="Mission 7 image">
+      <div class="mission-overlay">
+        <h2>Mission 7</h2>
+        <a class="read-more" href="puzzle7.html" role="button">Begin Mission</a>
+      </div>
+      <div class="lock-overlay hidden">
+        <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
+        <p>Locked</p>
+      </div>
+    </article>
+
+  </section>
   </main>
     <div id="majorx-modal" class="dialogue-modal hidden">
     <div class="dialogue-box">
@@ -105,6 +134,21 @@
     </div>
   </div>
 
+  <audio id="briefing1-audio" preload="auto">
+  <source src="audio/briefing1.mp4" type="audio/mp4">
+</audio>
+
+<audio id="briefing2-audio" preload="auto">
+  <source src="audio/briefing2.mp4" type="audio/mp4">
+</audio>
+
+<audio id="briefing3-audio" preload="auto">
+  <source src="audio/briefing3.mp4" type="audio/mp4">
+</audio>
+
+<audio id="briefing4-audio" preload="auto">
+  <source src="audio/briefing4.mp4" type="audio/mp4">
+</audio>
   <script src="js/app.js"></script>
   <script src="js/accessibility.js"></script>
 </body>

@@ -35,19 +35,19 @@ for (let i = 0; i < 3; i++) {
 // puzzles
 const emojiPuzzles = {
     easy: [
-        { emojis: "⛰️🐺🐺⚡️ ⚔️⚡️", answer: ["meet at"] },
-        { emojis: "🔥👁️ ⚡️👁️", answer: ["go to"] },
+        { emojis: "⛰️🐺🐺⚡️  ⚔️⚡️", answer: ["meet at"] },
+        { emojis: "🔥👁️  ⚡️👁️", answer: ["go to"] },
         { emojis: "🌊👁️🚢⚔️⚡️🍺👁️🌙", answer: ["location"] }
     ],
     medium: [
-        { emojis: "⚡️🍖🐺🪶 🍖🍺🐉", answer: ["the ship"] },
-        { emojis: "⚡️🍖🐺🪶 🍖👁️🏹🐺", answer: ["the shore"] },
-        { emojis: "⚡️🍖🐺🪓 👁️🚢🧭", answer: ["the dock"] }
+        { emojis: "⚡️🍖🐺  🪶🍖🍺🐉", answer: ["the ship"] },
+        { emojis: "⚡️🍖🐺  🪶🍖👁️🏹🐺", answer: ["the shore"] },
+        { emojis: "⚡️🍖🐺  🪓👁️🚢🧭", answer: ["the dock"] }
     ],
     hard: [
-        { emojis: "❄️👁️🏹 ⛰️🍺🪶🪶🍺👁️🌙 ⚡️⚔️🧭🐺 👁️❄️❄️", answer: ["for mission take off"] },
-        { emojis: "❄️👁️🏹 🏹⚔️🪓⚔️🏹 🌊⚔️🪵🌙🚢🍖 👁️❄️❄️", answer: ["for radar launch off"] },
-        { emojis: "❄️👁️🏹 🪶⚔️⚡️🐺🌊🌊🍺⚡️🐺 🌊⚔️🪵🌙🚢🍖", answer: ["for satellite launch"] }
+        { emojis: "❄️👁️🏹  ⛰️🍺🪶🪶🍺👁️🌙  ⚡️⚔️🧭🐺  👁️❄️❄️", answer: ["for mission take off"] },
+        { emojis: "❄️👁️🏹  🏹⚔️🪓⚔️🏹  🌊⚔️🪵🌙🚢🍖  👁️❄️❄️", answer: ["for radar launch off"] },
+        { emojis: "❄️👁️🏹  🪶⚔️⚡️🐺🌊🌊🍺⚡️🐺  🌊⚔️🪵🌙🚢🍖", answer: ["for satellite launch"] }
     ]
 };
 

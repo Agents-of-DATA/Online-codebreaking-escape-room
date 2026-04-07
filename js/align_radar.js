@@ -1,5 +1,5 @@
-// ── Helper ────────────────────────────────────────────────────
-/** Returns a random whole number between min and max (inclusive). */
+localStorage.setItem("mission5Complete", "true");
+localStorage.removeItem("mission5DialogueShown");
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

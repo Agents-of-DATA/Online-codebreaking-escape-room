@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/chart.css">
+  <script src="./js/chart.js"></script>
+  <title>Mission 7 </title>
+</head>
+
+<body>
+  <header class="mission-header">
+    <h1>Agents of DATA</h1>
+    <h2>System 7: Trace the Signal</h2>
+    <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
+  </header>
+
+  <div class="briefing">
+    <h3>Agent K's Briefing</h3>
+    <p>
+      The satellite launch has been successfully stopped… but the system is still active. Intercepted data shows encrypted signals continuing to move through the network. Your task is to analyze the data traffic from different regions. 
+      Compare the total traffic with the encrypted traffic and identify which region shows the highest level of suspicious encrypted activity. This will reveal the location of the next V.I.K.I.N.G.S launch site.
+    </p>
+  </div>
+
+  <div id="chartPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closeChart()">&times;</span>
+
+      <canvas id="canvas1" width="600" height="300"></canvas>
+      
+      <canvas id="canvas2" width="600" height="300"></canvas>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <img src="assets/images/map.png" alt="Network Map" class="map-image">
+  </div>
+
+  <div class="button-row">
+    <button onclick="showBarChart1()">Show Total traffic</button>
+    <button onclick="showBarChart2()">Show encrypted traffic</button>
+  </div>
+
+  <div class="button-row">
+    <button class="answer" disabled onclick="checkAnswer('glasgow')"> Glasgow</button>
+    <button class="answer" disabled onclick="checkAnswer('edinburgh')"> Edinburgh</button>
+    <button class="answer" disabled onclick="checkAnswer('dundee')"> Dundee</button>    
+    <button class="answer" disabled onclick="checkAnswer('inverness')"> Inverness</button> 
+</div>
+<p id="feedback"></p>
+<br><br>
+
+  <div class="tips">
+    <h3>Network Analysis Tips</h3>
+    <ul>
+      <li>Normal network traffic should have a small percentage of encrypted data</li>
+      <li>Look for regions where encrypted traffic is abnoramly high compared to total traffic</li>
+      <li>The heatmap on the map shows regions with suspicious activity</li>
+      <li>Cross-referecne the map visualisation with the chart data for confirmation</li>
+    </ul>
+  </div>
+
+<script>
+const ctx = document.getElementById("canvas1");
+let barChart1Viewed = false;
+let barchart2Viewed = false;
+const myChart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
+    datasets: [{
+      label: "Data Received",
+      data: [45, 60, 80, 20],
+      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+    }]
+  },
+  options: {
+    events: ['click'], 
+  }
+});
+
+const cty = document.getElementById("canvas2");
+
+const myChart1 = new Chart(cty, {
+  type: "bar",
+  data: {
+    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
+    datasets: [{
+      label: "Data Received",
+      data: [10, 20, 30, 40],
+      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+    }]
+  },
+  options: {
+    events: ['click'], 
+  }
+});
+function showBarChart1() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas1").style.display = "block";
+  document.getElementById("canvas2").style.display = "none";
+
+  barChart1Viewed = true;
+  checkIfUnlocked();
+}
+
+function showBarChart2() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas1").style.display = "none";
+  document.getElementById("canvas2").style.display = "block";
+
+  barChart2Viewed = true;
+  checkIfUnlocked();
+}
+
+function closeChart() {
+  document.getElementById("chartPopup").style.display = "none";
+}
+function checkIfUnlocked() {
+  if (barChart1Viewed && barChart2Viewed) {
+    document.querySelectorAll(".answer").forEach(btn => {
+      btn.disabled = false;
+    });
+  }
+}
+
+function finishMission2() {
+  const feedback = document.getElementById("feedback");
+
+  feedback.innerHTML = "🎉 Mission Complete! Returning to HQ...";
+  feedback.style.color = "green";
+
+  // Disable answer buttons
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.disabled = true;
+  });
+
+  localStorage.setItem("mission7Complete", "true");
+
+  setTimeout(() => {
+    window.location.href = "mission_hub.html";
+  }, 1500);
+}
+
+function checkAnswer(selected) {
+  const feedback = document.getElementById("feedback");
+
+  if (selected === window.correctCity) {
+    feedback.textContent = "✅ Correct! Dundee is leaking encrypted data.";
+    feedback.style.color = "green";
+    finishMission2();
+  } else {
+    feedback.textContent = "Try again.";
+    feedback.style.color = "red";
+  }
+}
+</script>
+</body>
+</html>

@@ -79,6 +79,8 @@ if (avatarButtons.length && continueBtn) {
 // =========================
 // MISSION STEP BUTTONS
 // =========================
+
+
 const steps = document.querySelectorAll(".step");
 
 function updateMissionSteps() {
@@ -104,13 +106,56 @@ function updateMissionSteps() {
 }
 
 updateMissionSteps();
+function updateMissionLocks() {
+  const missionCards = document.querySelectorAll(".mission-card-tile");
 
+  if (!missionCards.length) return;
+
+  const unlockedMissions = [
+    true,
+    localStorage.getItem("mission1Complete") === "true",
+    localStorage.getItem("mission2Complete") === "true",
+    localStorage.getItem("mission3Complete") === "true",
+    localStorage.getItem("mission4Complete") === "true",
+    localStorage.getItem("mission5Complete") === "true",
+    localStorage.getItem("mission6Complete") === "true"
+  ];
+
+  missionCards.forEach((card) => {
+    const missionNumber = parseInt(card.dataset.mission, 10);
+    const isUnlocked = unlockedMissions[missionNumber - 1];
+    const lockOverlay = card.querySelector(".lock-overlay");
+    const button = card.querySelector(".read-more");
+
+    if (isUnlocked) {
+      card.classList.remove("locked");
+      lockOverlay?.classList.add("hidden");
+      if (button) {
+        button.setAttribute("aria-disabled", "false");
+        button.tabIndex = 0;
+      }
+    } else {
+      card.classList.add("locked");
+      lockOverlay?.classList.remove("hidden");
+      if (button) {
+        button.setAttribute("aria-disabled", "true");
+        button.tabIndex = -1;
+      }
+    }
+  });
+}
+
+updateMissionLocks();
 // =========================
 // MAJOR X DIALOGUE SYSTEM
 // =========================
+
+
 const majorXModal = document.querySelector("#majorx-modal");
 const dialogueText = document.querySelector("#dialogue-text");
 const dialogueNextBtn = document.querySelector("#dialogue-next-btn");
+
+const firstVisit = localStorage.getItem("missionHubIntroShown");
 
 const mission1Complete = localStorage.getItem("mission1Complete");
 const mission1DialogueShown = localStorage.getItem("mission1DialogueShown");
@@ -121,14 +166,59 @@ const mission2DialogueShown = localStorage.getItem("mission2DialogueShown");
 const mission3Complete = localStorage.getItem("mission3Complete");
 const mission3DialogueShown = localStorage.getItem("mission3DialogueShown");
 
+const mission4Complete = localStorage.getItem("mission4Complete");
+const mission4DialogueShown = localStorage.getItem("mission4DialogueShown");
+
+const mission5Complete = localStorage.getItem("mission5Complete");
+const mission5DialogueShown = localStorage.getItem("mission5DialogueShown");
+
 const mission6Complete = localStorage.getItem("mission6Complete");
 const mission6DialogueShown = localStorage.getItem("mission6DialogueShown");
+
+const briefing1Audio = document.querySelector("#briefing1-audio");
+const briefing2Audio = document.querySelector("#briefing2-audio");
+const briefing3Audio = document.querySelector("#briefing3-audio");
+const briefing4Audio = document.querySelector("#briefing4-audio");
+
+function stopBriefingAudio() {
+  [briefing1Audio, briefing2Audio, briefing3Audio, briefing4Audio].forEach((audio) => {
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  });
+}
+
+function playBriefingAudio(index) {
+  stopBriefingAudio();
+
+  const audioMap = [
+    briefing1Audio,
+    briefing2Audio,
+    briefing3Audio,
+    briefing4Audio
+  ];
+
+  const selectedAudio = audioMap[index];
+
+  if (selectedAudio) {
+    selectedAudio.play().catch(() => {});
+  }
+}
 
 if (majorXModal && dialogueText && dialogueNextBtn) {
   let dialogueLines = null;
   let completionKey = null;
 
-  if (mission6Complete === "true" && mission6DialogueShown !== "true") {
+  if (firstVisit !== "true") {
+    dialogueLines = [
+      "Welcome, Agent!",
+      "It seems like our rivals have jumped into the digital age and are sending their evil plans with emojis!",
+      "We have intercepted an encrypted message and their decryption codex, but it is up to you to find out what messages they are sending!",
+      "Best of luck, Agent!"
+    ];
+    completionKey = "missionHubIntroShown";
+  } else if (mission6Complete === "true" && mission6DialogueShown !== "true") {
     dialogueLines = [
       "Excellent work, Agent. You've secured the firewall with a strong password.",
       "The V.I.K.I.N.G.S will have a far harder time breaking through our defenses now.",
@@ -154,20 +244,41 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
     completionKey = "mission2DialogueShown";
   } else if (mission1Complete === "true" && mission1DialogueShown !== "true") {
     dialogueLines = [
-      "Excellent work, Agent. You've cracked the code to the first mission.",
-      "The V.I.K.I.N.G.S now know we are onto them. Time is no longer on our side.",
-      "Their next encryption will be harder to break. You must be sharper, faster, and more precise.",
-      "Prepare yourself. Mission 2 begins now."
+      "Great work deciphering those emojis, Agent! Now we finally know what the “poop” emoji truly means!",
+      "Seems like you’re needed in the big brain department for this task! Our regular binary language analyst is off on holiday, and we need this message decrypted quickly!",
+      "We have grabbed this DATA from those dastardly VIKINGS; can you work out they are saying?.",
+      "We believe in you, Agent!"
     ];
     completionKey = "mission1DialogueShown";
+  } else if (mission4Complete === "true" && mission4DialogueShown !== "true") {
+    dialogueLines = [
+      "Excellent work, Agent. The satellite is now in orbit.",
+      "We now have full surveillance over the V.I.K.I.N.G.S network.",
+      "Your calculations were precise. One mistake, and the launch would have failed.",
+      "Stay sharp. The next mission will require both logic and speed."
+    ];
+    completionKey = "mission4DialogueShown";
+  } else if (mission5Complete === "true" && mission5DialogueShown !== "true") {
+    dialogueLines = [
+      "Excellent work, Agent. The satellite alignment is now calibrated.",
+      "Signal clarity has been restored across the entire network.",
+      "The V.I.K.I.N.G.S can no longer hide within corrupted transmissions.",
+      "Stay focused. We're getting closer to shutting them down for good."
+    ];
+    completionKey = "mission5DialogueShown";
   }
 
   if (dialogueLines) {
     let currentLine = 0;
+    const isIntroBriefing = completionKey === "missionHubIntroShown";
 
     majorXModal.classList.remove("hidden");
     dialogueText.textContent = dialogueLines[currentLine];
     dialogueNextBtn.textContent = "Next";
+
+    if (isIntroBriefing) {
+      playBriefingAudio(0);
+    }
 
     dialogueNextBtn.onclick = () => {
       currentLine++;
@@ -175,10 +286,15 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
       if (currentLine < dialogueLines.length) {
         dialogueText.textContent = dialogueLines[currentLine];
 
+        if (isIntroBriefing) {
+          playBriefingAudio(currentLine);
+        }
+
         if (currentLine === dialogueLines.length - 1) {
-          dialogueNextBtn.textContent = "Continue";
+          dialogueNextBtn.textContent = isIntroBriefing ? "Begin" : "Continue";
         }
       } else {
+        stopBriefingAudio();
         majorXModal.classList.add("hidden");
         localStorage.setItem(completionKey, "true");
       }

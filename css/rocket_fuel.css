@@ -1,90 +1,191 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #0f172a;
-    color: white;
-    position: relative;
-    min-height: 100vh;
-    padding-top: 56px;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 0;
 }
 
-#backBtn {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 999px;
-    background: #f97316;
-    color: #ffffff;
-    font-weight: 700;
-    cursor: pointer;
+.mission-header {
+  background: #020617;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #334155;
 }
 
-#backBtn:hover {
-    background: #ea580c;
+.mission-header h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
-#backBtn:focus-visible {
-    outline: 3px solid #fdba74;
-    outline-offset: 2px;
+.mission-header h2 {
+  margin: 5px 0 10px;
+  font-weight: normal;
+  color: #94a3b8;
 }
 
-.barrel-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
+.back-link {
+  color: #38bdf8;
+  text-decoration: none;
 }
 
-.barrel {
-    width: 120px;
+.mission-panel {
+  padding: 20px;
 }
 
-.fill {
-    width: 100%;
-    height: 200px;
-    background: #1e293b;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
+.container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.fill::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0%;
-    background: limegreen;
-    transition: height 0.3s ease;
+.puzzle-container {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.progress-bar {
-    width: 60%;
-    height: 20px;
-    background: #334155;
-    margin: 10px auto;
-    border-radius: 10px;
-    overflow: hidden;
+.briefing {
+  text-align: left;
 }
 
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: limegreen;
-    transition: width 0.3s ease;
+.hints {
+  max-width: 700px;
+  margin: 20px auto 0;
 }
 
 .accordion {
-    width: 60%;
-    padding: 10px;
-    margin: 5px auto;
-    cursor: pointer;
+  width: 100%;
+  padding: 14px 16px;
+  margin: 8px 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: #334155;
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.accordion:hover {
+  background: #475569;
 }
 
 .panel {
-    display: none;
-    background: #1e293b;
-    padding: 10px;
+  display: none;
+  background: #0f172a;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: left;
+  margin-bottom: 8px;
+  border: 1px solid #334155;
+}
+
+.barrel-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.barrel-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.barrel-card h4 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #38bdf8;
+}
+
+.fill {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(to top, #0b1220, #1e293b);
+  border: 2px solid #475569;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.fill-level {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(to top, #22c55e, #86efac);
+  transition: height 0.3s ease;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.progress-section {
+  max-width: 600px;
+  margin: 28px auto 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 28px;
+  background: #334155;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #22c55e, #86efac);
+  color: #0f172a;
+  font-weight: bold;
+  line-height: 28px;
+  text-align: center;
+  transition: width 0.3s ease;
+}
+
+button {
+  margin-top: 16px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: black;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+
+button:disabled {
+  background: #64748b;
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.launch-message {
+  margin-top: 16px;
+  font-weight: bold;
+  min-height: 24px;
+}
+
+@media (max-width: 900px) {
+  .barrel-container {
+    grid-template-columns: 1fr;
+  }
 }
