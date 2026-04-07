@@ -1,0 +1,85 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a; /* solid dark */
+  color: #e2e8f0;
+  margin: 0;
+  padding: 20px;
+
+  /* Flexbox centering */
+  display: flex;            /* enable flexbox */
+  flex-direction: column;   /* stack content vertically */
+  align-items: center;      /* horizontal center */
+  justify-content: center;  /* vertical center */
+  min-height: 100vh;        /* make body fill the viewport */
+  text-align: center;       /* optional: center text */
+}
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Only the popup overlay should be transparent */
+  background-color: rgba(0,0,0,0.7);
+}
+
+/* Popup box */
+.popup-content {
+  background: #ffffff; /* dark theme */
+  color: #e2e8f0;
+  margin: 10% auto;
+  padding: 20px;
+  width: 650px;
+  border-radius: 10px;
+  text-align: center;
+
+  border: 1px solid #334155;
+}
+
+/* Close button */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.close:hover {
+  color: #38bdf8;
+}
+/* General button style */
+button {
+  background: #38bdf8;       /* Bright blue */
+  color: #0f172a;            /* Dark text for contrast */
+  border: none;              /* Remove default border */
+  border-radius: 10px;       /* Rounded corners */
+  padding: 12px 24px;        /* Comfortable padding */
+  font-size: 1rem;           /* Easy to read */
+  font-weight: bold;         
+  cursor: pointer;           
+  transition: all 0.2s ease-in-out; /* Smooth hover effects */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Soft shadow */
+  margin: 5px;               /* Small spacing between buttons */
+}
+.button-row {
+  display: flex;              /* horizontal layout */
+  gap: 10px;                  /* spacing between buttons */
+  justify-content: center;    /* center the row horizontally */
+  flex-wrap: wrap;            /* wrap to next line on small screens */
+  margin-top: 20px;           /* spacing from content above */
+}
+/* Hover effect */
+button:hover {
+  background: #0ea5e9;       /* Slightly darker blue on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+/* Active/click effect */
+button:active {
+  transform: translateY(1px); /* Push down effect */
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}

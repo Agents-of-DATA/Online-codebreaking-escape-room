@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header */
+  .mission-header {
+    background: #020617;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #334155;
+  }
+  
+  .mission-header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  .mission-header h2 {
+    margin: 5px 0 10px;
+    font-weight: normal;
+    color: #94a3b8;
+  }
+  
+  .back-link {
+    color: #38bdf8;
+    text-decoration: none;
+  }
+  
+  /* Layout */
+  .mission-panel {
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Puzzle box */
+  .puzzle-container {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  /* Briefing section */
+  .briefing {
+    text-align: left;
+  }
+  
+  /* Inputs */
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  /* Buttons */
+  button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #38bdf8;
+    color: black;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background: #0ea5e9;
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Result text */
+  #result {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  /* Emoji table styling */
+  #emojiTable {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    background: #0f172a;
+  }
+  
+  #emojiTable th,
+  #emojiTable td {
+    border: 1px solid #334155;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #emojiTable th {
+    background: #020617;
+    color: #38bdf8;
+  }
+  
+  /* Optional hover effect for table rows */
+  #emojiTable tr:hover {
+    background: #334155;
+  }
+  
+  /* Animations */
+  .fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+  }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mission 7 </title>
+    <script src="./js/chart.js"></script>
+    <script src="./js/traffic.js"></script>
+    <link rel="stylesheet" href="css/chart.css">
+    <link rel="stylesheet" href="css/traffic.css">
+</head>
+<body>
+
+<div id="chartPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closeChart()">&times;</span>
+
+    <canvas id="canvas" width="600" height="300"></canvas>
+
+    <div class="map-container">
+      <img src="assets/images/scotland-map.png" class="map-bg">
+    
+      <canvas id="network" width="600" height="400"></canvas>
+    </div>
+  </div>
+</div>
+
+<h1>Analysis Question</h1>
+Which region is leaking encrypted data?<br>
+<p>Hint: Click the "Show Chart" button to view the data distribution across regions.</p>
+<div class="button-row">
+    <button class="answer" disabled onclick="checkAnswer('glasgow')"> Glasgow</button>
+    <button class="answer" disabled onclick="checkAnswer('edinburgh')"> Edinburgh</button>
+    <button class="answer" disabled onclick="checkAnswer('dundee')"> Dundee</button>    
+    <button class="answer" disabled onclick="checkAnswer('inverness')"> Inverness</button> 
+</div>
+<p id="feedback"></p>
+<br><br>
+<div class="button-row">
+  <button onclick="showBarChart()">Show Bar Chart</button>
+  <button onclick="showNetwork()">Show Network Graph</button>
+</div>
+<script>
+const ctx = document.getElementById("canvas");
+let barChartViewed = false;
+let networkViewed = false;
+const myChart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
+    datasets: [{
+      label: "Data Received",
+      data: [45, 60, 80, 20],
+      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+    }]
+  },
+  options: {
+    events: ['click'], 
+  }
+});
+function showBarChart() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas").style.display = "block";
+  document.querySelector(".map-container").style.display = "none";
+  barChartViewed = true;
+  checkIfUnlocked();
+}
+
+function showNetwork() {
+  document.getElementById("chartPopup").style.display = "block";
+
+  document.getElementById("canvas").style.display = "none";
+  document.querySelector(".map-container").style.display = "block";
+
+  requestAnimationFrame(() => {
+    window.drawNetwork();
+  });
+  networkViewed = true;
+  checkIfUnlocked();
+}
+
+function closeChart() {
+  document.getElementById("chartPopup").style.display = "none";
+}
+function checkIfUnlocked() {
+  if (barChartViewed && networkViewed) {
+    document.querySelectorAll(".answer").forEach(btn => {
+      btn.disabled = false;
+    });
+  }
+}
+
+function finishMission2() {
+  const feedback = document.getElementById("feedback");
+
+  feedback.innerHTML = "🎉 Mission Complete! Returning to HQ...";
+  feedback.style.color = "green";
+
+  // Disable answer buttons
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.disabled = true;
+  });
+
+  localStorage.setItem("mission7Complete", "true");
+
+  setTimeout(() => {
+    window.location.href = "mission_hub.html";
+  }, 1500);
+}
+function checkAnswer(selected) {
+  const feedback = document.getElementById("feedback");
+
+  if (selected === window.correctCity) {
+    feedback.textContent = "✅ Correct! Dundee is leaking encrypted data.";
+    feedback.style.color = "green";
+    finishMission2();
+  } else {
+    feedback.textContent = "Try again.";
+    feedback.style.color = "red";
+  }
+}
+</script>
+
+</body>
+</html>
