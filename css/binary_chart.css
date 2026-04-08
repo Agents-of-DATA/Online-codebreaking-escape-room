@@ -1,11 +1,11 @@
-/* Reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
+/* Body styles to set the background color and center the content */
 body {
   min-height: 100vh;
   font-family: Arial, sans-serif;
@@ -21,7 +21,7 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Main content container */
+/* Content container styles to create a frosted glass effect with padding and border */
 .content {
   width: 90%;
   max-width: 700px;
@@ -34,7 +34,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-/* Binary chart */
+/* binary image styles with hover effects for interactivity */
 .binary {
     width: 190px;
     border-radius: 15px;
@@ -62,7 +62,7 @@ body {
     font-family: 'Courier New', monospace;
     text-align: center;
 }
-
+/* Styles for the binary message header and paragraph with appropriate colors and spacing */
 #binary_message h3 {
     color: #38bdf8;
     margin-bottom: 15px;
@@ -73,7 +73,7 @@ body {
     word-break: break-all;
 }
 
-/* Buttons */
+/* Styles for the generate button and other buttons */
 #generate_btn,
 button {
     display: inline-block;
@@ -101,7 +101,7 @@ button:active {
     transform: scale(0.95);
 }
 
-/* Inputs */
+/* Input styles */
 input {
     width: 100%;
     padding: 10px;
@@ -113,15 +113,6 @@ input {
 
     background: #020617;
     color: #e2e8f0;
-}
-
-/* Layout helper */
-.page-center {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
 }
 
 /* Display box spacing */
