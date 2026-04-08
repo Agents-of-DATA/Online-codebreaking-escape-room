@@ -1,6 +1,6 @@
 const emojiKey = {
     A: "⚔️", B: "🛡️", C: "🚢", D: "🪓", E: "🐺",
-    F: "❄️", G: "🔥", H: "🍖", I: "🍺",
+    F: "❄️", G: "🔥", H: "🍖", I: "🧩",
     J: "🗡️", K: "🧭", L: "🌊", M: "⛰️",
     N: "🌙", O: "👁️", P: "🐉", Q: "👑",
     R: "🏹", S: "🪶", T: "⚡️", U: "🪵",
@@ -35,19 +35,19 @@ for (let i = 0; i < 3; i++) {
 // puzzles
 const emojiPuzzles = {
     easy: [
-        { emojis: "⛰️🐺🐺⚡️  ⚔️⚡️", answer: ["meet at"] },
-        { emojis: "🔥👁️  ⚡️👁️", answer: ["go to"] },
-        { emojis: "🌊👁️🚢⚔️⚡️🍺👁️🌙", answer: ["location"] }
+        { emojis: ["⛰️🐺🐺⚡️", "⚔️⚡️"], answer: ["meet at"] },
+        { emojis: ["🔥👁️", "⚡️👁️"], answer: ["go to"] },
+        { emojis: ["🌊👁️🚢⚔️⚡️🧩👁️🌙"], answer: ["location"] }
     ],
     medium: [
-        { emojis: "⚡️🍖🐺  🪶🍖🍺🐉", answer: ["the ship"] },
-        { emojis: "⚡️🍖🐺  🪶🍖👁️🏹🐺", answer: ["the shore"] },
-        { emojis: "⚡️🍖🐺  🪓👁️🚢🧭", answer: ["the dock"] }
+        { emojis: ["⚡️🍖🐺", "🪶🍖🧩🐉"], answer: ["the ship"] },
+        { emojis: ["⚡️🍖🐺", "🪶🍖👁️🏹🐺"], answer: ["the shore"] },
+        { emojis: ["⚡️🍖🐺", "🪓👁️🚢🧭"], answer: ["the dock"] }
     ],
     hard: [
-        { emojis: "❄️👁️🏹  ⛰️🍺🪶🪶🍺👁️🌙  ⚡️⚔️🧭🐺  👁️❄️❄️", answer: ["for mission take off"] },
-        { emojis: "❄️👁️🏹  🏹⚔️🪓⚔️🏹  🌊⚔️🪵🌙🚢🍖  👁️❄️❄️", answer: ["for radar launch off"] },
-        { emojis: "❄️👁️🏹  🪶⚔️⚡️🐺🌊🌊🍺⚡️🐺  🌊⚔️🪵🌙🚢🍖", answer: ["for satellite launch"] }
+        { emojis: ["❄️👁️🏹", "⛰️🧩🪶🪶🧩👁️🌙", "⚡️⚔️🧭🐺", "👁️❄️❄️"], answer: ["for mission take off"] },
+        { emojis: ["❄️👁️🏹", "🏹⚔️🪓⚔️🏹", "🌊⚔️🪵🌙🚢🍖", "👁️❄️❄️"], answer: ["for radar launch off"] },
+        { emojis: ["❄️👁️🏹", "🪶⚔️⚡️🐺🌊🌊🧩⚡️🐺", "🌊⚔️🪵🌙🚢🍖"], answer: ["for satellite launch"] }
     ]
 };
 
@@ -64,9 +64,11 @@ function renderEmojiPuzzle() {
     document.getElementById("levelTitle").textContent =
         "Level " + (currentLevelIndex + 1);
 
-    document.getElementById("emojiDisplay").textContent =
-        currentPuzzle.emojis;
+    const display = currentPuzzle.emojis
+        .map(group => `<span class="emoji-group">${group}</span>`)
+        .join("");
 
+    document.getElementById("emojiDisplay").innerHTML = display;
     document.getElementById("answerInput").value = "";
     document.getElementById("result").textContent = "";
 }
