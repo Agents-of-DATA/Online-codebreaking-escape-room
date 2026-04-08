@@ -435,6 +435,10 @@ h1 {
   color: #fbbf24;
 }
 
+.report-related-red {
+  color: #ef4444;
+}
+
 /* ── Controls ─────────────────────────────────────────── */
 .controls {
   width: 100%;

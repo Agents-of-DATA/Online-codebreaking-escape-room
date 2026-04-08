@@ -37,7 +37,8 @@
         <div class="controls">
           <div class="control-group">
             <label for="angleInput"
-              >Radar Angle: <span id="angleDisplay">0°</span></label
+              ><span style="color: aqua">Radar Angle:</span>
+              <span id="angleDisplay">0°</span></label
             >
             <div class="angle-input-row">
               <button
@@ -74,7 +75,9 @@
           </div>
 
           <div class="control-group">
-            <label for="freqSelect">Frequency Code</label>
+            <label for="freqSelect"
+              ><span style="color: #4ade80">Frequency Code</span></label
+            >
             <select id="freqSelect">
               <option value="">— Select a code —</option>
               <option value="A">Code A</option>
@@ -113,7 +116,8 @@
             aria-expanded="false"
             aria-controls="panel1"
           >
-            Data Report 1 — Satellite Position
+            Data Report 1 —
+            <span class="report-related-red">Satellite Position</span>
           </button>
           <div class="panel" id="panel1" role="region">
             <p id="report1Text"></p>

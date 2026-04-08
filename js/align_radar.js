@@ -169,7 +169,7 @@ function stepAngle(delta) {
 function renderReports() {
   document.getElementById("report1Text").innerHTML =
     "The satellite is currently tracked at " +
-    "<strong style='color:#fbbf24;font-size:1.1em'>" +
+    "<strong class='report-related-red' style='font-size:1.1em'>" +
     satelliteAngle +
     "°</strong>" +
     " in its orbital path around Earth.<br>" +
@@ -207,8 +207,8 @@ function renderReports() {
     "</tbody>" +
     "</table>" +
     "<div class='formula-box'>" +
-    "<strong>Formula:</strong><br>" +
-    "Radar Angle = Satellite Position + Angle Adjustment" +
+    "<strong class='report-related-red'>Formula:</strong><br>" +
+    "<span style='color:aqua'>Radar Angle</span> = <span class='report-related-red'>Satellite Position</span> + <span style='color:#a78bfa'>Angle Adjustment</span>" +
     "</div>";
 }
 
