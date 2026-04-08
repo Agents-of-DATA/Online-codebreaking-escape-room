@@ -42,6 +42,8 @@
     <button onclick="showBarChart2()">Show encrypted traffic</button>
   </div>
 
+  <p id="lockMessage">View both charts to unlock answers</p>
+
   <div class="button-row">
     <button class="answer" disabled onclick="checkAnswer('glasgow')"> Glasgow</button>
     <button class="answer" disabled onclick="checkAnswer('edinburgh')"> Edinburgh</button>
@@ -61,102 +63,163 @@
     </ul>
   </div>
 
-<script>
-const ctx = document.getElementById("canvas1");
-let barChart1Viewed = false;
-let barchart2Viewed = false;
-const myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
-    datasets: [{
-      label: "Data Received",
-      data: [45, 60, 80, 20],
-      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
-    }]
-  },
-  options: {
-    events: ['click'], 
-  }
-});
+  <script>
+    const ctx = document.getElementById("canvas1");
+    const cty = document.getElementById("canvas2");
+    
+    let barChart1Viewed = false;
+    let barChart2Viewed = false;
+    
+    const cities = ["Glasgow", "Edinburgh", "Dundee", "Inverness"];
 
-const cty = document.getElementById("canvas2");
+    const datasets = [
+      // 1️⃣ Same totals trap
+      {
+        total: [80, 80, 60, 60],
+        encrypted: [20, 36, 18, 15],
+        answer: "edinburgh"
+      },
 
-const myChart1 = new Chart(cty, {
-  type: "bar",
-  data: {
-    labels: ["Glasgow", "Edinburgh", "Dundee", "Inverness"],
-    datasets: [{
-      label: "Data Received",
-      data: [10, 20, 30, 40],
-      backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
-    }]
-  },
-  options: {
-    events: ['click'], 
-  }
-});
-function showBarChart1() {
-  document.getElementById("chartPopup").style.display = "block";
+      // 2️⃣ Highest total is NOT the answer
+      {
+        total: [100, 70, 60, 50],
+        encrypted: [20, 35, 30, 10],
+        answer: "dundee"
+      },
 
-  document.getElementById("canvas1").style.display = "block";
-  document.getElementById("canvas2").style.display = "none";
+      // 3️⃣ Very close values (forces careful thinking)
+      {
+        total: [90, 85, 80, 75],
+        encrypted: [30, 32, 28, 25],
+        answer: "edinburgh"
+      },
 
-  barChart1Viewed = true;
-  checkIfUnlocked();
-}
+      // 4️⃣ Two similar encrypted values but different totals
+      {
+        total: [60, 90, 60, 90],
+        encrypted: [18, 27, 24, 20],
+        answer: "dundee"
+      },
 
-function showBarChart2() {
-  document.getElementById("chartPopup").style.display = "block";
+      // 5️⃣ All totals equal (pure ratio thinking)
+      {
+        total: [70, 70, 70, 70],
+        encrypted: [14, 28, 21, 20],
+        answer: "edinburgh"
+      },
 
-  document.getElementById("canvas1").style.display = "none";
-  document.getElementById("canvas2").style.display = "block";
+      // 6️⃣ Similar totals, subtle difference
+      {
+        total: [85, 85, 70, 70],
+        encrypted: [25, 30, 20, 18],
+        answer: "edinburgh"
+      },
 
-  barChart2Viewed = true;
-  checkIfUnlocked();
-}
+      // 7️⃣ Highest encrypted value is NOT correct (trap)
+      {
+        total: [100, 80, 60, 50],
+        encrypted: [40, 30, 25, 20],
+        answer: "dundee"
+      },
 
-function closeChart() {
-  document.getElementById("chartPopup").style.display = "none";
-}
-function checkIfUnlocked() {
-  if (barChart1Viewed && barChart2Viewed) {
-    document.querySelectorAll(".answer").forEach(btn => {
-      btn.disabled = false;
+      // 8️⃣ Close ratios (requires careful comparison)
+      {
+        total: [90, 75, 75, 60],
+        encrypted: [27, 24, 30, 18],
+        answer: "dundee"
+      }
+    ];
+
+    const selectedDataset = datasets[Math.floor(Math.random() * datasets.length)];
+    
+    const totalTraffic = selectedDataset.total;
+    const encryptedTraffic = selectedDataset.encrypted;
+    window.correctCity = selectedDataset.answer;
+
+    const myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: cities,
+        datasets: [
+          {
+            label: "Total Traffic",
+            data: totalTraffic,
+            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+          }
+        ]
+      },
+      options: {
+        events: ['click']
+      }
     });
+    
+    const myChart1 = new Chart(cty, {
+      type: "bar",
+      data: {
+        labels: cities,
+        datasets: [
+          {
+            label: "Encrypted Traffic",
+            data: encryptedTraffic,
+            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
+          }
+        ]
+      },
+      options: {
+        events: ['click']
+      }
+    });
+    
+    function showBarChart1() {
+      document.getElementById("chartPopup").style.display = "block";
+      document.getElementById("canvas1").style.display = "block";
+      document.getElementById("canvas2").style.display = "none";
+    
+      barChart1Viewed = true;
+      checkIfUnlocked();
+    }
+    
+    function showBarChart2() {
+      document.getElementById("chartPopup").style.display = "block";
+      document.getElementById("canvas1").style.display = "none";
+      document.getElementById("canvas2").style.display = "block";
+    
+      barChart2Viewed = true;
+      checkIfUnlocked();
+    }
+    
+    function closeChart() {
+      document.getElementById("chartPopup").style.display = "none";
+    }
+    
+
+    function checkIfUnlocked() {
+    const message = document.getElementById("lockMessage");
+
+    if (barChart1Viewed && barChart2Viewed) {
+      document.querySelectorAll(".answer").forEach(btn => {
+        btn.disabled = false;
+        btn.classList.add("unlocked");
+      });
+      message.textContent = "";
+    } else if (barChart1Viewed || barChart2Viewed) {
+      message.textContent = " View the other chart to continue";
+    }
   }
-}
+    
+    function checkAnswer(selected) {
+      const feedback = document.getElementById("feedback");
+    
+      if (selected === window.correctCity) {
+        feedback.textContent = "✅ Correct! This region shows the highest suspicious encrypted activity.";
+        feedback.style.color = "green";
+        setTimeout(() => {
+          window.location.href = "mission_hub.html";
+        }, 1500);
 
-function finishMission2() {
-  const feedback = document.getElementById("feedback");
-
-  feedback.innerHTML = "🎉 Mission Complete! Returning to HQ...";
-  feedback.style.color = "green";
-
-  // Disable answer buttons
-  document.querySelectorAll(".answer").forEach(btn => {
-    btn.disabled = true;
-  });
-
-  localStorage.setItem("mission7Complete", "true");
-
-  setTimeout(() => {
-    window.location.href = "mission_hub.html";
-  }, 1500);
-}
-
-function checkAnswer(selected) {
-  const feedback = document.getElementById("feedback");
-
-  if (selected === window.correctCity) {
-    feedback.textContent = "✅ Correct! Dundee is leaking encrypted data.";
-    feedback.style.color = "green";
-    finishMission2();
-  } else {
-    feedback.textContent = "Try again.";
-    feedback.style.color = "red";
-  }
-}
-</script>
-</body>
-</html>
+      } else {
+        feedback.textContent = "Try again.";
+        feedback.style.color = "red";
+      }
+    }
+    </script>
