@@ -144,3 +144,20 @@ button:active {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+
+/* Locked (disabled) answer buttons */
+.answer:disabled {
+  background: #334155;   /* darker muted colour */
+  color: #94a3b8;        /* faded text */
+  cursor: not-allowed;
+  transform: none;       /* stop hover lift */
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Remove hover effect when disabled */
+.answer:disabled:hover {
+  background: #334155;
+  transform: none;
+  box-shadow: none;
+}
