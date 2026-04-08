@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Complete - Certificate</title>
+    <!-- Link to the CSS file for styling the certificate -->
+    <link rel="stylesheet" href="css/mission_complete.css">
+</head>
+<body>
+    <div class="certificate">
+        <div class="certificate-header">Certificate of Completion</div>
+        <div class="certificate-subtitle">Code-Breaking Escape Room</div>
+        <!-- placeholder for agent name and to say they have completed the missions -->
+        <div class="certificate-body">
+            <p>This certifies that</p>
+            <p class="agent-name">Agent ___________________</p>
+            <p>has successfully completed all missions and escaped the code-breaking escape room.</p>
+            <p>Congratulations on your outstanding problem-solving skills and dedication.</p>
+        </div>
+        
+        <div class="certificate-footer">
+            <p>Mission Accomplished - <span id="completionDate"></span></p>
+        </div>
+        <!-- buttons for printing and returning home -->
+        <div class="buttons">
+            <button class="btn-print" onclick="window.print()">Print Certificate</button>
+            <button class="btn-home" onclick="window.location.href='index.html'">Return Home</button>
+        </div>
+    </div>
+    
+    <script>
+       
+        // Set completion date
+        const today = new Date();
+        const dateString = today.toLocaleDateString('en-UK', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        document.getElementById('completionDate').textContent = dateString;
+    </script>
+</body>
+</html>
