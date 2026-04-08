@@ -1,6 +1,7 @@
 // ── Helper ────────────────────────────────────────────────────
 /** Returns a random whole number between min and max (inclusive). */
 function randomInt(min, max) {
+  // Scale random decimal to an integer range that includes min and max.
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -67,7 +68,10 @@ var radarArmEl = document.getElementById("radarArm");
  * The minus on sin is needed because CSS Y increases downward.
  */
 function placeSatellite() {
+  // Convert from degrees to radians before using trig functions.
   var rad = (satelliteAngle * Math.PI) / 180;
+
+  // Position the emoji on the orbit using polar-to-cartesian conversion.
   satelliteEl.style.left = EARTH_X + ORBIT_R * Math.cos(rad) + "px";
   satelliteEl.style.top = EARTH_Y - ORBIT_R * Math.sin(rad) + "px";
 }
@@ -82,13 +86,16 @@ function placeSatellite() {
  *                               of the element, which sits at Earth centre.
  */
 function updateRadarVisual(angle) {
+  // Negative rotation aligns CSS direction with puzzle angle direction.
   var rotation = "rotate(" + -angle + "deg)";
 
+  // Anchor and rotate the yellow beam from Earth's centre.
   beamEl.style.left = EARTH_X + "px";
   beamEl.style.top = EARTH_Y + "px";
   beamEl.style.width = ORBIT_R + "px";
   beamEl.style.transform = rotation;
 
+  // Anchor and rotate the short radar arm with the same angle.
   radarArmEl.style.left = EARTH_X + "px";
   radarArmEl.style.top = EARTH_Y + "px";
   radarArmEl.style.width = ARM_LEN + "px";
@@ -102,12 +109,15 @@ function updateRadarVisual(angle) {
  * contact button state.
  */
 function updateState() {
+  // Read current user selections from slider and dropdown.
   var angle = parseInt(angleInput.value);
   var code = freqSelect.value;
 
+  // Reflect current angle text and rotate visuals immediately.
   angleDisplay.textContent = angle + "°";
   updateRadarVisual(angle);
 
+  // Evaluate each part of the answer independently.
   var angleOk = angle === correctAngle;
   var codeOk = code === correctCode;
   var score = (angleOk ? 1 : 0) + (codeOk ? 1 : 0);
@@ -116,6 +126,7 @@ function updateState() {
   progressFill.style.width = (score / 2) * 100 + "%";
 
   if (score === 2) {
+    // Full match: show success state and enable final button.
     progressFill.style.background = "#4ade80";
     statusMsg.textContent =
       "✅ Perfect alignment! Signal locked on to the satellite!";
@@ -123,20 +134,25 @@ function updateState() {
     beamEl.classList.add("locked");
     contactBtn.disabled = false;
   } else {
+    // Any mismatch keeps the button disabled and removes lock visuals.
     satelliteEl.classList.remove("locked");
     beamEl.classList.remove("locked");
     contactBtn.disabled = true;
 
     if (score === 1) {
+      // Half-correct: keep the hint specific to what is still wrong.
       progressFill.style.background = "#f97316";
       if (angleOk) {
+        // Angle is done; prompt user to focus on code selection.
         statusMsg.textContent =
           "📐 Angle is correct! Double-check the frequency code.";
       } else {
+        // Code is done; prompt user to focus on aiming angle.
         statusMsg.textContent =
           "📻 Frequency code confirmed! Adjust the radar angle.";
       }
     } else {
+      // Nothing correct yet: show the default retry guidance.
       progressFill.style.background = "#ef4444";
       statusMsg.textContent =
         "📡 No signal detected. Adjust the angle and frequency code.";
@@ -145,17 +161,21 @@ function updateState() {
 }
 
 function stepAngle(delta) {
+  // Keep manual button steps within the slider's allowed range.
   var min = parseInt(angleInput.min);
   var max = parseInt(angleInput.max);
   var next = parseInt(angleInput.value) + delta;
 
   if (next < min) {
+    // Prevent moving below the configured lower bound.
     next = min;
   }
   if (next > max) {
+    // Prevent moving above the configured upper bound.
     next = max;
   }
 
+  // Write back the clamped value, then refresh puzzle state.
   angleInput.value = String(next);
   updateState();
 }
@@ -167,6 +187,7 @@ function stepAngle(delta) {
  * The correct answer is never shown directly — students must work it out.
  */
 function renderReports() {
+  // Report 1 gives current satellite position.
   document.getElementById("report1Text").innerHTML =
     "The satellite is currently tracked at " +
     "<strong class='report-related-red' style='font-size:1.1em'>" +
@@ -180,6 +201,7 @@ function renderReports() {
     "Open <strong>Data Report 2</strong> to find out how fast the satellite is moving and " +
     "why that matters for aiming your radar dish.";
 
+  // Report 2 gives current speed and explains leading the target.
   document.getElementById("report2Text").innerHTML =
     "The satellite is travelling at " +
     "<strong style='color:#fbbf24;font-size:1.1em'>" +
@@ -192,6 +214,7 @@ function renderReports() {
     "Open <strong>Data Report 3</strong> to find the correct angle adjustment " +
     "and frequency code for this speed.";
 
+  // Report 3 provides the lookup table used to solve the puzzle.
   document.getElementById("report3Panel").innerHTML =
     "<p>Find the satellite's speed in the table to get the adjustment and frequency code:</p>" +
     "<table>" +
@@ -210,6 +233,8 @@ function renderReports() {
     "<strong class='report-related-red'>Formula:</strong><br>" +
     "<span style='color:aqua'>Radar Angle</span> = <span class='report-related-red'>Satellite Position</span> + <span style='color:#a78bfa'>Angle Adjustment</span>" +
     "</div>";
+
+  // All reports are regenerated on load so values match this round only.
 }
 
 // ── Accordion Panels ──────────────────────────────────────────
@@ -217,6 +242,8 @@ document.querySelectorAll(".accordion").forEach(function (btn) {
   btn.addEventListener("click", function () {
     var panel = this.nextElementSibling;
     var isOpen = panel.style.display === "block";
+
+    // Toggle panel visibility and keep ARIA state in sync.
     panel.style.display = isOpen ? "none" : "block";
     this.classList.toggle("open", !isOpen);
     this.setAttribute("aria-expanded", String(!isOpen));
@@ -259,6 +286,7 @@ renderReports();
 updateRadarVisual(0);
 updateState();
 
+// Keep puzzle state synced as the user changes controls.
 angleInput.addEventListener("input", updateState);
 freqSelect.addEventListener("change", updateState);
 angleMinusBtn.addEventListener("click", function () {
