@@ -1,42 +1,50 @@
-/* Reset spacing */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body full screen, flex center */
+/* Body */
 body {
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  color: #111;
+  color: #e2e8f0;
 
   display: flex;
-  justify-content: center;   /* horizontal center */
-  align-items: center;       /* vertical center */
+  justify-content: center;
+  align-items: center;
 
-  background-image: url("../assets/images/hackingtheship.png");
-  background-size: cover;
+  background: #0f172a;
+ 
   background-position: center;
   background-repeat: no-repeat;
 }
 
+/* Main content container */
 .content {
   width: 90%;
   max-width: 700px;
   transform: translateY(-40px);
+
+  background: rgba(30, 41, 59, 0.9);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  backdrop-filter: blur(6px);
 }
 
-/* Binary chart styling */
+/* Binary chart */
 .binary {
     width: 190px;
-    border-radius: 25px;
+    border-radius: 15px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .binary:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .binary.enlarged {
@@ -45,18 +53,18 @@ body {
 
 /* Binary message box */
 #binary_message {
-    margin: 10px auto;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border: 2px solid #333;
-    border-radius: 8px;
+    margin: 15px auto;
+    padding: 20px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
     max-width: 600px;
     font-family: 'Courier New', monospace;
     text-align: center;
 }
 
 #binary_message h3 {
-    color: #333;
+    color: #38bdf8;
     margin-bottom: 15px;
 }
 
@@ -65,21 +73,49 @@ body {
     word-break: break-all;
 }
 
-#generate_btn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+/* Buttons */
+#generate_btn,
+button {
+    display: inline-block;
+    margin: 10px auto;
+    padding: 10px 15px;
+
+    background: #38bdf8;
+    color: black;
+
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-weight: bold;
+
+    transition: 0.2s;
 }
 
-#generate_btn:hover {
-    background-color: #0056b3;
+#generate_btn:hover,
+button:hover {
+    background: #0ea5e9;
 }
+
+#generate_btn:active,
+button:active {
+    transform: scale(0.95);
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+
+    background: #020617;
+    color: #e2e8f0;
+}
+
+/* Layout helper */
 .page-center {
   min-height: 100vh;
   display: flex;
@@ -88,7 +124,7 @@ body {
   padding: 24px;
 }
 
-/* Input / buttons */
-.display-box { margin: 10px 0; }
-input { width: 200px; padding: 5px; margin: 5px 0; }
-button { padding: 5px 10px; margin: 5px; }
+/* Display box spacing */
+.display-box {
+  margin: 10px 0;
+}
