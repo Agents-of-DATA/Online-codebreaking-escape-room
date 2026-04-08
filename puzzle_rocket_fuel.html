@@ -3,91 +3,169 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="css/rocket_fuel.css" />
-    <title>Mission 4 - Launch the Spy Satellite</title>
+
+    <title>Launch the Spy Satellite</title>
   </head>
-
   <body>
-    <header class="mission-header">
-      <h1>Agents of DATA</h1>
-      <h2>System 4: Launch the Spy Satellite</h2>
-      <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
-    </header>
+    <button id="backBtn">Back to Mission Hub</button>
+    <h1>Spy Satellite Launch Control</h1>
+    <p>
+      Find and review the relevant Data Reports to discover the required
+      chemical levels.
+    </p>
+    <p><strong>Click the icons to reveal the data reports.</strong></p>
+    <p><strong>Icons can be dragged to reposition them.</strong></p>
 
-    <section class="mission-panel">
-      <div class="container">
-        <div class="briefing puzzle-container">
-          <h3>Agent K's Briefing</h3>
-          <p>
-            Agent, we need to launch our spy satellite before the V.I.K.I.N.G.S
-            can activate their next attack. Study the data reports carefully,
-            calculate the correct fuel mix, and prepare the satellite for launch.
-          </p>
+    <!-- DATA HINTS -->
+    <div
+      class="floating-clues"
+      id="floatingClues"
+      aria-label="Floating data reports"
+    ></div>
+
+    <p>Adjust the rocket fuel chemical levels to achieve launch readiness!</p>
+    <!-- BARRELS -->
+    <div class="rocket-stage">
+      <img
+        class="rocket-background"
+        src="assets/images/rocket_launching.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <div class="barrel-container">
+        <div class="barrel">
+          <div class="fill" id="fillA"></div>
+          <p>Chemical A</p>
+          <div class="slider-controls">
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="A"
+              data-step="-1"
+              aria-label="Decrease Chemical A"
+            >
+              -
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="0"
+              id="inputA"
+            />
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="A"
+              data-step="1"
+              aria-label="Increase Chemical A"
+            >
+              +
+            </button>
+          </div>
+          <p id="valueA">0%</p>
         </div>
-
-        <div class="puzzle-container">
-          <h3>Mission Objective</h3>
-          <p>
-            Review the data reports and adjust the rocket fuel chemical levels
-            to achieve full launch readiness.
-          </p>
-
-          <div class="hints">
-            <button class="accordion">Data Report 1</button>
-            <div class="panel">
-              <p id="report1Text"></p>
-            </div>
-
-            <button class="accordion">Data Report 2</button>
-            <div class="panel">
-              <p id="report2Text"></p>
-            </div>
-
-            <button class="accordion">Data Report 3</button>
-            <div class="panel">
-              <p id="report3Text"></p>
-            </div>
+        <div class="barrel">
+          <div class="fill" id="fillB"></div>
+          <p>Chemical B</p>
+          <div class="slider-controls">
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="B"
+              data-step="-1"
+              aria-label="Decrease Chemical B"
+            >
+              -
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="0"
+              id="inputB"
+            />
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="B"
+              data-step="1"
+              aria-label="Increase Chemical B"
+            >
+              +
+            </button>
           </div>
+          <p id="valueB">0%</p>
         </div>
-
-        <div class="puzzle-container">
-          <h3>Fuel Control System</h3>
-
-          <div class="barrel-container">
-            <div class="barrel-card">
-              <h4>Chemical A</h4>
-              <div class="fill" id="fillA"></div>
-              <input type="range" min="0" max="100" value="0" id="inputA" />
-              <p id="valueA">0%</p>
-            </div>
-
-            <div class="barrel-card">
-              <h4>Chemical B</h4>
-              <div class="fill" id="fillB"></div>
-              <input type="range" min="0" max="100" value="0" id="inputB" />
-              <p id="valueB">0%</p>
-            </div>
-
-            <div class="barrel-card">
-              <h4>Chemical C</h4>
-              <div class="fill" id="fillC"></div>
-              <input type="range" min="0" max="100" value="0" id="inputC" />
-              <p id="valueC">0%</p>
-            </div>
+        <div class="barrel">
+          <div class="fill" id="fillC"></div>
+          <p>Chemical C</p>
+          <div class="slider-controls">
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="C"
+              data-step="-1"
+              aria-label="Decrease Chemical C"
+            >
+              -
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value="0"
+              id="inputC"
+            />
+            <button
+              type="button"
+              class="slider-step"
+              data-letter="C"
+              data-step="1"
+              aria-label="Increase Chemical C"
+            >
+              +
+            </button>
           </div>
-
-          <div class="progress-section">
-            <p>Launch Readiness</p>
-            <div class="progress-bar">
-              <div class="progress-fill" id="progressFill">0%</div>
-            </div>
-          </div>
-
-          <button id="launchBtn" disabled>Launch Satellite</button>
-          <p id="launchMessage" class="launch-message"></p>
+          <p id="valueC">0%</p>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- PROGRESS-->
+    <div class="progress-section">
+      <p>Launch Readiness</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <button id="launchBtn" disabled>Launch Satellite</button>
+
+    <div
+      id="successScreen"
+      class="success-screen"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="successTitle"
+      hidden
+    >
+      <div class="success-card">
+        <h2 id="successTitle">Mission Success</h2>
+        <img
+          class="success-image"
+          src="assets/images/rocket_launch.jpg"
+          alt="Rocket launching into the sky"
+        />
+        <p>The spy satellite has launched successfully - well done!</p>
+        <button id="successHubBtn" type="button">Back to Mission Hub</button>
+      </div>
+    </div>
 
     <script src="js/rocket_fuel.js"></script>
   </body>
