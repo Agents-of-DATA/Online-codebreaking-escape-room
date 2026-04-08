@@ -117,9 +117,18 @@ body {
     color: #38bdf8;
   }
   
+  #emojiDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: 2rem;
+    margin: 15px 0;
+  }
+  
   .emoji-group {
     display: inline-block;
-    margin: 0 15px;
   }
   
   /* Animations */
