@@ -146,11 +146,6 @@ function updateMissionLocks() {
 }
 
 updateMissionLocks();
-// =========================
-// MAJOR X DIALOGUE SYSTEM
-// =========================
-
-
 const majorXModal = document.querySelector("#majorx-modal");
 const dialogueText = document.querySelector("#dialogue-text");
 const dialogueNextBtn = document.querySelector("#dialogue-next-btn");
@@ -175,13 +170,56 @@ const mission5DialogueShown = localStorage.getItem("mission5DialogueShown");
 const mission6Complete = localStorage.getItem("mission6Complete");
 const mission6DialogueShown = localStorage.getItem("mission6DialogueShown");
 
-const briefing1Audio = document.querySelector("#briefing1-audio");
-const briefing2Audio = document.querySelector("#briefing2-audio");
-const briefing3Audio = document.querySelector("#briefing3-audio");
-const briefing4Audio = document.querySelector("#briefing4-audio");
+const mission7Complete = localStorage.getItem("mission7Complete");
+const mission7DialogueShown = localStorage.getItem("mission7DialogueShown");
 
-function stopBriefingAudio() {
-  [briefing1Audio, briefing2Audio, briefing3Audio, briefing4Audio].forEach((audio) => {
+const audioSets = {
+  missionHubIntroShown: [
+    document.querySelector("#briefing1-audio"),
+    document.querySelector("#briefing2-audio"),
+    document.querySelector("#briefing3-audio"),
+    document.querySelector("#briefing4-audio")
+  ],
+  mission1DialogueShown: [
+    document.querySelector("#mission2briefing1-audio"),
+    document.querySelector("#mission2briefing2-audio"),
+    document.querySelector("#mission2briefing3-audio"),
+    document.querySelector("#mission2briefing4-audio")
+  ],
+  mission2DialogueShown: [
+    document.querySelector("#mission3briefing1-audio"),
+    document.querySelector("#mission3briefing2-audio"),
+    document.querySelector("#mission3briefing3-audio"),
+    document.querySelector("#mission3briefing4-audio")
+  ],
+  mission3DialogueShown: [
+    document.querySelector("#mission4briefing1-audio"),
+    document.querySelector("#mission4briefing2-audio"),
+    document.querySelector("#mission4briefing3-audio"),
+    document.querySelector("#mission4briefing4-audio")
+  ],
+  mission4DialogueShown: [
+    document.querySelector("#mission5briefing1-audio"),
+    document.querySelector("#mission5briefing2-audio"),
+    document.querySelector("#mission5briefing3-audio"),
+    document.querySelector("#mission5briefing4-audio")
+  ],
+  mission5DialogueShown: [
+    document.querySelector("#mission6briefing1-audio"),
+    document.querySelector("#mission6briefing2-audio"),
+    document.querySelector("#mission6briefing3-audio"),
+    document.querySelector("#mission6briefing4-audio")
+  ],
+  mission6DialogueShown: [
+    document.querySelector("#mission7briefing1-audio"),
+    document.querySelector("#mission7briefing2-audio"),
+    document.querySelector("#mission7briefing3-audio"),
+    document.querySelector("#mission7briefing4-audio")
+  ]
+};
+
+function stopAllDialogueAudio() {
+  Object.values(audioSets).flat().forEach((audio) => {
     if (audio) {
       audio.pause();
       audio.currentTime = 0;
@@ -189,18 +227,13 @@ function stopBriefingAudio() {
   });
 }
 
-function playBriefingAudio(index) {
-  stopBriefingAudio();
+function playDialogueAudio(completionKey, index) {
+  stopAllDialogueAudio();
 
-  const audioMap = [
-    briefing1Audio,
-    briefing2Audio,
-    briefing3Audio,
-    briefing4Audio
-  ];
+  const selectedSet = audioSets[completionKey];
+  if (!selectedSet) return;
 
-  const selectedAudio = audioMap[index];
-
+  const selectedAudio = selectedSet[index];
   if (selectedAudio) {
     selectedAudio.play().catch(() => {});
   }
@@ -220,26 +253,42 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
     completionKey = "missionHubIntroShown";
   } else if (mission6Complete === "true" && mission6DialogueShown !== "true") {
     dialogueLines = [
-      "Excellent work, Agent. You've secured the firewall with a strong password.",
-      "The V.I.K.I.N.G.S will have a far harder time breaking through our defenses now.",
-      "Security is never just about code. It's about smart choices, strong habits, and constant vigilance.",
-      "Stay ready. The final stages of this operation are approaching."
+      "Wow, that was one strong Password! No-one will be able to steal your DATA now! I should be taking notes…",
+      "This is it Agent, The ultimate battle has commenced! There is a location in Scotland where the VIKINGS have their ground base!",
+      "We need you to Trace the Signal and find which Scottish City they are hiding in. Once you have the location, we can stop the signal remotely, and it’s goodnight VIKINGS!",
+      "Let’s Finish This, Agent!"
     ];
     completionKey = "mission6DialogueShown";
+  } else if (mission5Complete === "true" && mission5DialogueShown !== "true") {
+    dialogueLines = [
+      "Excellent work, Agent. The satellite alignment is now calibrated. Signal clarity has been restored across the entire network.",
+      "Password security is vital these days, Agent. Keeping your data safe is of the utmost importance in this digital DATA age!",
+      "It looks like the VIKINGS are trying to hack into your account, little do they know you are a Password Master! Show them what you’ve got and make a super hard Password!",
+      "Do us proud, Agent!"
+    ];
+    completionKey = "mission5DialogueShown";
+  } else if (mission4Complete === "true" && mission4DialogueShown !== "true") {
+    dialogueLines = [
+      "That fuel was something else! Super-fast launch! Shame about the smell though...",
+      "It seems like we have lost communication with that Satellite we sent rocketing into space… Woops! That fuel might have worked too well!",
+      "We need to reconnect with the Satellite to send instructions to stop those VIKINGS. Use the DATA provided to align our Radar Dish to get us back on track!",
+      "Stay sharp. The next mission will require both logic and speed. Best of luck, Agent!"
+    ];
+    completionKey = "mission4DialogueShown";
   } else if (mission3Complete === "true" && mission3DialogueShown !== "true") {
     dialogueLines = [
       "Exceptional work, Agent. You've broken through the Caesar encryption.",
       "The V.I.K.I.N.G.S are adapting quickly, but so are we.",
-      "Every decoded message brings us closer to exposing their full operation.",
+      "We need you to launch a rocket that will spy on their systems. We have acquired information on a new type of fuel; can you figure out the right amount of chemicals to mix to make the fuel?",
       "Stay focused. Mission 4 will push your skills even further."
     ];
     completionKey = "mission3DialogueShown";
   } else if (mission2Complete === "true" && mission2DialogueShown !== "true") {
     dialogueLines = [
-      "Outstanding work, Agent. You've successfully decoded the binary transmission.",
-      "We've intercepted critical intelligence from the V.I.K.I.N.G.S network.",
-      "They are escalating their encryption methods, which means our next move must be precise.",
-      "Stand by. Mission 3 is now unlocked."
+      "Incredible decryption work, Agent! After this is all done, we can send YOU on holiday!",
+      "We've intercepted critical intelligence from the V.I.K.I.N.G.S network. This task will really shift our DATA into gear! We have a complex cipher that we need to decode, and you’re the person for the job!",
+      "You need to decode the “Caesar Cipher” by shifting the Cipher numbers to decode their cryptic clues!",
+      "You’re the best Agent for the job!"
     ];
     completionKey = "mission2DialogueShown";
   } else if (mission1Complete === "true" && mission1DialogueShown !== "true") {
@@ -250,51 +299,29 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
       "We believe in you, Agent!"
     ];
     completionKey = "mission1DialogueShown";
-  } else if (mission4Complete === "true" && mission4DialogueShown !== "true") {
-    dialogueLines = [
-      "Excellent work, Agent. The satellite is now in orbit.",
-      "We now have full surveillance over the V.I.K.I.N.G.S network.",
-      "Your calculations were precise. One mistake, and the launch would have failed.",
-      "Stay sharp. The next mission will require both logic and speed."
-    ];
-    completionKey = "mission4DialogueShown";
-  } else if (mission5Complete === "true" && mission5DialogueShown !== "true") {
-    dialogueLines = [
-      "Excellent work, Agent. The satellite alignment is now calibrated.",
-      "Signal clarity has been restored across the entire network.",
-      "The V.I.K.I.N.G.S can no longer hide within corrupted transmissions.",
-      "Stay focused. We're getting closer to shutting them down for good."
-    ];
-    completionKey = "mission5DialogueShown";
   }
 
   if (dialogueLines) {
     let currentLine = 0;
-    const isIntroBriefing = completionKey === "missionHubIntroShown";
 
     majorXModal.classList.remove("hidden");
     dialogueText.textContent = dialogueLines[currentLine];
     dialogueNextBtn.textContent = "Next";
 
-    if (isIntroBriefing) {
-      playBriefingAudio(0);
-    }
+    playDialogueAudio(completionKey, 0);
 
     dialogueNextBtn.onclick = () => {
       currentLine++;
 
       if (currentLine < dialogueLines.length) {
         dialogueText.textContent = dialogueLines[currentLine];
-
-        if (isIntroBriefing) {
-          playBriefingAudio(currentLine);
-        }
+        playDialogueAudio(completionKey, currentLine);
 
         if (currentLine === dialogueLines.length - 1) {
-          dialogueNextBtn.textContent = isIntroBriefing ? "Begin" : "Continue";
+          dialogueNextBtn.textContent = completionKey === "missionHubIntroShown" ? "Begin" : "Continue";
         }
       } else {
-        stopBriefingAudio();
+        stopAllDialogueAudio();
         majorXModal.classList.add("hidden");
         localStorage.setItem(completionKey, "true");
       }

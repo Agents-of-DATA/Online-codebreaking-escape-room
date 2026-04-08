@@ -1,5 +1,5 @@
-localStorage.setItem("mission5Complete", "true");
-localStorage.removeItem("mission5DialogueShown");
+// ── Helper ────────────────────────────────────────────────────
+/** Returns a random whole number between min and max (inclusive). */
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -49,6 +49,8 @@ var ARM_LEN = 70; // Orange radar arm length (pixels)
 
 // ── DOM References ────────────────────────────────────────────
 var angleInput = document.getElementById("angleInput");
+var angleMinusBtn = document.getElementById("angleMinusBtn");
+var anglePlusBtn = document.getElementById("anglePlusBtn");
 var angleDisplay = document.getElementById("angleDisplay");
 var freqSelect = document.getElementById("freqSelect");
 var progressFill = document.getElementById("progressFill");
@@ -142,6 +144,22 @@ function updateState() {
   }
 }
 
+function stepAngle(delta) {
+  var min = parseInt(angleInput.min);
+  var max = parseInt(angleInput.max);
+  var next = parseInt(angleInput.value) + delta;
+
+  if (next < min) {
+    next = min;
+  }
+  if (next > max) {
+    next = max;
+  }
+
+  angleInput.value = String(next);
+  updateState();
+}
+
 // ── Data Report Content ───────────────────────────────────────
 /*
  * Fills the three accordion panels with puzzle-specific data.
@@ -157,7 +175,10 @@ function renderReports() {
     " in its orbital path around Earth.<br>" +
     "<small style='color:#64748b'>" +
     "(0° = east of Earth &nbsp;·&nbsp; 90° = directly overhead &nbsp;·&nbsp; 180° = west of Earth)" +
-    "</small>";
+    "</small><br>" +
+    "<br>" +
+    "Open <strong>Data Report 2</strong> to find out how fast the satellite is moving and " +
+    "why that matters for aiming your radar dish.";
 
   document.getElementById("report2Text").innerHTML =
     "The satellite is travelling at " +
@@ -202,8 +223,10 @@ document.querySelectorAll(".accordion").forEach(function (btn) {
   });
 });
 
-// ── Contact Button ────────────────────────────────────────────
 contactBtn.addEventListener("click", function () {
+  localStorage.setItem("mission5Complete", "true");
+  localStorage.removeItem("mission5DialogueShown");
+
   document.body.innerHTML =
     "<div class='success-screen'>" +
     "<div class='sat-icon'>🛰️</div>" +
@@ -221,12 +244,15 @@ contactBtn.addEventListener("click", function () {
     "The satellite is now transmitting encrypted mission data back to base. " +
     "The operation against the V.I.K.I.N.G.S continues..." +
     "</p>" +
-    "<button onclick=\"window.location.href='mission_hub.html'\">" +
-    "Return to Mission Hub" +
-    "</button>" +
+    "<p>" +
+    "Mission Complete! Returning to Mission Hub..." +
+    "</p>" +
     "</div>";
-});
 
+  setTimeout(function () {
+    window.location.href = "mission_hub.html";
+  }, 1800);
+});
 // ── Back Button ───────────────────────────────────────────────
 document.getElementById("backBtn").addEventListener("click", function () {
   window.location.href = "mission_hub.html";
@@ -240,3 +266,9 @@ updateState();
 
 angleInput.addEventListener("input", updateState);
 freqSelect.addEventListener("change", updateState);
+angleMinusBtn.addEventListener("click", function () {
+  stepAngle(-1);
+});
+anglePlusBtn.addEventListener("click", function () {
+  stepAngle(1);
+});

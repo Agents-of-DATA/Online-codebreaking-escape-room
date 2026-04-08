@@ -3,56 +3,86 @@ const lowerCaseAlphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 function caesarShift(inputText, shiftDegrees) {
   const inputTextToLowerCase = inputText.toLowerCase();
-  let arrayOfNewLetters = [];
+  let result = [];
 
   for (let i = 0; i < inputTextToLowerCase.length; i++) {
-    const currentChar = inputTextToLowerCase[i];
-    if (lowerCaseAlphabet.includes(currentChar)) {
-      let idx = lowerCaseAlphabet.indexOf(currentChar);
+    const char = inputTextToLowerCase[i];
+    if (lowerCaseAlphabet.includes(char)) {
+      let idx = lowerCaseAlphabet.indexOf(char);
       let newIdx = (idx + shiftDegrees) % 26;
       if (newIdx < 0) newIdx += 26;
-      arrayOfNewLetters.push(lowerCaseAlphabet[newIdx]);
+      result.push(lowerCaseAlphabet[newIdx]);
     } else {
-      arrayOfNewLetters.push(currentChar);
+      result.push(char);
     }
   }
-  return arrayOfNewLetters.join("");
+  return result.join("");
 }
 
+function encodeCaesar(text, shift) {
+  return caesarShift(text, shift);
+}
+
+function decodeCaesar(text, shift) {
+  return caesarShift(text, shift);
+}
+
+// --- Random helpers ---
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// --- Words setup ---
-const words = ["KEY", "HASH", "DATA", "CODE", "BYTE", "NODE", "LINK", "FILE", "USER"];
-
-// Pick 2 random non-repeating words for the challenge
-let challengeIndices = [];
-while (challengeIndices.length < 2) {
-  const idx = randomInt(0, words.length - 1);
-  if (!challengeIndices.includes(idx)) challengeIndices.push(idx);
+function getRandomShift() {
+  return randomInt(1, 5); // shifts between 1–5
 }
 
-// Prepare encoded challenges
-const encodedWords = challengeIndices.map((idx) => {
-  const shift = randomInt(1, 25);
-  const word = words[idx];
+// --- Direction cycle setup ---
+let directionCycle = ["forward", "backward"];
+let directionIndex = 0;
+
+function getNextDirection() {
+  const dir = directionCycle[directionIndex];
+  directionIndex = (directionIndex + 1) % directionCycle.length;
+  return dir;
+}
+
+// --- Word bank ---
+const words = ["KEY", "HASH", "DATA", "CODE", "BYTE", "NODE", "LINK", "FILE", "USER"];
+
+// --- Generate random challenges ---
+const numberOfChallenges = 3; // how many questions you want
+let shuffledWords = [...words].sort(() => Math.random() - 0.5);
+
+const challengeWords = shuffledWords.slice(0, numberOfChallenges).map(word => ({
+  word: word,
+  shift: getRandomShift(),
+  direction: getNextDirection()  // cycles forward, backward, forward...
+}));
+
+// --- Encode challenges ---
+const encodedWords = challengeWords.map(ch => {
+  const actualShift = ch.direction === "forward" ? ch.shift : -ch.shift;
   return {
-    original: word,
-    shift: shift,
-    encoded: caesarShift(word, shift)
+    original: ch.word,
+    shift: ch.shift,
+    direction: ch.direction,
+    encoded: encodeCaesar(ch.word, actualShift)
   };
 });
 
 // --- Page setup ---
 let currentIndex = 0;
 let questionsAnswered = 0;
-const maxQuestions = 2;
+const maxQuestions = encodedWords.length;
 
 const pages = [
   {
     type: "info",
-    content: "<h2>Info Page</h2><p>Welcome! This page explains how the Caesar Cipher challenge works.</p>"
+    content: `<h2>Info Page</h2>
+      <p>Welcome! Solve the Caesar Cipher challenge.</p>
+      <p>Decode the scrambled word using the shift and direction.</p>
+      <p><strong>Forward</strong> = move letters forward<br>
+         <strong>Backward</strong> = move letters backward</p>`
   },
   {
     type: "question",
@@ -64,15 +94,15 @@ const pages = [
 function updateContent() {
   const page = pages[currentIndex];
   const pageContent = document.getElementById("page_content");
+  const controls = document.getElementById("caesar_controls");
+
   pageContent.innerHTML = page.content;
 
-  const caesarControls = document.getElementById("caesar_controls");
-
   if (page.type === "question") {
-    caesarControls.style.display = "block";
-    displayRandomCaesar();
+    controls.style.display = "block";
+    displayNextChallenge();
   } else {
-    caesarControls.style.display = "none";
+    controls.style.display = "none";
   }
 }
 
@@ -87,15 +117,58 @@ document.getElementById("forward_btn").addEventListener("click", () => {
   updateContent();
 });
 
-// --- Caesar cipher functionality ---
+// --- Caesar challenge logic ---
 let currentCaesarChallenge = null;
 
-function finishMission3() {
-  const pageContent = document.getElementById("page_content");
-  const caesarControls = document.getElementById("caesar_controls");
+function displayNextChallenge() {
+  const feedback = document.getElementById("word_feedback");
 
-  pageContent.innerHTML = `<h3>Mission Complete! Returning to HQ...</h3>`;
-  caesarControls.style.display = "none";
+  if (questionsAnswered >= maxQuestions) {
+    finishMission();
+    return;
+  }
+
+  currentCaesarChallenge = encodedWords[questionsAnswered];
+
+  // Fill demo/reference inputs
+  document.getElementById("encoded_input").value = currentCaesarChallenge.encoded;
+  document.getElementById("original_input").value = currentCaesarChallenge.original;
+  document.getElementById("shift").value = currentCaesarChallenge.shift;
+  document.getElementById("direction").value = currentCaesarChallenge.direction;
+
+  feedback.innerHTML = "";
+  document.getElementById("caesar_input").value = "";
+}
+
+function checkCaesarInput() {
+  const userInput = document.getElementById("caesar_input").value.trim().toUpperCase();
+  const feedback = document.getElementById("word_feedback");
+
+  const actualShift = currentCaesarChallenge.direction === "forward"
+    ? -currentCaesarChallenge.shift
+    : currentCaesarChallenge.shift;
+
+  const decoded = decodeCaesar(currentCaesarChallenge.encoded, actualShift).toUpperCase();
+
+  if (userInput === decoded) {
+    feedback.innerHTML = `<p style="color: green;">
+      Correct! "${currentCaesarChallenge.encoded}" decodes to "${decoded}" 
+      (Shift ${currentCaesarChallenge.shift} ${currentCaesarChallenge.direction})
+    </p>`;
+
+    questionsAnswered++;
+    setTimeout(displayNextChallenge, 1000);
+  } else {
+    feedback.innerHTML = `<p style="color: red;">Incorrect. Try again!</p>`;
+  }
+}
+
+function finishMission() {
+  const pageContent = document.getElementById("page_content");
+  const controls = document.getElementById("caesar_controls");
+
+  pageContent.innerHTML = `<h3>Mission Complete! Returning to mission hub...</h3>`;
+  controls.style.display = "none";
 
   localStorage.setItem("mission3Complete", "true");
   localStorage.removeItem("mission3DialogueShown");
@@ -105,39 +178,8 @@ function finishMission3() {
   }, 1500);
 }
 
-function displayRandomCaesar() {
-  const feedback = document.getElementById("word_feedback");
+// --- Event listener ---
+document.getElementById("submit_btn").addEventListener("click", checkCaesarInput);
 
-  if (questionsAnswered >= maxQuestions) {
-    finishMission3();
-    return;
-  }
-
-  // Get next challenge in the prepared array
-  currentCaesarChallenge = encodedWords[questionsAnswered];
-
-  document.getElementById("encoded_input").value = currentCaesarChallenge.encoded;
-  document.getElementById("original_input").value = currentCaesarChallenge.original;
-  document.getElementById("shift").value = currentCaesarChallenge.shift;
-
-  feedback.innerHTML = "";
-  document.getElementById("caesar_input").value = "";
-}
-
-function compareCaesarInput() {
-  const userInput = document.getElementById("caesar_input").value.trim().toUpperCase();
-  const feedback = document.getElementById("word_feedback");
-
-  if (userInput === currentCaesarChallenge.original) {
-    feedback.innerHTML = `<p style="color: green;">Correct! The word is "${currentCaesarChallenge.original}" with shift ${currentCaesarChallenge.shift}.</p>`;
-    questionsAnswered++;
-    setTimeout(displayRandomCaesar, 1000);
-  } else {
-    feedback.innerHTML = `<p style="color: red;">Try again!</p>`;
-  }
-}
-
-document.getElementById("submit_btn").addEventListener("click", compareCaesarInput);
-
-// --- Initial display ---
+// --- Start ---
 updateContent();
