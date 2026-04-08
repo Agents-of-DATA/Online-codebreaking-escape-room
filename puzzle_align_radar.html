@@ -11,8 +11,8 @@
 
     <h1>📡 Align the Radar Dish!</h1>
     <p class="subtitle">
-      Use the mission data to point the radar at the satellite and establish
-      contact!
+      Use the mission data reports to point the radar at the satellite and
+      establish contact!
     </p>
 
     <div class="puzzle-layout">
@@ -30,6 +30,57 @@
             <div class="radar-arm" id="radarArm"></div>
             <div class="satellite" id="satellite">🛰️</div>
             <div class="earth">🌍</div>
+          </div>
+        </div>
+
+        <!-- ── Controls ───────────────────────────────────── -->
+        <div class="controls">
+          <div class="control-group">
+            <label for="angleInput"
+              >Radar Angle: <span id="angleDisplay">0°</span></label
+            >
+            <div class="angle-input-row">
+              <button
+                type="button"
+                id="angleMinusBtn"
+                class="angle-step-btn"
+                aria-label="Decrease radar angle by 1 degree"
+              >
+                −
+              </button>
+              <input
+                type="range"
+                id="angleInput"
+                min="0"
+                max="180"
+                value="0"
+                step="1"
+                aria-label="Radar angle in degrees"
+              />
+              <button
+                type="button"
+                id="anglePlusBtn"
+                class="angle-step-btn"
+                aria-label="Increase radar angle by 1 degree"
+              >
+                +
+              </button>
+            </div>
+            <div class="range-labels">
+              <span>0° (East)</span>
+              <span>90° (Overhead)</span>
+              <span>180° (West)</span>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="freqSelect">Frequency Code</label>
+            <select id="freqSelect">
+              <option value="">— Select a code —</option>
+              <option value="A">Code A</option>
+              <option value="B">Code B</option>
+              <option value="C">Code C</option>
+            </select>
           </div>
         </div>
 
@@ -87,39 +138,6 @@
             Data Report 3 — Speed Reference Table
           </button>
           <div class="panel" id="report3Panel" role="region"></div>
-        </div>
-
-        <!-- ── Controls ───────────────────────────────────── -->
-        <div class="controls">
-          <div class="control-group">
-            <label for="angleInput"
-              >Radar Angle: <span id="angleDisplay">0°</span></label
-            >
-            <input
-              type="range"
-              id="angleInput"
-              min="0"
-              max="180"
-              value="0"
-              step="1"
-              aria-label="Radar angle in degrees"
-            />
-            <div class="range-labels">
-              <span>0° (East)</span>
-              <span>90° (Overhead)</span>
-              <span>180° (West)</span>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <label for="freqSelect">Frequency Code</label>
-            <select id="freqSelect">
-              <option value="">— Select a code —</option>
-              <option value="A">Code A</option>
-              <option value="B">Code B</option>
-              <option value="C">Code C</option>
-            </select>
-          </div>
         </div>
       </div>
     </div>

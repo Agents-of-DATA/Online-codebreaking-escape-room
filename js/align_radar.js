@@ -49,6 +49,8 @@ var ARM_LEN = 70; // Orange radar arm length (pixels)
 
 // ── DOM References ────────────────────────────────────────────
 var angleInput = document.getElementById("angleInput");
+var angleMinusBtn = document.getElementById("angleMinusBtn");
+var anglePlusBtn = document.getElementById("anglePlusBtn");
 var angleDisplay = document.getElementById("angleDisplay");
 var freqSelect = document.getElementById("freqSelect");
 var progressFill = document.getElementById("progressFill");
@@ -142,6 +144,22 @@ function updateState() {
   }
 }
 
+function stepAngle(delta) {
+  var min = parseInt(angleInput.min);
+  var max = parseInt(angleInput.max);
+  var next = parseInt(angleInput.value) + delta;
+
+  if (next < min) {
+    next = min;
+  }
+  if (next > max) {
+    next = max;
+  }
+
+  angleInput.value = String(next);
+  updateState();
+}
+
 // ── Data Report Content ───────────────────────────────────────
 /*
  * Fills the three accordion panels with puzzle-specific data.
@@ -157,7 +175,10 @@ function renderReports() {
     " in its orbital path around Earth.<br>" +
     "<small style='color:#64748b'>" +
     "(0° = east of Earth &nbsp;·&nbsp; 90° = directly overhead &nbsp;·&nbsp; 180° = west of Earth)" +
-    "</small>";
+    "</small><br>" +
+    "<br>" +
+    "Open <strong>Data Report 2</strong> to find out how fast the satellite is moving and " +
+    "why that matters for aiming your radar dish.";
 
   document.getElementById("report2Text").innerHTML =
     "The satellite is travelling at " +
@@ -240,3 +261,9 @@ updateState();
 
 angleInput.addEventListener("input", updateState);
 freqSelect.addEventListener("change", updateState);
+angleMinusBtn.addEventListener("click", function () {
+  stepAngle(-1);
+});
+anglePlusBtn.addEventListener("click", function () {
+  stepAngle(1);
+});

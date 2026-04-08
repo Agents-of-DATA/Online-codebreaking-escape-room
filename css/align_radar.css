@@ -464,8 +464,42 @@ h1 {
   font-size: 1.15rem;
 }
 
+.angle-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.angle-step-btn {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.angle-step-btn:hover {
+  background: #1e3a5f;
+}
+
+.angle-step-btn:active {
+  transform: scale(0.97);
+}
+
+.angle-step-btn:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
 input[type="range"] {
   width: 100%;
+  flex: 1 1 auto;
   cursor: pointer;
   accent-color: #f97316;
 }
@@ -649,4 +683,4 @@ select:focus {
 .success-screen button:hover {
   background: #22c55e;
   transform: scale(1.04);
-} 
+}
