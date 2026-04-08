@@ -1,3 +1,4 @@
+/* Base page styling */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -75,6 +76,7 @@ body {
   display: block;
 }
 
+/* Main action buttons */
 #backBtn {
   position: absolute;
   top: 16px;
@@ -130,6 +132,7 @@ body {
   opacity: 0.75;
 }
 
+/* Rocket stage and chemical controls */
 .barrel-container {
   display: flex;
   justify-content: center;
@@ -142,7 +145,12 @@ body {
   width: fit-content;
   padding: 20px 40px;
   margin: 0 auto;
-  background-color: #a09791;
+  background: repeating-linear-gradient(
+    135deg,
+    #111111 0 18px,
+    #facc15 18px 36px
+  );
+  border: 2px solid #0f0f0f;
   border-radius: 12px;
 }
 
@@ -165,6 +173,11 @@ body {
 
 .barrel {
   width: 120px;
+  padding: 12px 12px 10px;
+  border-radius: 12px;
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
 }
 
 .slider-controls {
@@ -223,6 +236,7 @@ body {
   transition: height 0.3s ease;
 }
 
+/* Launch readiness progress */
 .progress-bar {
   width: 60%;
   height: 20px;
@@ -239,6 +253,7 @@ body {
   transition: width 0.3s ease;
 }
 
+/* Mission success modal */
 .success-screen {
   position: fixed;
   inset: 0;
