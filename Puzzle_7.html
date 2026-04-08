@@ -73,62 +73,47 @@
     const cities = ["Glasgow", "Edinburgh", "Dundee", "Inverness"];
 
     const datasets = [
-      // 1️⃣ Same totals trap
-      {
-        total: [80, 80, 60, 60],
-        encrypted: [20, 36, 18, 15],
-        answer: "edinburgh"
-      },
-
-      // 2️⃣ Highest total is NOT the answer
-      {
-        total: [100, 70, 60, 50],
-        encrypted: [20, 35, 30, 10],
-        answer: "dundee"
-      },
-
-      // 3️⃣ Very close values (forces careful thinking)
-      {
-        total: [90, 85, 80, 75],
-        encrypted: [30, 32, 28, 25],
-        answer: "edinburgh"
-      },
-
-      // 4️⃣ Two similar encrypted values but different totals
-      {
-        total: [60, 90, 60, 90],
-        encrypted: [18, 27, 24, 20],
-        answer: "dundee"
-      },
-
-      // 5️⃣ All totals equal (pure ratio thinking)
-      {
-        total: [70, 70, 70, 70],
-        encrypted: [14, 28, 21, 20],
-        answer: "edinburgh"
-      },
-
-      // 6️⃣ Similar totals, subtle difference
-      {
-        total: [85, 85, 70, 70],
-        encrypted: [25, 30, 20, 18],
-        answer: "edinburgh"
-      },
-
-      // 7️⃣ Highest encrypted value is NOT correct (trap)
-      {
-        total: [100, 80, 60, 50],
-        encrypted: [40, 30, 25, 20],
-        answer: "dundee"
-      },
-
-      // 8️⃣ Close ratios (requires careful comparison)
-      {
-        total: [90, 75, 75, 60],
-        encrypted: [27, 24, 30, 18],
-        answer: "dundee"
-      }
-    ];
+    {
+      total: [80, 80, 60, 60],
+      encrypted: [20, 36, 18, 15],
+      answer: "edinburgh"
+    },
+    {
+      total: [100, 70, 60, 50],
+      encrypted: [20, 28, 30, 10],
+      answer: "dundee"
+    },
+    {
+      total: [90, 85, 80, 75],
+      encrypted: [30, 32, 28, 25],
+      answer: "edinburgh"
+    },
+    {
+      total: [60, 90, 60, 90],
+      encrypted: [18, 27, 24, 20],
+      answer: "dundee"
+    },
+    {
+      total: [70, 70, 70, 70],
+      encrypted: [28, 21, 18, 20],
+      answer: "glasgow"
+    },
+    {
+      total: [85, 85, 70, 70],
+      encrypted: [20, 22, 15, 35],
+      answer: "inverness"
+    },
+    {
+      total: [100, 80, 60, 50],
+      encrypted: [40, 30, 25, 15],
+      answer: "glasgow"
+    },
+    {
+      total: [90, 75, 75, 60],
+      encrypted: [27, 24, 30, 18],
+      answer: "dundee"
+    }
+  ];
 
     const selectedDataset = datasets[Math.floor(Math.random() * datasets.length)];
     
@@ -223,3 +208,5 @@
       }
     }
     </script>
+  </body>
+</html>
