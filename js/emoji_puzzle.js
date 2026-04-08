@@ -69,6 +69,7 @@ function renderEmojiPuzzle() {
         .join("");
 
     document.getElementById("emojiDisplay").innerHTML = display;
+
     document.getElementById("answerInput").value = "";
     document.getElementById("result").textContent = "";
 }
@@ -112,13 +113,13 @@ function finishEmojiMission() {
     result.textContent = "Mission Complete! Returning to HQ...";
     result.style.color = "lightgreen";
 
-    // ✅ mark mission complete
+    // mark mission complete
     localStorage.setItem("mission1Complete", "true");
 
-    // ✅ reset dialogue so it plays again
+    // reset dialogue so it plays again
     localStorage.removeItem("mission1DialogueShown");
 
-    // ✅ redirect back to mission hub
+    // redirect back to mission hub
     setTimeout(() => {
         window.location.href = "mission_hub.html";
     }, 1500);
