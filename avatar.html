@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--Page setup-->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--css for avatar-->
   <link rel="stylesheet" href="css/avatar.css" />
+  <!--Title-->
   <title>Choose Your Agent</title>
 </head>
 
+<!--Navbar-->
 <body class="avatar-page">
       <nav class="main-nav">
     <div class="nav-links">
@@ -15,16 +19,18 @@
         <a href="accessibility.html">Accessibility</a>
     </div>
     </nav>
+    <!--Header logo-->
   <header class="site-header">
     <img src="assets/images/Logo.png" alt="Data Education in Schools Logo" class="site-logo">
   </header>
-
+  <!--Mission card for choosing avatar-->
   <main class="landing-wrap">
     <section class="mission-card avatar-card" aria-label="Avatar selection">
       <div class="briefing">
+        <!--Header1-->
         <h1 class="briefing-title">Choose your Agent Avatar</h1>
         <p>Select one avatar to represent you in the mission.</p>
-
+        <!--Images of different avatars to select-->
         <div class="avatar-grid" id="avatar-grid">
           <button class="avatar-option" type="button" data-avatar="agent1.png">
             <img src="assets/images/agent1.png" alt="Agent avatar 1">
@@ -63,14 +69,14 @@
             <img src="assets/images/agent12.png" alt="Agent avatar 12">
           </button>
         </div>
-
+        <!--button to continue, user must select an avatar-->
         <div class="start-row">
           <button id="continue-btn" type="button" disabled>Continue</button>
         </div>
       </div>
     </section>
   </main>
-
+  <!--Scripts to use on the page-->
   <script src="js/app.js"></script>
   <script src="js/accessibility.js"></script>
 </body>

@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--page setup-->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--css link to mission hub css-->
   <link rel="stylesheet" href="css/mission_hub.css" />
+  <!--title of page-->
   <title>Mission Hub</title>
 </head>
-
+<!--logo for header-->
 <body class="mission-page">
   <header class="site-header">
     <img src="assets/images/Logo.png" alt="Data Education in Schools Logo" class="site-logo">
   </header>
+  <!--navbar-->
       <nav class="main-nav">
     <div class="nav-links">
         <a href="index.html">Home</a>
@@ -18,7 +22,7 @@
         <a href="accessibility.html">Accessibility</a>
     </div>
     </nav>
-
+    <!--mission selection with 7 buttons-->
   <main class="hub-wrap">
     <h1 id="welcome-message" class="hub-title"></h1>
 
@@ -33,7 +37,7 @@
     </nav>
 
   <section class="mission-grid" aria-label="Mission selection">
-
+    <!--classes containing each mission plus images of mission-->
     <article class="mission-card-tile" data-mission="1">
       <img src="assets/images/emoji_challenge.png" alt="Mission 1 image">
       <div class="mission-overlay">
@@ -41,6 +45,7 @@
         <a class="read-more" href="emoji_puzzle.html" role="button">Begin Mission</a>
       </div>
       <div class="lock-overlay hidden">
+        <!--locks mission until mission is completed-->
         <img src="assets/images/lock.png" alt="Locked mission" class="lock-icon">
         <p>Locked</p>
       </div>
@@ -107,7 +112,7 @@
     </article>
 
     <article class="mission-card-tile" data-mission="7">
-      <img src="assets/images/placeholder.png" alt="Mission 7 image">
+      <img src="assets/images/mission7.png" alt="Mission 7 image">
       <div class="mission-overlay">
         <h2>Mission 7</h2>
         <a class="read-more" href="Puzzle_7.html" role="button">Begin Mission</a>
@@ -119,13 +124,14 @@
     </article>
 
   </section>
+  <!--major x speech when entering mission hub-->
   </main>
     <div id="majorx-modal" class="dialogue-modal hidden">
     <div class="dialogue-box">
       <div class="dialogue-left">
         <img src="assets/images/major-x.png" alt="Major X" class="dialogue-majorx">
       </div>
-
+      <!--dialogue next to major x-->
       <div class="dialogue-right">
         <h2>Major X</h2>
         <p id="dialogue-text"></p>
@@ -133,7 +139,7 @@
       </div>
     </div>
   </div>
-
+  <!--audios for each briefing after beating each mission and returning to mission hub-->
 <audio id="briefing1-audio" preload="auto"><source src="audio/briefing1.mp4" type="audio/mp4"></audio>
 <audio id="briefing2-audio" preload="auto"><source src="audio/briefing2.mp4" type="audio/mp4"></audio>
 <audio id="briefing3-audio" preload="auto"><source src="audio/briefing3.mp4" type="audio/mp4"></audio>
@@ -168,7 +174,8 @@
 <audio id="mission7briefing2-audio" preload="auto"><source src="audio/mission7briefing2.mp4" type="audio/mp4"></audio>
 <audio id="mission7briefing3-audio" preload="auto"><source src="audio/mission7briefing3.mp4" type="audio/mp4"></audio>
 <audio id="mission7briefing4-audio" preload="auto"><source src="audio/mission7briefing4.mp4" type="audio/mp4"></audio>
-  <script src="js/app.js"></script>
-  <script src="js/accessibility.js"></script>
+<!--scripts used on mission hub--> 
+<script src="js/app.js"></script>
+<script src="js/accessibility.js"></script>
 </body>
 </html>

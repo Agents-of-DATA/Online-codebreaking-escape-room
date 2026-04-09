@@ -9,13 +9,20 @@
     <title>Launch the Spy Satellite</title>
   </head>
   <body>
+    <!-- Quick navigation back to the mission hub -->
     <button id="backBtn">Back to Mission Hub</button>
+
+    <!-- Page intro and puzzle instructions -->
     <h1>Spy Satellite Launch Control</h1>
     <p>
       Find and review the relevant Data Reports to discover the required
       chemical levels.
     </p>
-    <p><strong>Click the icons to reveal the data reports.</strong></p>
+    <p>
+      <strong
+        >Click the round floating icons to reveal the data reports.</strong
+      >
+    </p>
     <p><strong>Icons can be dragged to reposition them.</strong></p>
 
     <!-- DATA HINTS -->
@@ -66,7 +73,7 @@
               +
             </button>
           </div>
-          <p id="valueA">0%</p>
+          <p id="valueA">0 units</p>
         </div>
         <div class="barrel">
           <div class="fill" id="fillB"></div>
@@ -99,7 +106,7 @@
               +
             </button>
           </div>
-          <p id="valueB">0%</p>
+          <p id="valueB">0 units</p>
         </div>
         <div class="barrel">
           <div class="fill" id="fillC"></div>
@@ -132,12 +139,12 @@
               +
             </button>
           </div>
-          <p id="valueC">0%</p>
+          <p id="valueC">0 units</p>
         </div>
       </div>
     </div>
 
-    <!-- PROGRESS-->
+    <!-- Readiness progress and final action -->
     <div class="progress-section">
       <p>Launch Readiness</p>
       <div class="progress-bar">
@@ -168,5 +175,6 @@
     </div>
 
     <script src="js/rocket_fuel.js"></script>
+    <script src="js/accessibility.js"></script>
   </body>
 </html>

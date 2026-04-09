@@ -2,16 +2,19 @@
 <html lang="en">
 
 <head>
+    <!--Header setup-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--link to index css-->
     <link rel="stylesheet" href="css/index.css">
+    <!--title of page-->
     <title>Agents of DATA</title>
 </head>
-
+<!--header logo-->
 <header class="site-header">
   <img src="assets/images/Logo.png" alt="Data Education in Schools Logo" class="site-logo">
 </header>
-
+<!--navbar-->
 <body class="landing">
     <nav class="main-nav">
         <div class="nav-links">
@@ -20,6 +23,7 @@
             <a href="accessibility.html">Accessibility</a>
         </div>
     </nav>
+    <!--major x speech content, contains image, text and audio-->
     <main class="landing-wrap">
         <section class ="mission-card" aria-label="Mission Briefing">
             <div class="majorx">
@@ -27,27 +31,13 @@
             </div>
             <div class="briefing">
                 <h1 class="briefing-title">TOP SECRET BRIEF AGENT OF DATA SPACE REPORT</h1>
-            <p>
-                Welcome back Agent, I am Major X, Leader of the DATA team and we once again need your assistance. As an Agent of DATA (Defence Against Temporal Attacks), you are the best person for the job when it comes to protecting the world as we know it from the dastardly V.I.K.I.N.G.S. As you know, VIKINGS stands for Villains, Insurgents and Kleptomaniacs: Invading Networks and Global Systems, and they are not nice people! We have intelligence that the dastardly VIKINGS are planning to steal valuable data from unsuspecting civilians around the globe!
-            </p>
-            <p>
-               It seems like the villainous VIKINGS have created a sort of Space Station to launch their attacks from, and this is where you come in! We need you to fight the good fight and stop these jokers before they can do any damage.
-            </p>
-            <p>
-                We have been monitoring the situation and have intelligence ready to assist you at every turn. Remember to take notes, stop, and think before making any decisions, and we are always here to help!
-            </p>
-            <p>
-                First, you will need to launch equipment into space to connect to the VIKINGS silly little space station. Then, you will need to hack into their system to find out their evil plan! Only once you complete all the tasks will you be able to end their reign of terror and save our planet!
-            </p>
-            <p>
-                Only YOU can stop this threat!
-            </p>
-            <p>
-                Best of luck Agent,
-            </p>
-            <p>
-                Major X
-            </p>
+            <p>Welcome back Agent, I am Major X, Leader of the DATA team and we once again need your assistance. As an Agent of DATA (Defence Against Temporal Attacks), you are the best person for the job when it comes to protecting the world as we know it from the dastardly V.I.K.I.N.G.S. As you know, VIKINGS stands for Villains, Insurgents and Kleptomaniacs: Invading Networks and Global Systems, and they are not nice people! We have intelligence that the dastardly VIKINGS are planning to steal valuable data from unsuspecting civilians around the globe!</p>
+            <p>It seems like the villainous VIKINGS have created a sort of Space Station to launch their attacks from, and this is where you come in! We need you to fight the good fight and stop these jokers before they can do any damage.</p>
+            <p>We have been monitoring the situation and have intelligence ready to assist you at every turn. Remember to take notes, stop, and think before making any decisions, and we are always here to help!</p>
+            <p>First, you will need to launch equipment into space to connect to the VIKINGS silly little space station. Then, you will need to hack into their system to find out their evil plan! Only once you complete all the tasks will you be able to end their reign of terror and save our planet!</p>
+            <p>Only YOU can stop this threat!</p> 
+            <p> Best of luck Agent,</p>
+            <p>Major X</p>
             <form id="name-form">
                 <label class="sr-only" for="agent-name">Enter your Agent name</label>
                 <input id="agent-name" name="agent-name" type="text" required autocomplete="name" placeholder="Enter your agent name..."/>
@@ -57,10 +47,12 @@
 
         </section>
     </main>    
+    <!--scripts for page including audio file-->
     <script src="js/app.js"></script>
     <script src="js/accessibility.js"></script>
     <audio id="intro-audio" src="audio/intro.mp3"></audio>
 
+    <!--scripts to play audio-->
     <script>
     const introAudio = document.getElementById("intro-audio");
 
@@ -70,6 +62,12 @@
     }
 
     document.addEventListener("click", playIntroOnce);
+    // Get stored agent name
+    const agentName = sessionStorage.getItem("agentName");
+
+    // Insert into certificate
+    document.getElementById("agentName").textContent = agentName || "Unknown Agent";
     </script>
+    <script src="js/accessibility.js"></script>
 </body>
 </html>
