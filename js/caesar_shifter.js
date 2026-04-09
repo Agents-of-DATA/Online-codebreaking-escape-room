@@ -81,8 +81,8 @@ const pages = [
     content: `<h2>Info Page</h2>
       <p>Welcome! Solve the Caesar Cipher challenge.</p>
       <p>Decode the scrambled word using the shift and direction.</p>
-      <p><strong>Forward</strong> = move letters forward<br>
-         <strong>Backward</strong> = move letters backward</p>`
+      <p><strong>Forward</strong> = move letters backward from shifted word<br>
+         <strong>Backward</strong> = move letters forward from shifted word</p>`
   },
   {
     type: "question",
