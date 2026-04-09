@@ -95,4 +95,3 @@ window.drawNetwork = function () {
   
     draw();
   };
-  window.correctCity = "dundee";
