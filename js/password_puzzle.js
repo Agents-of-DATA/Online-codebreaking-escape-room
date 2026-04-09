@@ -179,6 +179,7 @@ function testPassword() {
 
   // If all rules are passed
   if (result.strength === 5) {
+    playSound("audio/correct.mp4");
     finishMission6();
   }
 }
