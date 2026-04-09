@@ -9,50 +9,60 @@
 </head>
 
 <body>
+  <!-- Header section with tital and navigation back to hub page -->
   <header class="mission-header">
     <h1>Agents of DATA</h1>
     <h2>System 7: Trace the Signal</h2>
+    <!-- Link back to mission hub -->
     <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
   </header>
 
+  <!-- Mission briefing section -->
   <div class="briefing">
     <h3>Agent K's Briefing</h3>
-    <p>
-      The satellite launch has been successfully stopped… but the system is still active. Intercepted data shows encrypted signals continuing to move through the network. Your task is to analyze the data traffic from different regions. 
-      Compare the total traffic with the encrypted traffic and identify which region shows the highest level of suspicious encrypted activity. This will reveal the location of the next V.I.K.I.N.G.S launch site.
-    </p>
+    <p>The satellite launch has been successfully stopped… but the system is still active. Intercepted data shows encrypted signals continuing to move through the network. Your task is to analyze the data traffic from different regions. Compare the total traffic with the encrypted traffic and identify which region shows the highest level of suspicious encrypted activity. This will reveal the location of the next V.I.K.I.N.G.S launch site.</p>
   </div>
 
+  <!-- Popup container for charts -->
   <div id="chartPopup" class="popup">
     <div class="popup-content">
+      <!-- Close button for popup -->
       <span class="close" onclick="closeChart()">&times;</span>
 
+      <!-- Canvas for total traffic bar chart -->
       <canvas id="canvas1" width="600" height="300"></canvas>
-      
+      <!-- Canvas for enctryped traffic bar chart -->
       <canvas id="canvas2" width="600" height="300"></canvas>
     </div>
   </div>
 
+  <!-- Map image section -->
   <div class="map-container">
-    <img src="assets/images/map.png" alt="Network Map" class="map-image">
+    <img src="assets/images/map.png" class="map-image">
   </div>
 
+  <!-- Buttons to display chart popups -->
   <div class="button-row">
     <button onclick="showBarChart1()">Show Total traffic</button>
     <button onclick="showBarChart2()">Show encrypted traffic</button>
   </div>
 
+  <!-- Message to show both charts need to be viewed before answer buttons are unlocked -->
   <p id="lockMessage">View both charts to unlock answers</p>
 
+  <!-- Answer buttons (disabled until charts are viewed)-->
   <div class="button-row">
     <button class="answer" disabled onclick="checkAnswer('glasgow')"> Glasgow</button>
     <button class="answer" disabled onclick="checkAnswer('edinburgh')"> Edinburgh</button>
     <button class="answer" disabled onclick="checkAnswer('dundee')"> Dundee</button>    
     <button class="answer" disabled onclick="checkAnswer('inverness')"> Inverness</button> 
-</div>
-<p id="feedback"></p>
-<br><br>
+  </div>
 
+  <!-- Where the feddback message after selecteing an answer will display -->
+  <p id="feedback"></p>
+  <br><br>
+
+  <!-- Tip section -->
   <div class="tips">
     <h3>Network Analysis Tips</h3>
     <ul>
@@ -62,154 +72,6 @@
       <li>Cross-referecne the map visualisation with the chart data for confirmation</li>
     </ul>
   </div>
-
-  <script>
-    const ctx = document.getElementById("canvas1");
-    const cty = document.getElementById("canvas2");
-    
-    let barChart1Viewed = false;
-    let barChart2Viewed = false;
-    
-    const cities = ["Glasgow", "Edinburgh", "Dundee", "Inverness"];
-
-    const datasets = [
-    {
-      total: [80, 80, 60, 60],
-      encrypted: [20, 36, 18, 15],
-      answer: "edinburgh"
-    },
-    {
-      total: [100, 70, 60, 50],
-      encrypted: [20, 28, 30, 10],
-      answer: "dundee"
-    },
-    {
-      total: [90, 85, 80, 75],
-      encrypted: [30, 32, 28, 25],
-      answer: "edinburgh"
-    },
-    {
-      total: [60, 90, 60, 90],
-      encrypted: [18, 27, 24, 20],
-      answer: "dundee"
-    },
-    {
-      total: [70, 70, 70, 70],
-      encrypted: [28, 21, 18, 20],
-      answer: "glasgow"
-    },
-    {
-      total: [85, 85, 70, 70],
-      encrypted: [20, 22, 15, 35],
-      answer: "inverness"
-    },
-    {
-      total: [100, 80, 60, 50],
-      encrypted: [40, 30, 25, 15],
-      answer: "glasgow"
-    },
-    {
-      total: [90, 75, 75, 60],
-      encrypted: [27, 24, 30, 18],
-      answer: "dundee"
-    }
-  ];
-
-    const selectedDataset = datasets[Math.floor(Math.random() * datasets.length)];
-    
-    const totalTraffic = selectedDataset.total;
-    const encryptedTraffic = selectedDataset.encrypted;
-    window.correctCity = selectedDataset.answer;
-
-    const myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: cities,
-        datasets: [
-          {
-            label: "Total Traffic",
-            data: totalTraffic,
-            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
-          }
-        ]
-      },
-      options: {
-        events: ['click']
-      }
-    });
-    
-    const myChart1 = new Chart(cty, {
-      type: "bar",
-      data: {
-        labels: cities,
-        datasets: [
-          {
-            label: "Encrypted Traffic",
-            data: encryptedTraffic,
-            backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"]
-          }
-        ]
-      },
-      options: {
-        events: ['click']
-      }
-    });
-    function showBarChart1() {
-  document.getElementById("chartPopup").style.display = "block";
-  document.getElementById("canvas1").style.display = "block";
-  document.getElementById("canvas2").style.display = "none";
-
-  drawBarChart("canvas1", totalTraffic, "Total Traffic");
-
-  barChart1Viewed = true;
-  checkIfUnlocked();
-}
-
-function showBarChart2() {
-  document.getElementById("chartPopup").style.display = "block";
-  document.getElementById("canvas1").style.display = "none";
-  document.getElementById("canvas2").style.display = "block";
-
-  drawBarChart("canvas2", encryptedTraffic, "Encrypted Traffic");
-
-  barChart2Viewed = true;
-  checkIfUnlocked();
-}
-    
-    function closeChart() {
-      document.getElementById("chartPopup").style.display = "none";
-    }
-    
-
-    function checkIfUnlocked() {
-    const message = document.getElementById("lockMessage");
-
-    if (barChart1Viewed && barChart2Viewed) {
-      document.querySelectorAll(".answer").forEach(btn => {
-        btn.disabled = false;
-        btn.classList.add("unlocked");
-      });
-      message.textContent = "";
-    } else if (barChart1Viewed || barChart2Viewed) {
-      message.textContent = " View the other chart to continue";
-    }
-  }
-    
-    function checkAnswer(selected) {
-      const feedback = document.getElementById("feedback");
-    
-      if (selected === window.correctCity) {
-        feedback.textContent = "Correct! This region shows the highest suspicious encrypted activity.";
-        feedback.style.color = "green";
-        setTimeout(() => {
-          window.location.href = "mission_complete.html";
-        }, 1500);
-
-      } else {
-        feedback.textContent = "Try again.";
-        feedback.style.color = "red";
-      }
-    }
-    </script>
+  <script src="js/mission7.js"></script>
   </body>
 </html>
