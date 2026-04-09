@@ -85,6 +85,15 @@ function placeSatellite() {
  * transform-origin: 0 50%  →  rotation pivots at the left edge
  *                               of the element, which sits at Earth centre.
  */
+function playSound(src) {
+  try {
+    const audio = new Audio(src);
+    audio.volume = 0.5; // optional
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  } catch (err) {
+    console.error("Error creating audio:", err);
+  }
+}
 function updateRadarVisual(angle) {
   // Negative rotation aligns CSS direction with puzzle angle direction.
   var rotation = "rotate(" + -angle + "deg)";
@@ -266,6 +275,7 @@ contactBtn.addEventListener("click", function () {
     "°</span> " +
     "using Frequency Code <span class='highlight'>" +
     correctCode +
+    playSound("audio/correct.mp4") +
     "</span>." +
     "</p>" +
     "<p>" +

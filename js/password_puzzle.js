@@ -10,7 +10,16 @@ const passwords = {
 function getRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
-
+// function to play sound effects for correct and incorrect answers 
+function playSound(src) {
+  try {
+    const audio = new Audio(src);
+    audio.volume = 0.5; // optional
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  } catch (err) {
+    console.error("Error creating audio:", err);
+  }
+}
 // Get one password from each level and mix them up
 function getPuzzleSetByLevels() {
   return [
@@ -65,6 +74,7 @@ function checkPuzzle(selectedPassword) {
 
     result.textContent = `Correct! (${puzzleProgress}/${requiredRounds})`;
     result.style.color = "lightgreen";
+    playSound("audio/correct.mp4");
 
     // If finished all rounds
     if (puzzleProgress >= requiredRounds) {
@@ -78,6 +88,7 @@ function checkPuzzle(selectedPassword) {
     // Wrong answer
     result.textContent = "Incorrect. Try again.";
     result.style.color = "red";
+    playSound("audio/wrong.mp4");
   }
 }
 

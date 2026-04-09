@@ -70,7 +70,16 @@ let currentLevelIndex = 0;
 
 // Store current puzzle
 let currentPuzzle = null;
-
+// function to play sound effects for correct and incorrect answers 
+function playSound(src) {
+  try {
+    const audio = new Audio(src);
+    audio.volume = 0.5; // optional
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  } catch (err) {
+    console.error("Error creating audio:", err);
+  }
+}
 // Show a puzzle on the screen
 function renderEmojiPuzzle() {
     const levelName = levels[currentLevelIndex];
@@ -106,12 +115,14 @@ function checkAnswer() {
     if (currentPuzzle.answer.includes(userInput)) {
         result.textContent = "Correct!";
         result.style.color = "lightgreen";
+        playSound("audio/correct.mp4");
 
         // Move to next level
         setTimeout(goToNextLevel, 1000);
     } else {
         // If wrong
         result.textContent = "Incorrect. Try again.";
+        playSound("audio/wrong.mp4");   
         result.style.color = "red";
     }
 }

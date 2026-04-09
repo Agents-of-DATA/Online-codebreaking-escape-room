@@ -14,6 +14,7 @@ const binaryValues = [
   "01000110 01001001 01001100 01000101",
   "01010101 01010011 01000101 01010010"
 ];
+
 // declaration of variables to keep track of the current challenge and progress
 let currentBinaryChallenge = null;
 let currentIndex = 0;
@@ -50,9 +51,17 @@ function updateContent() {
     controls.style.display = "none";
   }
 }
-
+// function to play sound effects for correct and incorrect answers 
+function playSound(src) {
+  try {
+    const audio = new Audio(src);
+    audio.volume = 0.5; // optional
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  } catch (err) {
+    console.error("Error creating audio:", err);
+  }
+}
 // random int generator for the binary challenges
-
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -106,11 +115,13 @@ function compareBinaryInput() {
   // if answer correct show success move to next question increment the counter
   if (userInput === currentBinaryChallenge.word) {
     feedback.innerHTML = `<p style="color:green;">Correct! The word is ${currentBinaryChallenge.word}</p>`;
+    playSound("audio/correct.mp4");
     questionsAnswered++;
     document.getElementById("binary_input").value = "";
 
     setTimeout(displayBinary, 1000);
   } else {
+    playSound("audio/wrong.mp4");
     feedback.innerHTML = `<p style="color:red;">Try again!</p>`;
   }
 }

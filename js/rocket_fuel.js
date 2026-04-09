@@ -34,7 +34,16 @@ const floatingClues = document.getElementById("floatingClues");
 const successScreen = document.getElementById("successScreen");
 const successHubBtn = document.getElementById("successHubBtn");
 const stepButtons = document.querySelectorAll(".slider-step");
-
+// function to play sound effects for correct and incorrect answers 
+function playSound(src) {
+  try {
+    const audio = new Audio(src);
+    audio.volume = 0.5; // optional
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  } catch (err) {
+    console.error("Error creating audio:", err);
+  }
+}
 // Updates barrel liquid height and units label for a given chemical.
 function setFill(letter) {
   // Read current numeric value from the chosen slider.
@@ -305,6 +314,7 @@ updateProgress();
 
 // Show the success modal when all values are correct and launch is pressed.
 launchBtn.addEventListener("click", () => {
+  playSound("audio/correct.mp4");
   localStorage.setItem("mission4Complete", "true");
   localStorage.removeItem("mission4DialogueShown");
 
@@ -312,7 +322,7 @@ launchBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     window.location.href = "mission_hub.html";
-  }, 1800);
+  }, 2200);
 });
 
 // Return to mission hub.
