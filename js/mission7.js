@@ -93,6 +93,17 @@ const myChart1 = new Chart(cty, {
     }
 });
 
+// function to play sound effects for correct and incorrect answers 
+function playSound(src) {
+    try {
+      const audio = new Audio(src);
+      audio.volume = 0.5; // optional
+      audio.play().catch(err => console.warn("Audio play failed:", err));
+    } catch (err) {
+      console.error("Error creating audio:", err);
+    }
+}
+
 // Show first chart popup
 function showBarChart1() {
   document.getElementById("chartPopup").style.display = "block";
@@ -155,6 +166,8 @@ function checkAnswer(selected) {
         // Set the feedback text to show it is the correct answer
         feedback.textContent = "Correct! This region shows the highest suspicious encrypted activity.";
         feedback.style.color = "green";
+        // play correct sound effect 
+        playSound("audio/correct.mp4");  
         // Redirect user to the mission complete page after short delay
         setTimeout(() => {
           window.location.href = "mission_completion.html";
@@ -164,5 +177,7 @@ function checkAnswer(selected) {
         // Set the feedback text to show the answer is incorrect
         feedback.textContent = "Try again.";
         feedback.style.color = "red";
+        //play incorrect sound effect
+        playSound("audio/wrong.mp4");
     }
 }

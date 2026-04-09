@@ -100,7 +100,7 @@ function drawBarChart(canvasId, data, label) {
   draw();
 
   // hover event
-  canvas.onmousemove = function (e) {
+  canvas.onclick = function (e) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
