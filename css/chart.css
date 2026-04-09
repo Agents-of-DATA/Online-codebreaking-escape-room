@@ -1,23 +1,23 @@
 body {
   font-family: Arial, sans-serif;
-  background: #0f172a; /* solid dark */
+  background: #0f172a; 
   color: #e2e8f0;
   margin: 0;
   padding: 0px;
 
-  /* Flexbox centering */
-  display: flex;            /* enable flexbox */
-  flex-direction: column;   /* stack content vertically */
-  align-items: center;      /* horizontal center */
-  justify-content: flex-start;  /* vertical center */
-  min-height: 100vh;        /* make body fill the viewport */
-  text-align: center;       /* optional: center text */
+  /* Center content */
+  display: flex;          
+  flex-direction: column;  
+  align-items: center;      
+  justify-content: flex-start; 
+  min-height: 100vh;      
+  text-align: center;     
 }
-
 h3 {
   color: #38bdf8;               
 }
 
+/* Header section */
 .mission-header {
   background: #020617;
   padding: 20px;
@@ -39,6 +39,7 @@ h3 {
   text-decoration: none;
 }
 
+/* Briefing box */
 .briefing {
   max-width: 900px;
   width: 100%;
@@ -46,9 +47,10 @@ h3 {
   background: #1e293b;
   padding: 15px;
   border-radius: 10px;
-  text-align: left; /* ensures everything aligns left */
+  text-align: left; 
 }
 
+/* Popup overlay background */
 .popup {
   display: none;
   position: fixed;
@@ -56,14 +58,13 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-
-  /* Only the popup overlay should be transparent */
+  /* Dark transparent background behind popup */
   background-color: rgba(0,0,0,0.7);
 }
 
-/* Popup box */
+/* Popup content box */
 .popup-content {
-  background: #ffffff; /* dark theme */
+  background: #ffffff; 
   color: #e2e8f0;
   margin: 10% auto;
   padding: 20px;
@@ -82,43 +83,35 @@ h3 {
   color: #94a3b8;
 }
 
-.close:hover {
-  color: #38bdf8;
-}
-/* General button style */
+/* Button style */
 button {
-  background: #38bdf8;       /* Bright blue */
-  color: #0f172a;            /* Dark text for contrast */
-  border: none;              /* Remove default border */
-  border-radius: 10px;       /* Rounded corners */
-  padding: 12px 24px;        /* Comfortable padding */
-  font-size: 1rem;           /* Easy to read */
+  background: #38bdf8;    
+  color: #0f172a;           
+  border: none;           
+  border-radius: 10px;       
+  padding: 12px 24px;      
+  font-size: 1rem;        
   font-weight: bold;         
   cursor: pointer;           
-  transition: all 0.2s ease-in-out; /* Smooth hover effects */
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Soft shadow */
-  margin: 5px;               /* Small spacing between buttons */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2); 
+  margin: 5px;              
 }
+/* Row of buttons */
 .button-row {
-  display: flex;              /* horizontal layout */
-  gap: 10px;                  /* spacing between buttons */
-  justify-content: center;    /* center the row horizontally */
-  flex-wrap: wrap;            /* wrap to next line on small screens */
-  margin-top: 20px;           /* spacing from content above */
-}
-/* Hover effect */
-button:hover {
-  background: #0ea5e9;       /* Slightly darker blue on hover */
-  transform: translateY(-2px); /* Lift effect */
-  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+  display: flex;           
+  gap: 10px;                
+  justify-content: center;   
+  flex-wrap: wrap;           
+  margin-top: 20px;          
 }
 
-/* Active/click effect */
+/* Click effect */
 button:active {
-  transform: translateY(1px); /* Push down effect */
+  transform: translateY(1px); 
   box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
 
+/* Tips section */
 .tips {
   max-width: 900px;
   width: 100%;
@@ -126,18 +119,17 @@ button:active {
   background: #1e293b;
   padding: 15px;
   border-radius: 10px;
-  text-align: left; /* ensures everything aligns left */
+  text-align: left; 
 }
-
 .tips ul {
-  padding-left: 20px; /* keeps bullet indentation clean */
+  padding-left: 20px; 
 }
 
+/* Map section */
 .map-container {
   text-align: center;
   margin: 20px 0;
 }
-
 .map-image {
   width: 50%;
   height: auto;
@@ -145,19 +137,11 @@ button:active {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Locked (disabled) answer buttons */
+/* Disabled answer buttons */
 .answer:disabled {
-  background: #334155;   /* darker muted colour */
-  color: #94a3b8;        /* faded text */
+  background: #334155;   
+  color: #94a3b8;       
   cursor: not-allowed;
-  transform: none;       /* stop hover lift */
   box-shadow: none;
   opacity: 0.7;
-}
-
-/* Remove hover effect when disabled */
-.answer:disabled:hover {
-  background: #334155;
-  transform: none;
-  box-shadow: none;
 }
