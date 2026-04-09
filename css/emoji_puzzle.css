@@ -6,6 +6,9 @@ body {
   margin: 0;
   padding: 0;
 }
+h3 {
+  color: #38bdf8;               
+}
 
 /* Header section */
 .mission-header {
