@@ -21,8 +21,10 @@ const groupSize = Math.ceil(letters.length / 3);
 for (let i = 0; i < 3; i++) {
     const group = letters.slice(i * groupSize, (i + 1) * groupSize);
 
-    const letterRow = document.createElement("tr"); // row for letters
-    const emojiRow = document.createElement("tr");  // row for emojis
+    // Row for letters
+    const letterRow = document.createElement("tr"); 
+    // Row for emojis
+    const emojiRow = document.createElement("tr");  
 
     group.forEach(letter => {
         // Add letter cell
