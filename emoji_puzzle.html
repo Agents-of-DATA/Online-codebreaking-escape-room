@@ -4,54 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/emoji_puzzle.css">
-  <title>Emoji Challenge</title>
+  <title>Emoji Puzzle</title>
 </head>
 
 <body>
 
+  <!-- Header section with mission title and page navigation -->
   <header class="mission-header">
     <h1>Agents of DATA</h1>
     <h2>System 1</h2>
-    <a href="mission_hub.html" class="back-link">← Back to Mission Hub</a>
+    <!-- Link to return to the mission hub -->
+    <a href="mission_hub.html" class="back-link"> Back to Mission Hub</a>
   </header>
 
+  <!-- Main mission area -->
   <section class="mission-panel">
 
     <div class="container">
-
-      <!-- Briefing -->
+      <!-- Agent breif section explaining the puzzle -->
       <div class="puzzle-container briefing">
         <h3>Agent K's Briefing</h3>
-        <p>
-          The VIKINGS have encrypted their message using emojis. Decode the pattern and find the correct meaning.
-        </p>
+        <p>The VIKINGS have encrypted their message using emojis. Decode the pattern and find the correct meaning.</p>
       </div>
 
-      <!-- Puzzle -->
+      <!-- Puzzle section -->
       <div class="puzzle-container">
 
-        <!-- Emoji Cipher Table -->
+        <!-- Table showing what letter each emoji represents -->
         <table id="emojiTable">
-            <thead id="tableHead"></thead>
-            <tbody id="tableBody"></tbody>
+          <thead id="tableHead"></thead>
+          <tbody id="tableBody"></tbody>
         </table>
 
-        <!-- Level Title -->
+        <!-- Title showing the current level -->
         <h2 id="levelTitle">Level 1</h2>
 
-        <!-- Emoji Display -->
-        <div id="emojiDisplay" style="font-size: 2rem; margin: 15px 0;"></div>
+        <!-- Where the emoji sentence will be display -->
+        <div id="emojiDisplay"></div>
 
-        <!-- Optional Clues -->
-        <div id="clues"></div>
+        <!-- User input and action controls -->
+        <div class="controls">
+          <!-- Input for users answer -->
+          <input id="answerInput" type="text" placeholder="Type your answer here" />
+          <!-- Button to validate the users answer using the function -->
+          <button onclick="checkAnswer()">Check Answer</button>
+        </div>
 
-        <!-- Input -->
-        <input id="answerInput" type="text" placeholder="Type your answer here" />
-
-        <!-- Button -->
-        <button onclick="checkAnswer()">Check Answer</button>
-
-        <!-- Feedback -->
+        <!-- Area to display if user got it right or wrong -->
         <div id="result"></div>
 
       </div>
@@ -59,7 +58,6 @@
     </div>
   </section>
 
-  <!-- Load JS at end of body -->
   <script src="js/emoji_puzzle.js"></script>
 
 </body>
