@@ -92,7 +92,7 @@ button {
   color: black;
   font-weight: bold;
 }
-/* slight shrink on click */
+/* Slight shrink on click */
 button:active {
   transform: scale(0.95);
 }
@@ -121,19 +121,23 @@ button:active {
   background: #020617;
   color: #38bdf8;
 }
+/* Spacing between emoji words */
+#emojiDisplay {
+  display: flex;
+  gap: 40px; 
+}
 
-/* Simple animations */
-/* moves up while fading */
+/* Moves up while fading */
 .fade-out {
   opacity: 0;
   transform: translateY(-20px);
 }
-/* starts slightly lower */
+/* Starts slightly lower */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
 }
-/* returns to normal position */
+/* Returns to normal position */
 .fade-in.active {
   opacity: 1;
   transform: translateY(0);
