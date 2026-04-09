@@ -154,24 +154,27 @@
         events: ['click']
       }
     });
-    
     function showBarChart1() {
-      document.getElementById("chartPopup").style.display = "block";
-      document.getElementById("canvas1").style.display = "block";
-      document.getElementById("canvas2").style.display = "none";
-    
-      barChart1Viewed = true;
-      checkIfUnlocked();
-    }
-    
-    function showBarChart2() {
-      document.getElementById("chartPopup").style.display = "block";
-      document.getElementById("canvas1").style.display = "none";
-      document.getElementById("canvas2").style.display = "block";
-    
-      barChart2Viewed = true;
-      checkIfUnlocked();
-    }
+  document.getElementById("chartPopup").style.display = "block";
+  document.getElementById("canvas1").style.display = "block";
+  document.getElementById("canvas2").style.display = "none";
+
+  drawBarChart("canvas1", totalTraffic, "Total Traffic");
+
+  barChart1Viewed = true;
+  checkIfUnlocked();
+}
+
+function showBarChart2() {
+  document.getElementById("chartPopup").style.display = "block";
+  document.getElementById("canvas1").style.display = "none";
+  document.getElementById("canvas2").style.display = "block";
+
+  drawBarChart("canvas2", encryptedTraffic, "Encrypted Traffic");
+
+  barChart2Viewed = true;
+  checkIfUnlocked();
+}
     
     function closeChart() {
       document.getElementById("chartPopup").style.display = "none";
@@ -196,10 +199,10 @@
       const feedback = document.getElementById("feedback");
     
       if (selected === window.correctCity) {
-        feedback.textContent = "✅ Correct! This region shows the highest suspicious encrypted activity.";
+        feedback.textContent = "Correct! This region shows the highest suspicious encrypted activity.";
         feedback.style.color = "green";
         setTimeout(() => {
-          window.location.href = "mission_hub.html";
+          window.location.href = "mission_completion.html";
         }, 1500);
 
       } else {
