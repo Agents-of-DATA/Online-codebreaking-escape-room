@@ -1,28 +1,27 @@
 const nameForm = document.querySelector("#name-form");
+//name input
 const nameInput = document.querySelector("#agent-name");
 const viking = document.querySelector(".viking");
+//welcome message
 const welcomeMessage = document.querySelector("#welcome-message");
 
-// =========================
-// NAME ENTRY
-// =========================
+//user submits agent nam
 nameForm?.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const name = nameInput?.value.trim();
-
+//does not work if empty
   if (!name) {
     nameInput?.focus();
     return;
   }
-
+  //saves agent name
   sessionStorage.setItem("agentName", name);
+  //goes to avatar selection page
   window.location.href = "avatar.html";
 });
 
-// =========================
-// WELCOME MESSAGE
-// =========================
+//shows personalised welcome text
 if (welcomeMessage) {
   const storedName = sessionStorage.getItem("agentName");
   welcomeMessage.textContent = storedName
@@ -30,19 +29,16 @@ if (welcomeMessage) {
     : "Welcome, Agent";
 }
 
-// =========================
-// VIKING CLICK EFFECT
-// =========================
+
 viking?.addEventListener("click", () => {
   viking.classList.toggle("enlarged");
 });
 
-// =========================
-// AVATAR SELECTION
-// =========================
+//all avatar buttons
 const avatarButtons = document.querySelectorAll(".avatar-option");
+//continue button on avatar 
 const continueBtn = document.querySelector("#continue-btn");
-
+//runs only if on avatar page
 if (avatarButtons.length && continueBtn) {
   const storedName = sessionStorage.getItem("agentName");
   if (!storedName) {
@@ -50,7 +46,7 @@ if (avatarButtons.length && continueBtn) {
   }
 
   let selectedAvatar = sessionStorage.getItem("agentAvatar");
-
+//if avatar is select, becomes highlighted
   if (selectedAvatar) {
     avatarButtons.forEach((btn) => {
       if (btn.dataset.avatar === selectedAvatar) {
@@ -59,33 +55,30 @@ if (avatarButtons.length && continueBtn) {
     });
     continueBtn.disabled = false;
   }
-
+//when an avatar is clicked
   avatarButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
+      //removes previous selection highlight
       avatarButtons.forEach((b) => b.classList.remove("selected"));
       btn.classList.add("selected");
-
+      //keeps selected avatar highlighted
       selectedAvatar = btn.dataset.avatar;
       sessionStorage.setItem("agentAvatar", selectedAvatar);
       continueBtn.disabled = false;
     });
   });
-
+//goes to mission hub once button is clicked
   continueBtn.addEventListener("click", () => {
     window.location.href = "mission_hub.html";
   });
 }
 
-// =========================
-// MISSION STEP BUTTONS
-// =========================
-
-
+//progress on the top
 const steps = document.querySelectorAll(".step");
-
+//turns circles green if mission is completed
 function updateMissionSteps() {
   if (!steps.length) return;
-
+//checks if mission is completed from localstorage
   const missionFlags = [
     localStorage.getItem("mission1Complete") === "true",
     localStorage.getItem("mission2Complete") === "true",
@@ -95,22 +88,23 @@ function updateMissionSteps() {
     localStorage.getItem("mission6Complete") === "true",
     localStorage.getItem("mission7Complete") === "true"
   ];
-
+//active mission class
   steps.forEach((step, index) => {
     if (missionFlags[index]) {
-      step.classList.add("active");   // green
+      step.classList.add("active");   
     } else {
-      step.classList.remove("active"); // red
+      step.classList.remove("active"); 
     }
   });
 }
-
+//run as soon as script runs
 updateMissionSteps();
+//locks mission until previous is completed
 function updateMissionLocks() {
   const missionCards = document.querySelectorAll(".mission-card-tile");
 
   if (!missionCards.length) return;
-
+  //unlock order
   const unlockedMissions = [
     true,
     localStorage.getItem("mission1Complete") === "true",
@@ -120,7 +114,7 @@ function updateMissionLocks() {
     localStorage.getItem("mission5Complete") === "true",
     localStorage.getItem("mission6Complete") === "true"
   ];
-
+//mission card attributes to check mission number, ready to unlock, lock overlay and mission button
   missionCards.forEach((card) => {
     const missionNumber = parseInt(card.dataset.mission, 10);
     const isUnlocked = unlockedMissions[missionNumber - 1];
@@ -144,12 +138,12 @@ function updateMissionLocks() {
     }
   });
 }
-
+//major x container, paragraph of text and next button
 updateMissionLocks();
 const majorXModal = document.querySelector("#majorx-modal");
 const dialogueText = document.querySelector("#dialogue-text");
 const dialogueNextBtn = document.querySelector("#dialogue-next-btn");
-
+//first time vising mission hub 
 const firstVisit = localStorage.getItem("missionHubIntroShown");
 
 const mission1Complete = localStorage.getItem("mission1Complete");
@@ -172,7 +166,8 @@ const mission6DialogueShown = localStorage.getItem("mission6DialogueShown");
 
 const mission7Complete = localStorage.getItem("mission7Complete");
 const mission7DialogueShown = localStorage.getItem("mission7DialogueShown");
-
+//audio set for dialogue
+//map for for each sequence
 const audioSets = {
   missionHubIntroShown: [
     document.querySelector("#briefing1-audio"),
@@ -217,7 +212,7 @@ const audioSets = {
     document.querySelector("#mission7briefing4-audio")
   ]
 };
-
+//stops dialogue audio clips
 function stopAllDialogueAudio() {
   Object.values(audioSets).flat().forEach((audio) => {
     if (audio) {
@@ -226,7 +221,7 @@ function stopAllDialogueAudio() {
     }
   });
 }
-
+//plays when a specific one is selected
 function playDialogueAudio(completionKey, index) {
   stopAllDialogueAudio();
 
@@ -238,11 +233,11 @@ function playDialogueAudio(completionKey, index) {
     selectedAudio.play().catch(() => {});
   }
 }
-
+//runs only if conditions are met
 if (majorXModal && dialogueText && dialogueNextBtn) {
   let dialogueLines = null;
   let completionKey = null;
-
+//this is all the different dialogue
   if (firstVisit !== "true") {
     dialogueLines = [
       "Welcome, Agent!",
@@ -300,10 +295,10 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
     ];
     completionKey = "mission1DialogueShown";
   }
-
+//if there is dialogue to show
   if (dialogueLines) {
     let currentLine = 0;
-
+    //shows model, first line an plays clip. continues the same process for the next button
     majorXModal.classList.remove("hidden");
     dialogueText.textContent = dialogueLines[currentLine];
     dialogueNextBtn.textContent = "Next";
