@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission Complete - Certificate</title>
-    <!-- Link to the CSS file for styling the certificate -->
-    <link rel="stylesheet" href="css/mission_complete.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Complete - Certificate</title>
+  <link rel="stylesheet" href="css/mission_complete.css">
 </head>
 <body>
-    <div class="certificate">
-        <div class="certificate-header">Certificate of Completion</div>
-        <div class="certificate-subtitle">Code-Breaking Escape Room</div>
-        <!-- placeholder for agent name and to say they have completed the missions -->
-        <div class="certificate-body">
-            <p>This certifies that</p>
-            <p class="agent-name">Agent <span id="agentName"></span></p>
-            <p>has successfully completed all missions and escaped the code-breaking escape room.</p>
-            <p>Congratulations on your outstanding problem-solving skills and dedication.</p>
-        </div>
-        
-        <div class="certificate-footer">
-            <p>Mission Accomplished - <span id="completionDate"></span></p>
-        </div>
-        <!-- buttons for printing and returning home -->
-        <div class="buttons">
-            <button class="btn-print" onclick="window.print()">Print Certificate</button>
-            <button class="btn-home" onclick="window.location.href='index.html'">Return Home</button>
-        </div>
-    </div>
-    <script src="js/accessibility.js"></script>
-    <script>
-       
-        // Set completion date
-        const today = new Date();
-        const dateString = today.toLocaleDateString('en-UK', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-        document.getElementById('completionDate').textContent = dateString;
-        // Get stored agent name
-        const agentName = sessionStorage.getItem("agentName");
+  <div class="page-wrap">
+    <div class="certificate-wrapper">
+      <div class="certificate">
+        <img src="assets/images/certificate.png" class="certificate-bg" alt="Certificate">
 
-        // Insert into certificate
-        document.getElementById("agentName").textContent = agentName || "Unknown Agent";
-            </script>
-        <script src="js/accessibility.js"></script>
+        <div class="certificate-overlay">
+          <img id="agentAvatarImg" class="certificate-avatar" src="" alt="Agent Avatar">
+          <p class="agent-name">Agent <span id="agentName"></span></p>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn-print" onclick="window.print()">Print Certificate</button>
+        <button class="btn-home" onclick="window.location.href='index.html'">Return Home</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/accessibility.js"></script>
+  <script>
+    const agentName = sessionStorage.getItem("agentName");
+    document.getElementById("agentName").textContent = agentName || "Unknown Agent";
+
+    const avatar = sessionStorage.getItem("agentAvatar");
+    if (avatar) {
+      document.getElementById("agentAvatarImg").src = "assets/images/" + avatar;
+    }
+  </script>
 </body>
 </html>
