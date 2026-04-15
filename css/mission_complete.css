@@ -3,70 +3,71 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* body styles to set the background image and center the certificate content */
+
 body {
-  min-height: 100vh; 
-  font-family: Arial, sans-serif; 
-  background-image: url("../assets/images/missionRoom.png"); 
-  background-size: cover; 
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-image: url("../assets/images/missionRoom.png");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;  
-  align-items: center;      
 }
-/* styles for the certificate container and its elements */
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.certificate-wrapper {
+  width: min(1100px, 95vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .certificate {
-  background: linear-gradient(135deg, #f5f7fa 0%, #fff 100%); 
-  border: 8px solid #d4af37; 
-  border-radius: 10px;
-  padding: 60px 80px;
-  text-align: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  max-width: 800px;
+  position: relative;
   width: 100%;
 }
-/* styles for the certificate header, subtitle, body text, agent name, footer, and buttons */
-.certificate-header {
-  color: #0011ff;
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+
+.certificate-bg {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
-/* styles for the certificate subtitle with a different color and italic font style */
-.certificate-subtitle {
-  color: #667eea;
-  font-size: 24px;
-  margin-bottom: 40px;
-  font-style: italic;
+
+.certificate-overlay {
+  position: absolute;
+  inset: 0;
 }
-/* styles for the certificate body text with a different color and line height for better readability */
-.certificate-body {
-  color: #333;
-  font-size: 18px;
-  line-height: 1.8;
-  margin: 40px 0;
+
+.certificate-avatar {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  left: 35%;
+  top: 55%;
+  transform: translate(-50%, -50%);
 }
-/* styles for the agent name with a different color, larger font size, and uppercase letters */
+
 .agent-name {
-  font-size: 36px;
-  color: #d4af37;
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  transform: translate(-50%, -50%);
+
+  font-size: clamp(26px, 3vw, 38px);
   font-weight: bold;
-  margin: 20px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #1a237e;
 }
-/* styles for the certificate footer with a different color and smaller font size */
-.certificate-footer {
-  margin-top: 60px;
-  color: #667eea;
-  font-size: 14px;
-}
-/* styles for the buttons container and the individual buttons with different colors and hover effects */
+
 .buttons {
-  margin-top: 40px;
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -77,9 +78,9 @@ button {
   padding: 12px 30px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
   font-weight: bold;
 }
 
@@ -100,12 +101,22 @@ button {
 .btn-home:hover {
   background: #e5c158;
 }
-        
-        @media print {
-            body {
-                background: white;
-            }
-            .buttons {
-                display: none;
-            }
-        }
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .page-wrap {
+    padding: 0;
+  }
+
+  .certificate-wrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .buttons {
+    display: none;
+  }
+}
