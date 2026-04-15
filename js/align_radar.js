@@ -275,7 +275,7 @@ contactBtn.addEventListener("click", function () {
     "°</span> " +
     "using Frequency Code <span class='highlight'>" +
     correctCode +
-    playSound("audio/correct.mp4") +
+    playSound("audio/correct.wav") +
     "</span>." +
     "</p>" +
     "<p>" +

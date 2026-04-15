@@ -115,14 +115,14 @@ function checkAnswer() {
     if (currentPuzzle.answer.includes(userInput)) {
         result.textContent = "Correct!";
         result.style.color = "lightgreen";
-        playSound("audio/correct.mp4");
+        playSound("audio/correct.wav");
 
         // Move to next level
         setTimeout(goToNextLevel, 1000);
     } else {
         // If wrong
         result.textContent = "Incorrect. Try again.";
-        playSound("audio/wrong.mp4");   
+        playSound("audio/incorrect3.wav");   
         result.style.color = "red";
     }
 }

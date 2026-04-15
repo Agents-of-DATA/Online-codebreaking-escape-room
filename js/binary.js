@@ -115,13 +115,13 @@ function compareBinaryInput() {
   // if answer correct show success move to next question increment the counter
   if (userInput === currentBinaryChallenge.word) {
     feedback.innerHTML = `<p style="color:green;">Correct! The word is ${currentBinaryChallenge.word}</p>`;
-    playSound("audio/correct.mp4");
+    playSound("audio/correct.wav");
     questionsAnswered++;
     document.getElementById("binary_input").value = "";
 
     setTimeout(displayBinary, 1000);
   } else {
-    playSound("audio/wrong.mp4");
+    playSound("audio/incorrect3.wav");
     feedback.innerHTML = `<p style="color:red;">Try again!</p>`;
   }
 }

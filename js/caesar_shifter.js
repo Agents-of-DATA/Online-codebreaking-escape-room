@@ -172,13 +172,13 @@ function checkCaesarInput() {
       (Shift ${currentCaesarChallenge.shift} ${currentCaesarChallenge.direction})
     </p>`;
     //play correct sound effect 
-    playSound("audio/correct.mp4");  
+    playSound("audio/correct.wav");  
     // increment the counter and display the next challenge after a short delay
     questionsAnswered++;
     setTimeout(displayNextChallenge, 1000);
   } else {
       //play incorrect sound effect
-      playSound("audio/wrong.mp4");
+      playSound("audio/incorrect3.wav");
     feedback.innerHTML = `<p style="color: red;">Incorrect. Try again!</p>`;
   }
 }

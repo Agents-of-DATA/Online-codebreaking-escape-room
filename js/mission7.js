@@ -167,7 +167,7 @@ function checkAnswer(selected) {
         feedback.textContent = "Correct! This region shows the highest suspicious encrypted activity.";
         feedback.style.color = "green";
         // play correct sound effect 
-        playSound("audio/correct.mp4");  
+        playSound("audio/correct.wav");  
         // Redirect user to the mission complete page after short delay
         setTimeout(() => {
           window.location.href = "mission_complete.html";
@@ -178,6 +178,6 @@ function checkAnswer(selected) {
         feedback.textContent = "Try again.";
         feedback.style.color = "red";
         //play incorrect sound effect
-        playSound("audio/wrong.mp4");
+        playSound("audio/incorrect3.wav");
     }
 }

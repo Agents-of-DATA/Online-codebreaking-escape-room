@@ -74,7 +74,7 @@ function checkPuzzle(selectedPassword) {
 
     result.textContent = `Correct! (${puzzleProgress}/${requiredRounds})`;
     result.style.color = "lightgreen";
-    playSound("audio/correct.mp4");
+    playSound("audio/correct.wav");
 
     // If finished all rounds
     if (puzzleProgress >= requiredRounds) {
@@ -88,7 +88,7 @@ function checkPuzzle(selectedPassword) {
     // Wrong answer
     result.textContent = "Incorrect. Try again.";
     result.style.color = "red";
-    playSound("audio/wrong.mp4");
+    playSound("audio/incorrect3.wav");
   }
 }
 

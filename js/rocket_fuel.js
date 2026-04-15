@@ -314,7 +314,7 @@ updateProgress();
 
 // Show the success modal when all values are correct and launch is pressed.
 launchBtn.addEventListener("click", () => {
-  playSound("audio/correct.mp4");
+  playSound("audio/correct.wav");
   localStorage.setItem("mission4Complete", "true");
   localStorage.removeItem("mission4DialogueShown");
 
