@@ -1,0 +1,121 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles to set the background color and center the content */
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #e2e8f0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #0f172a;
+ 
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Content container styles to create a frosted glass effect with padding and border */
+.content {
+  width: 90%;
+  max-width: 700px;
+  transform: translateY(-40px);
+
+  background: rgba(30, 41, 59, 0.9);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  backdrop-filter: blur(6px);
+}
+
+/* binary image styles with hover effects for interactivity */
+.binary {
+    width: 190px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.binary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.binary.enlarged {
+    transform: scale(1.2);
+}
+
+/* Binary message box */
+#binary_message {
+    margin: 15px auto;
+    padding: 20px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    max-width: 600px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+}
+/* Styles for the binary message header and paragraph with appropriate colors and spacing */
+#binary_message h3 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+#binary_message p {
+    margin: 10px 0;
+    word-break: break-all;
+}
+
+/* Styles for the generate button and other buttons */
+#generate_btn,
+button {
+    display: inline-block;
+    margin: 10px auto;
+    padding: 10px 15px;
+
+    background: #38bdf8;
+    color: black;
+
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+#generate_btn:hover,
+button:hover {
+    background: #0ea5e9;
+}
+
+#generate_btn:active,
+button:active {
+    transform: scale(0.95);
+}
+
+/* Input styles */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+
+    background: #020617;
+    color: #e2e8f0;
+}
+
+/* Display box spacing */
+.display-box {
+  margin: 10px 0;
+}

@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*body settings inclduing height, font and image of mission oom*/
+body.avatar-page {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-image: url("../assets/images/missionRoom.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+/*dark overlay for easy reading*/
+body.avatar-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+/*wrapping content*/
+.landing-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 100px;
+}
+/*avatar box*/
+.mission-card {
+  width: min(650px, 90%);
+  background: rgba(245, 221, 170, 0.92);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+/*avatar grid for 4 avatars per row*/
+.avatar-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+/*avatar buttons*/
+.avatar-option {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+/*size of avatars*/
+.avatar-option img {
+  width: 70px;
+  height: auto;
+}
+/*for when avatar is selected*/
+.avatar-option.selected img {
+  outline: 3px solid #00d4ff;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(0,212,255,0.6);
+}
+/*continue button*/
+#continue-btn {
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+/*sites header*/
+.site-header {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 10;
+}
+/*logo size*/
+.site-logo {
+  width: 180px;
+}
+/*nav bar settings*/
+.main-nav {
+  width: 100%;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1000;
+}
+/*navbar links container*/
+.nav-links {
+  display: flex;
+  gap: 40px;
+}
+/*individual links*/
+.nav-links a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease;
+}
+/*hover styling*/
+.nav-links a:hover {
+  opacity: 0.6;
+}
