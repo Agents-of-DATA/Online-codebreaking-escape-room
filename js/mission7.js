@@ -170,7 +170,7 @@ function checkAnswer(selected) {
         playSound("audio/correct.mp4");  
         // Redirect user to the mission complete page after short delay
         setTimeout(() => {
-          window.location.href = "mission_completion.html";
+          window.location.href = "mission_complete.html";
         }, 1500);
     // If the user selected the wrong answer
     } else {
