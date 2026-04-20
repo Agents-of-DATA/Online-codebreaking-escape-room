@@ -112,7 +112,8 @@ function updateMissionLocks() {
     localStorage.getItem("mission3Complete") === "true",
     localStorage.getItem("mission4Complete") === "true",
     localStorage.getItem("mission5Complete") === "true",
-    localStorage.getItem("mission6Complete") === "true"
+    localStorage.getItem("mission6Complete") === "true",
+    localStorage.getItem("mission7Complete") === "true"
   ];
 //mission card attributes to check mission number, ready to unlock, lock overlay and mission button
   missionCards.forEach((card) => {
@@ -143,6 +144,10 @@ updateMissionLocks();
 const majorXModal = document.querySelector("#majorx-modal");
 const dialogueText = document.querySelector("#dialogue-text");
 const dialogueNextBtn = document.querySelector("#dialogue-next-btn");
+const finalPopup = document.querySelector("#final-popup");
+const finalListenBtn = document.querySelector("#final-listen-btn");
+
+
 //first time vising mission hub 
 const firstVisit = localStorage.getItem("missionHubIntroShown");
 
@@ -210,7 +215,14 @@ const audioSets = {
     document.querySelector("#mission7briefing2-audio"),
     document.querySelector("#mission7briefing3-audio"),
     document.querySelector("#mission7briefing4-audio")
-  ]
+  ],
+  finalBrief: [
+  document.querySelector("#finalBrief1-audio"),
+  document.querySelector("#finalBrief2-audio"),
+  document.querySelector("#finalBrief3-audio"),
+  document.querySelector("#finalBrief4-audio"),
+  document.querySelector("#finalBrief5-audio")
+]
 };
 //stops dialogue audio clips
 function stopAllDialogueAudio() {
@@ -233,12 +245,30 @@ function playDialogueAudio(completionKey, index) {
     selectedAudio.play().catch(() => {});
   }
 }
-//runs only if conditions are met
 if (majorXModal && dialogueText && dialogueNextBtn) {
   let dialogueLines = null;
   let completionKey = null;
-//this is all the different dialogue
-  if (firstVisit !== "true") {
+
+if (mission7Complete === "true" && mission7DialogueShown !== "true") {
+  majorXModal.classList.add("hidden");
+
+  if (finalPopup) {
+    finalPopup.classList.remove("hidden");
+  }
+
+  if (finalListenBtn) {
+    finalListenBtn.disabled = false;
+    finalListenBtn.textContent = "Hear Major X’s Final Speech";
+    finalListenBtn.onclick = () => {
+      window.location.href = "mission_complete.html";
+    };
+  }
+
+  localStorage.setItem("mission7DialogueShown", "true");
+}
+
+    localStorage.setItem("mission7DialogueShown", "true");
+  } else if (firstVisit !== "true") {
     dialogueLines = [
       "Welcome, Agent!",
       "It seems like our rivals have jumped into the digital age and are sending their evil plans with emojis!",
@@ -295,10 +325,10 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
     ];
     completionKey = "mission1DialogueShown";
   }
-//if there is dialogue to show
+
   if (dialogueLines) {
     let currentLine = 0;
-    //shows model, first line an plays clip. continues the same process for the next button
+
     majorXModal.classList.remove("hidden");
     dialogueText.textContent = dialogueLines[currentLine];
     dialogueNextBtn.textContent = "Next";
@@ -313,7 +343,8 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
         playDialogueAudio(completionKey, currentLine);
 
         if (currentLine === dialogueLines.length - 1) {
-          dialogueNextBtn.textContent = completionKey === "missionHubIntroShown" ? "Begin" : "Continue";
+          dialogueNextBtn.textContent =
+            completionKey === "missionHubIntroShown" ? "Begin" : "Continue";
         }
       } else {
         stopAllDialogueAudio();
@@ -321,5 +352,4 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
         localStorage.setItem(completionKey, "true");
       }
     };
-  }
 }
