@@ -25,7 +25,7 @@ body.mission-page::before {
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  .hub-wrap {padding: 80px 30px 40px;}
+  padding: 80px 30px 40px;
 }
 
 .hub-title {
@@ -304,4 +304,75 @@ body.mission-page::before {
 
 .mission-card-tile.locked img:not(.lock-icon) {
   filter: brightness(0.45);
+}
+
+.final-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 4000;
+}
+
+.final-popup.hidden {
+  display: none;
+}
+
+.final-content {
+  width: min(760px, 92vw);
+  background: #f5ddaa;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+  border: 4px solid #f1c40f;
+  text-align: center;
+}
+
+.final-image {
+  width: 100%;
+  display: block;
+  max-height: 360px;
+  object-fit: cover;
+}
+
+.final-text {
+  padding: 28px 32px 10px;
+}
+
+.final-text h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: #111;
+}
+
+.final-text p {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: #111;
+}
+
+#final-listen-btn {
+  margin: 22px 0 30px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 14px;
+  background: #111;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+#final-listen-btn:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+#final-listen-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
