@@ -24,16 +24,86 @@
       </div>
     </div>
   </div>
+  <div id="final-majorx-modal" class="dialogue-modal">
+  <div class="dialogue-box">
+    <div class="dialogue-left">
+      <img src="assets/images/major-x.png" alt="Major X" class="dialogue-majorx">
+    </div>
+    <div class="dialogue-right">
+      <h2>Major X</h2>
+      <p id="final-dialogue-text"></p>
+      <button id="final-dialogue-next-btn" type="button">Next</button>
+    </div>
+  </div>
+</div>
+<audio id="finalBrief1-audio" preload="auto"><source src="audio/finalBrief1.mp4" type="audio/mp4"></audio>
+<audio id="finalBrief2-audio" preload="auto"><source src="audio/finalBrief2.mp4" type="audio/mp4"></audio>
+<audio id="finalBrief3-audio" preload="auto"><source src="audio/finalBrief3.mp4" type="audio/mp4"></audio>
+<audio id="finalBrief4-audio" preload="auto"><source src="audio/finalBrief4.mp4" type="audio/mp4"></audio>
+<audio id="finalBrief5-audio" preload="auto"><source src="audio/finalBrief5.mp4" type="audio/mp4"></audio>
 
   <script src="js/accessibility.js"></script>
-  <script>
-    const agentName = sessionStorage.getItem("agentName");
-    document.getElementById("agentName").textContent = agentName || "Unknown Agent";
+<script>
+  const agentName = sessionStorage.getItem("agentName");
+  document.getElementById("agentName").textContent = agentName || "Unknown Agent";
 
-    const avatar = sessionStorage.getItem("agentAvatar");
-    if (avatar) {
-      document.getElementById("agentAvatarImg").src = "assets/images/" + avatar;
-    }
-  </script>
+  const avatar = sessionStorage.getItem("agentAvatar");
+  if (avatar) {
+    document.getElementById("agentAvatarImg").src = "assets/images/" + avatar;
+  }
+
+  const finalMajorXModal = document.getElementById("final-majorx-modal");
+  const finalDialogueText = document.getElementById("final-dialogue-text");
+  const finalDialogueNextBtn = document.getElementById("final-dialogue-next-btn");
+
+  const finalDialogueLines = [
+    "Well Agent, it has been an honour working with you over these past few missions. You have done an incredible job!",
+    "You have analysed DATA, Decrypted Emoji’s and Binary codes, make a SOLID STEEL level Password that cannot be broken. ",
+    "But most importantly of all, you have become more DATA aware. Being on the ball when it comes to your DATA is very important Agent, and I hope that the lessons you have learnt today will stick will you with years to come. ",
+    "Thank you once again for your assistance today.",
+    "Until we meet again, Agent. Thank you! Major X"
+  ];
+
+  const finalAudioSet = [
+    document.getElementById("finalBrief1-audio"),
+    document.getElementById("finalBrief2-audio"),
+    document.getElementById("finalBrief3-audio"),
+    document.getElementById("finalBrief4-audio"),
+    document.getElementById("finalBrief5-audio")
+  ];
+
+  function stopFinalAudio() {
+    finalAudioSet.forEach((audio) => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+  }
+
+  let currentFinalLine = 0;
+
+  if (finalMajorXModal && finalDialogueText && finalDialogueNextBtn) {
+    finalDialogueText.textContent = finalDialogueLines[currentFinalLine];
+    finalAudioSet[currentFinalLine]?.play().catch(() => {});
+
+    finalDialogueNextBtn.onclick = () => {
+      currentFinalLine++;
+
+      if (currentFinalLine < finalDialogueLines.length) {
+        finalDialogueText.textContent = finalDialogueLines[currentFinalLine];
+        stopFinalAudio();
+        finalAudioSet[currentFinalLine]?.play().catch(() => {});
+
+        if (currentFinalLine === finalDialogueLines.length - 1) {
+          finalDialogueNextBtn.textContent = "Finish";
+        }
+      } else {
+        stopFinalAudio();
+        finalMajorXModal.style.display = "none";
+      }
+    };
+  }
+</script>
 </body>
 </html>
