@@ -7,8 +7,16 @@ const passwords = {
 };
 
 // Pick a random item from a list
+const usedPasswords = new Set();
+
 function getRandomItem(array) {
-  return array[Math.floor(Math.random() * array.length)];
+  const available = array.filter(item => !usedPasswords.has(item));
+
+  const source = available.length > 0 ? available : array;
+  const choice = source[Math.floor(Math.random() * source.length)];
+
+  usedPasswords.add(choice);
+  return choice;
 }
 // function to play sound effects for correct and incorrect answers 
 function playSound(src) {

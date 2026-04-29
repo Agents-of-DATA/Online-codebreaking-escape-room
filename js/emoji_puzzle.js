@@ -57,7 +57,7 @@ const emojiPuzzles = {
     ],
     hard: [
         { emojis: ["❄️👁️🏹", "⛰️🧩🪶🪶🧩👁️🌙", "⚡️⚔️🧭🐺", "👁️❄️❄️"], answer: ["for mission take off"] },
-        { emojis: ["❄️👁️🏹", "🏹⚔️🪓⚔️🏹", "🌊⚔️🪵🌙🚢🍖", "👁️❄️❄️"], answer: ["for radar launch off"] },
+        { emojis: ["❄️👁️🏹", "🏹⚔️🪓⚔️🏹", "🌊⚔️🪵🌙🚢🍖" ], answer: ["for radar launch"] },
         { emojis: ["❄️👁️🏹", "🪶⚔️⚡️🐺🌊🌊🧩⚡️🐺", "🌊⚔️🪵🌙🚢🍖"], answer: ["for satellite launch"] }
     ]
 };

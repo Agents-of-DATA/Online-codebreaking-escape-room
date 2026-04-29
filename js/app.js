@@ -249,25 +249,23 @@ if (majorXModal && dialogueText && dialogueNextBtn) {
   let dialogueLines = null;
   let completionKey = null;
 
-if (mission7Complete === "true" && mission7DialogueShown !== "true") {
-  majorXModal.classList.add("hidden");
+  if (mission7Complete === "true" && mission7DialogueShown !== "true") {
+    majorXModal.classList.add("hidden");
 
-  if (finalPopup) {
-    finalPopup.classList.remove("hidden");
-  }
+    if (finalPopup) {
+      finalPopup.classList.remove("hidden");
+    }
 
-  if (finalListenBtn) {
-    finalListenBtn.disabled = false;
-    finalListenBtn.textContent = "Hear Major X’s Final Speech";
-    finalListenBtn.onclick = () => {
-      window.location.href = "mission_complete.html";
-    };
-  }
-
-  localStorage.setItem("mission7DialogueShown", "true");
-}
+    if (finalListenBtn) {
+      finalListenBtn.disabled = false;
+      finalListenBtn.textContent = "Hear Major X’s Final Speech";
+      finalListenBtn.onclick = () => {
+        window.location.href = "mission_complete.html";
+      };
+    }
 
     localStorage.setItem("mission7DialogueShown", "true");
+
   } else if (firstVisit !== "true") {
     dialogueLines = [
       "Welcome, Agent!",
@@ -276,6 +274,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "Best of luck, Agent!"
     ];
     completionKey = "missionHubIntroShown";
+
   } else if (mission6Complete === "true" && mission6DialogueShown !== "true") {
     dialogueLines = [
       "Wow, that was one strong Password! No-one will be able to steal your DATA now! I should be taking notes…",
@@ -284,6 +283,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "Let’s Finish This, Agent!"
     ];
     completionKey = "mission6DialogueShown";
+
   } else if (mission5Complete === "true" && mission5DialogueShown !== "true") {
     dialogueLines = [
       "Excellent work, Agent. The satellite alignment is now calibrated. Signal clarity has been restored across the entire network.",
@@ -292,6 +292,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "Do us proud, Agent!"
     ];
     completionKey = "mission5DialogueShown";
+
   } else if (mission4Complete === "true" && mission4DialogueShown !== "true") {
     dialogueLines = [
       "That fuel was something else! Super-fast launch! Shame about the smell though...",
@@ -300,6 +301,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "Stay sharp. The next mission will require both logic and speed. Best of luck, Agent!"
     ];
     completionKey = "mission4DialogueShown";
+
   } else if (mission3Complete === "true" && mission3DialogueShown !== "true") {
     dialogueLines = [
       "Exceptional work, Agent. You've broken through the Caesar encryption.",
@@ -308,6 +310,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "Stay focused. Mission 4 will push your skills even further."
     ];
     completionKey = "mission3DialogueShown";
+
   } else if (mission2Complete === "true" && mission2DialogueShown !== "true") {
     dialogueLines = [
       "Incredible decryption work, Agent! After this is all done, we can send YOU on holiday!",
@@ -316,6 +319,7 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
       "You’re the best Agent for the job!"
     ];
     completionKey = "mission2DialogueShown";
+
   } else if (mission1Complete === "true" && mission1DialogueShown !== "true") {
     dialogueLines = [
       "Great work deciphering those emojis, Agent! Now we finally know what the “poop” emoji truly means!",
@@ -352,4 +356,4 @@ if (mission7Complete === "true" && mission7DialogueShown !== "true") {
         localStorage.setItem(completionKey, "true");
       }
     };
-}
+  }}

@@ -85,15 +85,6 @@ function placeSatellite() {
  * transform-origin: 0 50%  →  rotation pivots at the left edge
  *                               of the element, which sits at Earth centre.
  */
-function playSound(src) {
-  try {
-    const audio = new Audio(src);
-    audio.volume = 0.5; // optional
-    audio.play().catch(err => console.warn("Audio play failed:", err));
-  } catch (err) {
-    console.error("Error creating audio:", err);
-  }
-}
 function updateRadarVisual(angle) {
   // Negative rotation aligns CSS direction with puzzle angle direction.
   var rotation = "rotate(" + -angle + "deg)";
@@ -247,23 +238,33 @@ function renderReports() {
 }
 
 // ── Accordion Panels ──────────────────────────────────────────
+function setAccordionState(btn, open) {
+  var panel = btn.nextElementSibling;
+  if (!panel) {
+    return;
+  }
+
+  panel.style.display = open ? "block" : "none";
+  btn.classList.toggle("open", open);
+  btn.setAttribute("aria-expanded", String(open));
+}
+
 document.querySelectorAll(".accordion").forEach(function (btn) {
   btn.addEventListener("click", function () {
     var panel = this.nextElementSibling;
-    var isOpen = panel.style.display === "block";
+    if (!panel) {
+      return;
+    }
 
-    // Toggle panel visibility and keep ARIA state in sync.
-    panel.style.display = isOpen ? "none" : "block";
-    this.classList.toggle("open", !isOpen);
-    this.setAttribute("aria-expanded", String(!isOpen));
+    // Use computed style so this works even when CSS (not inline styles)
+    // controls the initial open/closed state.
+    var isOpen = window.getComputedStyle(panel).display !== "none";
+    setAccordionState(this, !isOpen);
   });
 });
 
 // ── Contact Button ────────────────────────────────────────────
 contactBtn.addEventListener("click", function () {
-  localStorage.setItem("mission5Complete", "true");
-  localStorage.removeItem("mission5DialogueShown");
-
   document.body.innerHTML =
     "<div class='success-screen'>" +
     "<div class='sat-icon'>🛰️</div>" +
@@ -275,20 +276,18 @@ contactBtn.addEventListener("click", function () {
     "°</span> " +
     "using Frequency Code <span class='highlight'>" +
     correctCode +
-    playSound("audio/correct.wav") +
     "</span>." +
     "</p>" +
     "<p>" +
     "The satellite is now transmitting encrypted mission data back to base. " +
     "The operation against the V.I.K.I.N.G.S continues..." +
     "</p>" +
-    "<p>Mission Complete! Returning to Mission Hub...</p>" +
+    "<button onclick=\"window.location.href='mission_hub.html'\">" +
+    "Return to Mission Hub" +
+    "</button>" +
     "</div>";
-
-  setTimeout(function () {
-    window.location.href = "mission_hub.html";
-  }, 1800);
 });
+
 // ── Back Button ───────────────────────────────────────────────
 document.getElementById("backBtn").addEventListener("click", function () {
   window.location.href = "mission_hub.html";
@@ -297,6 +296,12 @@ document.getElementById("backBtn").addEventListener("click", function () {
 // ── Initialise ────────────────────────────────────────────────
 placeSatellite();
 renderReports();
+
+// Start with all data reports expanded (but still togglable).
+document.querySelectorAll(".accordion").forEach(function (btn) {
+  setAccordionState(btn, true);
+});
+
 updateRadarVisual(0);
 updateState();
 

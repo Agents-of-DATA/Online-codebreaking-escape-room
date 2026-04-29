@@ -59,7 +59,7 @@ function getNextDirection() {
 }
 
 // list of words
-const words = ["KEY", "HASH", "DATA", "CODE", "BYTE", "NODE", "LINK", "FILE", "USER"];
+const words = ["AGENT","RADAR","SIGNAL","ROCKET","PLANET","ORBIT","SPACE","SECRET","MISSION","VIKING"];
 
 
 // how many questions you want
@@ -90,21 +90,7 @@ let currentIndex = 0;
 let questionsAnswered = 0;
 const maxQuestions = encodedWords.length;
 
-const pages = [
-  // information page with instructions for the caesar cipher challenge 
-  {
-    type: "info",
-    content: `<h2>Info Page</h2>
-      <p>Welcome! Solve the Caesar Cipher challenge.</p>
-      <p>Decode the scrambled word using the shift and direction.</p>
-      <p><strong>Forward</strong> = move letters forward<br>
-         <strong>Backward</strong> = move letters backward</p>`
-  },
-  {
-    type: "question",
-    content: "<h2>Question Page</h2>"
-  }
-];
+
 
 // update content function to show the current page content and controls based on the page type
 function updateContent() {
@@ -122,21 +108,11 @@ function updateContent() {
   }
 }
 
-// navigation event listeners for the back and forward buttons to move between the info and questions pages 
-document.getElementById("back_btn").addEventListener("click", () => {
-  currentIndex = currentIndex > 0 ? currentIndex - 1 : pages.length - 1;
-  updateContent();
-});
-
-document.getElementById("forward_btn").addEventListener("click", () => {
-  currentIndex = currentIndex < pages.length - 1 ? currentIndex + 1 : 0;
-  updateContent();
-});
-
 // caesar cipher challenge logic 
 let currentCaesarChallenge = null;
 
 function displayNextChallenge() {
+  
   const feedback = document.getElementById("word_feedback");
   // if all questions answered finish the mission and return to the hub
   if (questionsAnswered >= maxQuestions) {
@@ -201,5 +177,4 @@ function finishMission() {
 // event lsitener
 document.getElementById("submit_btn").addEventListener("click", checkCaesarInput);
 
-
-updateContent();
+displayNextChallenge();

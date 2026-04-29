@@ -1,115 +1,71 @@
-function drawBarChart(canvasId, data, label) {
-  // get the canvas element by id and its 2d drawing context 
+function drawBarChart(canvasId, data, labels, title) {
+  //get canvas and drawing context
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext("2d");
-  // chart layout settings 
-  // width of each bar
-  const barWidth = 60;
-  // gap between each bar
-  const gap = 40;
-  // max height of chart in pixels
-  const chartHeight = 200;
-  // margin for x and y axis 
-  const offsetX = 60;
-  const offsetY = 250;
-  // bar colours 
+
+  //clear previous drawings
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  //chart layout settings
+  const barWidth = 60;     
+  const gap = 45;           
+  const chartHeight = 200;  
+  const offsetX = 60;       
+  const offsetY = 250;      
+
+  //colours for bars
   const colors = ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1"];
-  // find max value in data to scale bars
+
+  //find max value for scaling
   const maxValue = Math.max(...data);
 
-  // store bar positions for hover
-  const bars = [];
-  // function for drawing the chart including hover effects
-  function draw(mouseX = null, mouseY = null) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //set styles
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = "black";
+  ctx.font = "14px Arial";
 
-    // draw axes
+  //draw axes
+  ctx.beginPath();
+  ctx.moveTo(offsetX, 40);   
+  ctx.lineTo(offsetX, offsetY);
+  ctx.lineTo(canvas.width - 20, offsetY); 
+  ctx.stroke();
+
+  //draw Y-axis ticks and labels
+  for (let i = 0; i <= 5; i++) {
+    const value = Math.round((maxValue / 5) * i);
+    const y = offsetY - (i / 5) * chartHeight;
+
+    ctx.fillText(value, 20, y + 4);
+
     ctx.beginPath();
-    // start of y-axis
-    ctx.moveTo(offsetX, 50);
-    // y-axis line
-    ctx.lineTo(offsetX, offsetY);
-    // x-axis line
-    ctx.lineTo(canvas.width - 20, offsetY);
+    ctx.moveTo(offsetX - 5, y);
+    ctx.lineTo(offsetX, y);
     ctx.stroke();
-
-    //  draw y-axis labels and ticks
-    // text colour
-    ctx.fillStyle = "black";
-    // font for scale labels 
-    ctx.font = "10px Arial";
-
-    // 5 ticks for y-axis 
-    for (let i = 0; i <= 5; i++) {
-      // tick label
-      const value = Math.round((maxValue / 5) * i);
-      // position on canvas
-      const y = offsetY - (i / 5) * chartHeight;
-      // draw tick label
-      ctx.fillText(value, 20, y + 3);
-      // draw small tick line
-      ctx.beginPath();
-      ctx.moveTo(offsetX - 5, y);
-      ctx.lineTo(offsetX, y);
-      ctx.stroke();
-    }
-
-    bars.length = 0;
-
-    // bars
-    data.forEach((value, i) => {
-      const x = offsetX + i * (barWidth + gap);
-      const height = (value / maxValue) * chartHeight;
-      const y = offsetY - height;
-
-      ctx.fillStyle = colors[i];
-      ctx.fillRect(x, y, barWidth, height);
-
-      // label
-      ctx.fillStyle = "black";
-      ctx.fillText(cities[i], x, offsetY + 15);
-
-      // save bar for hover
-      bars.push({ x, y, width: barWidth, height, value, label: cities[i] });
-    });
-
-    // title
-    ctx.fillText(label, offsetX, 30);
-
-    // hover tooltip
-    if (mouseX !== null && mouseY !== null) {
-      bars.forEach(bar => {
-        if (
-          mouseX >= bar.x &&
-          mouseX <= bar.x + bar.width &&
-          mouseY >= bar.y &&
-          mouseY <= bar.y + bar.height
-        ) {
-          // tooltip box
-          ctx.fillStyle = "black";
-          ctx.fillRect(mouseX + 10, mouseY - 25, 80, 20);
-
-          ctx.fillStyle = "white";
-          ctx.fillText(`${bar.label}: ${bar.value}`, mouseX + 15, mouseY - 10);
-        }
-      });
-    }
   }
 
-  // initial draw
-  draw();
+  //draw bars
+  data.forEach((value, i) => {
+    const x = offsetX + i * (barWidth + gap);
+    const height = (value / maxValue) * chartHeight;
+    const y = offsetY - height;
 
-  // hover event
-  canvas.onclick = function (e) {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    //bar colour
+    ctx.fillStyle = colors[i];
 
-    draw(mouseX, mouseY);
-  };
+    //draws bar
+    ctx.fillRect(x, y, barWidth, height);
 
-  // clear tooltip when leaving
-  canvas.onmouseleave = function () {
-    draw();
-  };
+    //draw labels under bars
+    ctx.fillStyle = "black";
+    ctx.fillText(labels[i], x - 5, offsetY + 20);
+
+    //show value above bar
+    ctx.fillText(value, x + 18, y - 8);
+  });
+
+  //draw chart title
+  ctx.fillStyle = "black";
+  ctx.font = "bold 16px Arial";
+  ctx.fillText(title, offsetX, 25);
 }
