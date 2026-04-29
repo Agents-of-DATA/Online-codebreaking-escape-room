@@ -238,15 +238,28 @@ function renderReports() {
 }
 
 // ── Accordion Panels ──────────────────────────────────────────
+function setAccordionState(btn, open) {
+  var panel = btn.nextElementSibling;
+  if (!panel) {
+    return;
+  }
+
+  panel.style.display = open ? "block" : "none";
+  btn.classList.toggle("open", open);
+  btn.setAttribute("aria-expanded", String(open));
+}
+
 document.querySelectorAll(".accordion").forEach(function (btn) {
   btn.addEventListener("click", function () {
     var panel = this.nextElementSibling;
-    var isOpen = panel.style.display === "block";
+    if (!panel) {
+      return;
+    }
 
-    // Toggle panel visibility and keep ARIA state in sync.
-    panel.style.display = isOpen ? "none" : "block";
-    this.classList.toggle("open", !isOpen);
-    this.setAttribute("aria-expanded", String(!isOpen));
+    // Use computed style so this works even when CSS (not inline styles)
+    // controls the initial open/closed state.
+    var isOpen = window.getComputedStyle(panel).display !== "none";
+    setAccordionState(this, !isOpen);
   });
 });
 
@@ -283,6 +296,12 @@ document.getElementById("backBtn").addEventListener("click", function () {
 // ── Initialise ────────────────────────────────────────────────
 placeSatellite();
 renderReports();
+
+// Start with all data reports expanded (but still togglable).
+document.querySelectorAll(".accordion").forEach(function (btn) {
+  setAccordionState(btn, true);
+});
+
 updateRadarVisual(0);
 updateState();
 
