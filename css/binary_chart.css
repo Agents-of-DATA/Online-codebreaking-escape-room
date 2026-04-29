@@ -69,8 +69,9 @@ body {
 }
 
 #binary_message p {
-    margin: 10px 0;
-    word-break: break-all;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  line-height: 1.6;
 }
 
 /* Styles for the generate button and other buttons */
@@ -118,4 +119,10 @@ input {
 /* Display box spacing */
 .display-box {
   margin: 10px 0;
+}
+.caesar-wheel {
+  width: min(420px, 90%);
+  display: block;
+  margin: 20px auto;
+  transition: transform 0.8s ease;
 }

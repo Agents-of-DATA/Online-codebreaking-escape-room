@@ -105,26 +105,37 @@ button:active {
 
 /* Emoji table */
 #emojiTable {
-  width: 100%;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-  background: #0f172a;
+  border-collapse: collapse; /* IMPORTANT: makes lines clean */
+  margin: 20px auto;
 }
-#emojiTable th,
-#emojiTable td {
-  border: 1px solid #334155;
-  padding: 8px;
-  text-align: center;
-}
-/* Table header */
+
+/* Letter cells */
 #emojiTable th {
   background: #020617;
   color: #38bdf8;
+  padding: 12px 16px;
+  font-size: 1.2rem;
+  border-bottom: 3px solid #00d4ff; /* MAIN divider line */
+}
+
+/* Emoji cells */
+#emojiTable td {
+  padding: 14px 16px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Add spacing between groups (every pair of rows) */
+#emojiTable tr:nth-child(2n) td {
+  padding-bottom: 18px;
 }
 /* Spacing between emoji words */
 #emojiDisplay {
-  display: flex;
-  gap: 40px; 
+  font-size: 2.2rem;
+  letter-spacing: 8px;
+}
+.emoji-group {
+  margin: 0 8px;
 }
 
 /* Moves up while fading */
