@@ -10,12 +10,36 @@
     <!-- Quick navigation back to the mission hub -->
     <button id="backBtn">Back to Mission Hub</button>
 
-    <!-- Puzzle title and short objective -->
-    <h1>📡 Align the Radar Dish!</h1>
-    <p class="subtitle">
-      Use the mission data reports to point the radar at the satellite and
-      establish contact!
-    </p>
+    <!-- Puzzle instructions and short description -->
+    <div class="intro">
+      <h1>📡 Align the Radar Dish!</h1>
+      <p class="description">
+        Satellites and radars are tools we use to “see” things that are far
+        away, even up in the sky or across long distances.
+      </p>
+      <p class="description">
+        Satellites are machines that we send into space. They orbit (circle)
+        around the Earth, kind of like how the Moon does. They have cameras and
+        sensors that can take pictures, measure weather, or send signals for
+        things like TV, GPS, and the internet. They work by collecting
+        information and sending it back down to Earth using radio waves.
+      </p>
+      <p class="description">
+        Radar stands for “Radio Detection and Ranging.” It’s a system that helps
+        us find objects and see how far away they are. A radar machine sends out
+        radio waves, which bounce off objects like airplanes, ships, or even
+        rain clouds. When the waves bounce back, the radar uses them to figure
+        out where the object is and how fast it’s moving.
+      </p>
+      <p class="description">
+        In simple terms: Satellites watch and send information from space. Radar
+        sends out signals and listens for echoes to find things.
+      </p>
+      <p class="instructions">
+        CLICK the mission data reports to help you point the radar at the
+        satellite and establish contact!
+      </p>
+    </div>
 
     <div class="puzzle-layout">
       <!-- LEFT: diagram + status stays visible while scrolling -->
@@ -118,7 +142,7 @@
             aria-expanded="false"
             aria-controls="panel1"
           >
-            Data Report 1 —
+            DATA REPORT 1 📄 —
             <span class="report-related-red">Satellite Position</span>
           </button>
           <div class="panel" id="panel1" role="region">
@@ -130,7 +154,7 @@
             aria-expanded="false"
             aria-controls="panel2"
           >
-            Data Report 2 — Orbital Speed
+            DATA REPORT 2 📄 — Orbital Speed
           </button>
           <div class="panel" id="panel2" role="region">
             <p id="report2Text"></p>
@@ -141,7 +165,7 @@
             aria-expanded="false"
             aria-controls="panel3"
           >
-            Data Report 3 — Speed Reference Table
+            DATA REPORT 3 📄 — Speed Reference Table
           </button>
           <div class="panel" id="report3Panel" role="region"></div>
         </div>

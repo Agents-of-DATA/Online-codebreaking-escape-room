@@ -45,10 +45,32 @@ h1 {
   color: #fbbf24;
 }
 
-.subtitle {
+/* ── Opening Intro Text Width ──────────────────────────── */
+.intro {
+  width: 100%;
+  max-width: 65%;
+  margin: 0 auto 12px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .intro {
+    max-width: 100%;
+  }
+}
+
+.description {
   color: #94a3b8;
   margin-bottom: 12px;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.instructions {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  padding: 12px 16px;
 }
 
 /* ── Two-Column Puzzle Layout ──────────────────────────── */
