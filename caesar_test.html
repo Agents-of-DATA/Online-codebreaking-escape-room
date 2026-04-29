@@ -9,22 +9,19 @@
 <body>
     <div class="content">
         <h1>Caesar Cipher Challenge</h1>
+        <p>Use the Caesar wheel below to decode the message. Shift the letters in the opposite direction shown to find the original word.</p>
 
-        <!-- Forward/Back navigation -->
-        <button id="back_btn">Back</button>
-        <button id="forward_btn">Forward</button>
 
         <!-- Main content area -->
-        <div id="page_content"></div>
 
         <!-- Caesar challenge elements (shown only on question page) -->
-        <div id="caesar_controls" style="display:none;">
+        <div id="caesar_controls">
             <h3>Decode the Caesar Cipher:</h3>
             <input type="text" id="caesar_input" placeholder="Type your guess here">
             <button id="submit_btn">Submit Answer</button>
             <div id="word_feedback"></div>
             <!-- Reference image -->
-            <img src="./assets/images/alphabet.png" alt="alphabet chart" class="binary">
+            <img src="./assets/images/caesar_wheel.png" alt="Caesar cipher alphabet wheel" class="binary caesar-wheel">
             <!-- Display boxes for encoded word, shift, and direction -->
             <div class="display-box">
                 <label>Encoded Word:</label>
@@ -36,7 +33,7 @@
             </div>
             
             <div class="display-box">
-                <label>the word has been shifted you need to shift it the opposite way to the direction:</label>
+                <label>Direction (shift the opposite way):</label>
                 <input type="text" id="direction" readonly>
             </div>
             

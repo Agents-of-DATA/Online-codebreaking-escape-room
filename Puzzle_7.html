@@ -22,19 +22,21 @@
     <h3>Agent K's Briefing</h3>
     <p>The satellite launch has been successfully stopped… but the system is still active. Intercepted data shows encrypted signals continuing to move through the network. Your task is to analyze the data traffic from different regions. Compare the total traffic with the encrypted traffic and identify which region shows the highest level of suspicious encrypted activity. This will reveal the location of the next V.I.K.I.N.G.S launch site.</p>
   </div>
-
-  <!-- Popup container for charts -->
-  <div id="chartPopup" class="popup">
-    <div class="popup-content">
-      <!-- Close button for popup -->
-      <span class="close" onclick="closeChart()">&times;</span>
-
-      <!-- Canvas for total traffic bar chart -->
-      <canvas id="canvas1" width="600" height="300"></canvas>
-      <!-- Canvas for enctryped traffic bar chart -->
-      <canvas id="canvas2" width="600" height="300"></canvas>
-    </div>
-  </div>
+  <!-- Tip section -->
+   <div class="tips">
+  <h3>Network Analysis Tips</h3>
+  <ul>
+    <li>Normal network traffic should have a small percentage of encrypted data.</li>
+    <li>Look for regions where encrypted traffic is abnormally high compared to total traffic.</li>
+    <li>The heatmap on the map shows regions with suspicious activity.</li>
+    <li>Cross-reference the map visualisation with the chart data for confirmation.</li>
+  </ul>
+</div>
+  <!-- chart grids -->
+<div class="chart-grid">
+  <canvas id="canvas1" width="500" height="300"></canvas>
+  <canvas id="canvas2" width="500" height="300"></canvas>
+</div>
 
   <!-- Map image section -->
   <div class="map-container">
@@ -43,8 +45,7 @@
 
   <!-- Buttons to display chart popups -->
   <div class="button-row">
-    <button onclick="showBarChart1()">Show Total traffic</button>
-    <button onclick="showBarChart2()">Show encrypted traffic</button>
+  <button onclick="showCharts()">Show Traffic Charts</button>
   </div>
 
   <!-- Message to show both charts need to be viewed before answer buttons are unlocked -->
@@ -62,16 +63,7 @@
   <p id="feedback"></p>
   <br><br>
 
-  <!-- Tip section -->
-  <div class="tips">
-    <h3>Network Analysis Tips</h3>
-    <ul>
-      <li>Normal network traffic should have a small percentage of encrypted data</li>
-      <li>Look for regions where encrypted traffic is abnoramly high compared to total traffic</li>
-      <li>The heatmap on the map shows regions with suspicious activity</li>
-      <li>Cross-referecne the map visualisation with the chart data for confirmation</li>
-    </ul>
-  </div>
+
   <script src="js/mission7.js"></script>
   <script src="js/accessibility.js"></script>
   </body>
