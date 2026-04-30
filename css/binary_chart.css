@@ -126,3 +126,52 @@ input {
   margin: 20px auto;
   transition: transform 0.8s ease;
 }
+.binary_table {
+  color:#020617; 
+  background: #f4f8ff;
+  border: 3px solid #3b82f6;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 650px;
+  text-align: center;
+}
+
+.binary_table h2 {
+  margin-bottom: 5px;
+}
+
+.binary_table p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.binary_table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.binary_table th {
+  background: #3b82f6;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
+.binary_table td {
+  border: 1px solid #cbd5e1;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.binary_table td:first-child {
+  font-weight: bold;
+}
+
+.binary_table td:last-child {
+  font-family: monospace;
+  font-weight: bold;
+}
