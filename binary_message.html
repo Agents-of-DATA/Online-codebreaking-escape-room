@@ -13,27 +13,20 @@
 
 <body>
   <div class="content">
-   
-      <!-- Binary decoder challenge content -->
-      <h1>Binary Decoder Challenge</h1>
-      <!--forward and back button -->
-      <button id="back_btn">Back</button>
-      <button id="forward_btn">Forward</button>
+    <!-- Binary decoder challenge content -->
+    <h1>Binary Decoder Challenge</h1>
 
-      <div id="page_content"></div>
-      <!-- binary chart controls and message-->
-      <div id="binary_controls" style="display:none;">
-        <img src="./assets/images/binary_Chart.png" class="binary">
+    <!-- binary chart controls and message -->
+    <div id="binary_controls">
+      <div id="binary_message"></div>
 
-        <div id="binary_message"></div>
+      <input type="text" id="binary_input" placeholder="Enter decimal number">
+      <button id="answer_btn">Submit Answer</button>
 
-        <input type="text" id="binary_input" placeholder="Enter decoded word">
-        <button id="answer_btn">Submit Answer</button>
-        <!-- Feedback container -->
-        <div id="word_feedback"></div>
-      </div>
-  
-  </div>
+      <!-- Feedback container -->
+      <div id="word_feedback"></div>
+    </div>
+</div>
 
   <script src="js/binary.js"></script>
   <script src="js/accessibility.js"></script>
