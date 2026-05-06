@@ -160,7 +160,7 @@ function checkCaesarInput() {
 }
 // function to finish the mission and return to the mission hub after all questions are answered
 function finishMission() {
-  const pageContent = document.getElementById("page_content");
+  const pageContent = document.getElementById("word_feedback");
   const controls = document.getElementById("caesar_controls");
 
   pageContent.innerHTML = `<h3>Mission Complete! Returning to mission hub...</h3>`;
